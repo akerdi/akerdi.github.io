@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-7-23lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录设置Centos7 Nginx 制作一个简单的点播服务起因：当前nginx 版本是1.17.1, 想增加nginx-rtmp-module,找不到configure 文件，所以打算降版本。 删除CentOS 上的Nginx systemctl nginx stop 删除Nginx 的自动启动 centos6:语法 chkconfig nginx off centos7:语法 systemctl">
+<meta name="keywords" content="src nginx-flv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-7-23lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/07/23/2019-7-23lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="记录设置Centos7 Nginx 制作一个简单的点播服务起因：当前nginx 版本是1.17.1, 想增加nginx-rtmp-module,找不到configure 文件，所以打算降版本。 删除CentOS 上的Nginx systemctl nginx stop 删除Nginx 的自动启动 centos6:语法 chkconfig nginx off centos7:语法 systemctl">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-7-23lesson">
+<meta name="twitter:description" content="记录设置Centos7 Nginx 制作一个简单的点播服务起因：当前nginx 版本是1.17.1, 想增加nginx-rtmp-module,找不到configure 文件，所以打算降版本。 删除CentOS 上的Nginx systemctl nginx stop 删除Nginx 的自动启动 centos6:语法 chkconfig nginx off centos7:语法 systemctl">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-7-23lesson</h2>
+  <p class="sub">Jul 23, 2019</p>
+  <article class="content">
+    <h2 id="记录设置Centos7-Nginx-制作一个简单的点播服务"><a href="#记录设置Centos7-Nginx-制作一个简单的点播服务" class="headerlink" title="记录设置Centos7 Nginx 制作一个简单的点播服务"></a><strong>记录设置Centos7 Nginx 制作一个简单的点播服务</strong></h2><p>起因：当前nginx 版本是1.17.1, 想增加nginx-rtmp-module,找不到configure 文件，所以打算降版本。</p>
+<pre><code>删除CentOS 上的Nginx
+systemctl nginx stop
+删除Nginx 的自动启动
+centos6:语法
+chkconfig nginx off
+centos7:语法
+systemctl disable nginx.service
+
+从源头删除nginx
+rm -rf /usr/sbin/nginx
+rm -rf /etc/nginx
+rm -rf /etc/init.d/nginx
+
+在使用yum 清理
+yum remove nginx
+
+下载nginx-rtmp-module
+cd /root/download
+git clone https://github.com/arut/nginx-rtmp-module.git
+wget http://nginx.org/download/nginx-1.10.3.tar.gz
+tar -zxvf nginx-1.10.3.tar.gz
+cd nginx-1.10.3
+
+设置并install
+./configure --add-module=${刚下载的路径}/nginx-rtmp-module --with-http_ssl_module
+make &amp;&amp; make install
+</code></pre><p>此时nginx 已经在 <code>/usr/local/nginx</code></p>
+<pre><code>设置source:
+vim /etc/profile.d/nginx.sh
+</code></pre><p>添加一下内容</p>
+<pre><code>export NGINX_HOME=/usr/local/nginx
+export PATH=$NGINX_HOME/sbin:$PATH
+</code></pre><p>保存后使配置生效:</p>
+<pre><code>source /etc/profile
+</code></pre><p>测试一下：<code>nginx -V</code> 输出了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nginx version: nginx/1.10.3</span><br><span class="line">built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC)</span><br><span class="line">built with OpenSSL 1.0.2k-fips  26 Jan 2017</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: --add-module=/root/download/nginx-rtmp-module/ --with-http_ssl_module</span><br></pre></td></tr></table></figure>
+<p>使其在Centos7 systemctl 可以使用</p>
+<pre><code>vim /usr/lib/systemd/system/nginx.service
+</code></pre><p>输入文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=nginx - high performance web server</span><br><span class="line">After=network.target remote-fs.target nss-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span><br><span class="line">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>设置开机自启动: <code>systemctl enable nginx.service</code></p>
+<p>查看所有服务: <code>systemctl list-units --type=service</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rtmp &#123;</span><br><span class="line">  server &#123;</span><br><span class="line">    listen 1935;</span><br><span class="line">    chunk_size 4096;</span><br><span class="line"></span><br><span class="line">    application vod &#123;</span><br><span class="line">      play /opt/video/vod;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">http &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就可以使用: rtmp://ip/vod/1.mp4 点击查看啦</p>
+<p><a href="https://segmentfault.com/a/1190000009723940" target="_blank" rel="noopener">参考1</a><br><a href="https://www.jianshu.com/p/a210eab31f45" target="_blank" rel="noopener">参考2</a></p>
+<h2 id="Nginx-http-flv-module"><a href="#Nginx-http-flv-module" class="headerlink" title="Nginx-http-flv-module"></a><strong>Nginx-http-flv-module</strong></h2><p>昨天玩了Nginx-rtmp-module，但是指定路径是: rtmp://ip/vod/1.mp4 需要使用ip。这样就很low 了，简直拿不出去手(直接使用ip 还是挺不自由的)</p>
+<p>当前我的ip 都是挂在Cloudflare 上。</p>
+<p>那是不是可以: rtmp://<a href="http://www.baidu.com:1935/vod/1.mp4" target="_blank" rel="noopener">www.baidu.com:1935/vod/1.mp4</a> -&gt; rtmp://<a href="http://www.baidu.com:80/vod/1.mp4" target="_blank" rel="noopener">www.baidu.com:80/vod/1.mp4</a> 这样呢？？</p>
+<p><a href="https://github.com/arut/nginx-rtmp-module/issues/1180" target="_blank" rel="noopener">参考1</a><br><a href="https://github.com/winshining/nginx-http-flv-module" target="_blank" rel="noopener">参考2</a><br><a href="https://segmentfault.com/a/1190000016043297" target="_blank" rel="noopener">参考3</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/08/01/2019-8-1lesson/" class="link f-fl">⟵2019-8-1lesson</a>
+    
+    
+      <a href="/2019/07/22/2019-7-22lesson/" class="link f-fr">2019-7-22lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

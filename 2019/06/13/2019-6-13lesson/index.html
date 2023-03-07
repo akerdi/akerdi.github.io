@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-6-13lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="让服务躲在墙后面当前有两种方案，大体一致，不过由于关于联合TLS、Nginx、VVVVVV 等有些知识点可能有欠缺，当前使用他人一键生成。另一种不带TLS、Nginx 的还算方便。 当前处境: 我的ip 已经ping不通了。只能通过CDN 转向我的服务器进行拯救了。 第一种方案: centos 6.x 完全参考了sprov 的博客 123456789101112131415161718191. 前">
+<meta name="keywords" content="VVVVVV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-6-13lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/06/13/2019-6-13lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="让服务躲在墙后面当前有两种方案，大体一致，不过由于关于联合TLS、Nginx、VVVVVV 等有些知识点可能有欠缺，当前使用他人一键生成。另一种不带TLS、Nginx 的还算方便。 当前处境: 我的ip 已经ping不通了。只能通过CDN 转向我的服务器进行拯救了。 第一种方案: centos 6.x 完全参考了sprov 的博客 123456789101112131415161718191. 前">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/VVVVVVx_issue107.png">
+<meta property="og:image" content="https://akerdi.github.io/css/images/VVVVVV_toNormalStep.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-6-13lesson">
+<meta name="twitter:description" content="让服务躲在墙后面当前有两种方案，大体一致，不过由于关于联合TLS、Nginx、VVVVVV 等有些知识点可能有欠缺，当前使用他人一键生成。另一种不带TLS、Nginx 的还算方便。 当前处境: 我的ip 已经ping不通了。只能通过CDN 转向我的服务器进行拯救了。 第一种方案: centos 6.x 完全参考了sprov 的博客 123456789101112131415161718191. 前">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/VVVVVVx_issue107.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-6-13lesson</h2>
+  <p class="sub">Jun 13, 2019</p>
+  <article class="content">
+    <h1 id="让服务躲在墙后面"><a href="#让服务躲在墙后面" class="headerlink" title="让服务躲在墙后面"></a><strong>让服务躲在墙后面</strong></h1><p>当前有两种方案，大体一致，不过由于关于联合TLS、Nginx、VVVVVV 等有些知识点可能有欠缺，当前使用他人一键生成。另一种不带TLS、Nginx 的还算方便。</p>
+<p>当前处境: 我的ip 已经ping不通了。只能通过CDN 转向我的服务器进行拯救了。</p>
+<p>第一种方案: centos 6.x</p>
+<p>完全参考了<a href="https://blog.sprov.xyz/2019/03/11/cdn-VVVVVV-safe-proxy/?nsukey=PEs3kShj8DxdLAd3a9jeRtDkzetIbO3xXnhHySES87Vh3RxI6cD9jnzuo9YEAA99yX1xplHFNfsTv%2FO%2Bz%2Bn9Qn%2BdAUPmbU7H5yiscRg1UFRN6lnyQaMmnsZUNt2UxH3XUkV%2Bn992u4jXNqU0%2FH0ikRVtQPIVQw1NayReOpdThcwptuD4OVpLLeAZwTZ5ljabCV7QqcLytsux%2BYWycaTcqQ%3D%3D" target="_blank" rel="noopener">sprov 的博客</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. 前往Freecom 申请一个免费域名</span><br><span class="line">2. Freecom ManageDNS 添加`A`记录. eg: www.gogal.ml A 67.230.172.104</span><br><span class="line">3. 前往CloudFlare 申请注册一个免费的CDN</span><br><span class="line">4. CloudFlare **add** 时，填入二级域名. eg:gogal.ml</span><br><span class="line">5. 选择Free 套餐</span><br><span class="line">6. 增加子域，同时指向你的ip eg: fuck.gogal.ml 67.230.172.104</span><br><span class="line"></span><br><span class="line">这时候Status 如果有橙色云朵，代表CDN 已经将你的域名包含进去，此时ping fuck.gogal.ml 出现了CDN 的ip</span><br><span class="line"></span><br><span class="line">7. 下一步会看到让你修改Nameservers(域名服务器)。其在ManageDNS 左边tab栏，填上那两个值，continue</span><br><span class="line">8. 接下来到了CloudFlare CDN 的dashboard。</span><br><span class="line"></span><br><span class="line">顶部有很多栏目，有两个重要栏目：DNS、Crypto</span><br><span class="line"></span><br><span class="line">DNS 是管理你的域名，开关你的CDN 需求。</span><br><span class="line"></span><br><span class="line">Crypto 管理你的TLS 加密与否(默认Full 加密)。这个很重要。</span><br><span class="line"></span><br><span class="line">前往Crypto 将TLS 置为`Off` 或者Flexible</span><br></pre></td></tr></table></figure>
+<p>上面关于前提配置完毕。接下来去你的服务器</p>
+<p>前往你的服务器ssh(ip 挂了，但是服务器商会提供页面Interactive，使用root 和你的登录密码进行登录)</p>
+<p><a href="https://blog.sprov.xyz/2019/02/04/VVVVVV-simple-use/" target="_blank" rel="noopener">VVVVVV安装教程</a></p>
+<p><code>bash &lt;(curl -L -s https://install.direct/go.sh)</code></p>
+<p>这样就安装了VVVVVV。配置目录在/etc/v2ray/config.json</p>
+<p>安装完成后，出现PORT、UUID。这两个记录下来，忘记了就cat /etc/VVVVVV/config.json 将端口和uuid 打印出来。</p>
+<p><code>service VVVVVV start &amp;&amp; service VVVVVV status</code> // centos6.x</p>
+<p><code>systemctl start VVVVVV &amp;&amp; systemctl status VVVVVV</code> // centos7</p>
+<p>关闭防火墙：</p>
+<p><code>service iptables stop &amp;&amp; chkconfig iptables off</code> // centos6.x 关闭防火墙、关闭开机打开防火墙</p>
+<p><code>systemctl stop firewalld &amp;&amp; systemctl disable firewalld</code> // centos7</p>
+<p>由于我的服务器就在洛杉矶，bbr 什么什么加速我就没开了。</p>
+<p>最后一步就是连接了。</p>
+<p>服务器VVVVVV/config.json 的inbound参考如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "port": 80, // 很重要，否则CDN 找不进来</span><br><span class="line">    "streamSettings": &#123;</span><br><span class="line">        "wsSettings": &#123;</span><br><span class="line">            "path": "/58ff4ec7/",</span><br><span class="line">            "headers": &#123;&#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        "network": "ws"</span><br><span class="line">    &#125;,</span><br><span class="line">    "settings": &#123;</span><br><span class="line">        "clients": [</span><br><span class="line">            "id": "xxx", // 通过 /usr/bin/VVVVVV/v2ctl uuid 生成</span><br><span class="line">            "alterId": 64</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Address: fuck.gogal.ml : 443</span><br><span class="line">User ID:  xxx</span><br><span class="line">alterId: 64</span><br><span class="line">Security: chacha20那个</span><br><span class="line">Tag: 随便填，，标签使用而已</span><br><span class="line">NetWork: ws</span><br><span class="line">transport settings:</span><br><span class="line">   WebSocket:</span><br><span class="line">    path: /58ff4ec7/</span><br><span class="line">   TLS:</span><br><span class="line">    Use TLS</span><br><span class="line">    TLS serverName: fuck.gogal.ml</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/Cenmrev/VVVVVVW/releases" target="_blank" rel="noopener">VVVVVVW</a></p>
+<p><a href="https://github.com/Cenmrev/VVVVVVX/releases" target="_blank" rel="noopener">VVVVVVX</a></p>
+<h2 id="TLS版本"><a href="#TLS版本" class="headerlink" title="TLS版本"></a><strong>TLS版本</strong></h2><p>环境: centos7</p>
+<p><a href="https://github.com/wulabing/VVVVVV_ws-tls_bash_onekey" target="_blank" rel="noopener">github 一键脚本</a></p>
+<p>首先通过TLS 一键脚本生成，自己整还是挺麻烦。内容包括Nginx 转发配置，OpenSSL 配置TLS证书，VVVVVV配置ssl。</p>
+<p>配置完成后可以在clients 字段里面添加更多id。</p>
+<p>完成后，在客户端注意点：</p>
+<ol>
+<li>transport settings - WebSocket栏目 - path 填写对应路径</li>
+<li>TLS 打勾，同时填写你的CDN 转换的域名</li>
+<li>Network 选ws</li>
+<li>CloudFlare CDN 的Crypto 置为full。</li>
+</ol>
+<p>此时基本很健康，不容易再被打掉(毕竟我ip已经被打掉了)。</p>
+<p>这里提一点，不晓得为什么有些电脑就是连不上我的服务器，有些一填就好了，很奇怪。</p>
+<h2 id="VVVVVV无法联网"><a href="#VVVVVV无法联网" class="headerlink" title="VVVVVV无法联网"></a><em>VVVVVV无法联网</em></h2><p>特征: 对比他人config 完全一致后仍然无法联网, 该服务器提供的其他例子能正常使用</p>
+<p>查询了很多问题，终于将问题聚焦在了端口被占用上。</p>
+<p>同时查到这个VVVVVVX 的issue107</p>
+<blockquote>
+<p><a href="https://github.com/Cenmrev/VVVVVVX/issues/107" target="_blank" rel="noopener">https://github.com/Cenmrev/VVVVVVX/issues/107</a></p>
+</blockquote>
+<p><img src="/css/images/VVVVVVx_issue107.png" alt="VVVVVVX_issue107"></p>
+<p>表现完全一致。</p>
+<p>操作如下:</p>
+<p><img src="/css/images/VVVVVV_toNormalStep.jpg" alt="VVVVVV复活操作"></p>
+<p>反正接下来也不适用shadowsocks了，于是我就删了在 /Users/<strong><strong>/Library/LaunchAgents 下为shadowsock</strong></strong>.<em>**</em>.plist 的文件。重启一下电脑，于是就完全表现正常了。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/06/13/2019-6-13heroku/" class="link f-fl">⟵2019-6-13heroku</a>
+    
+    
+      <a href="/2019/06/12/2019-6-12kesan/" class="link f-fr">2019-6-12kesan⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

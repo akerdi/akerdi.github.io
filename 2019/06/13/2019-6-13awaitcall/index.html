@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-6-13awaitcall | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="js/ts 如何享受async 舒适下远离try{}catch{}1234567async login () &amp;#123;  try &amp;#123;    await userLogin()  &amp;#125; catch (e =&amp;gt; &amp;#123;    this.$message.error(e)  &amp;#125;)&amp;#125; async 带来了很大的方便，但是try/catch 却破坏了写作的">
+<meta name="keywords" content="awaitCall">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-6-13awaitcall">
+<meta property="og:url" content="https://akerdi.github.io/2019/06/13/2019-6-13awaitcall/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="js/ts 如何享受async 舒适下远离try{}catch{}1234567async login () &amp;#123;  try &amp;#123;    await userLogin()  &amp;#125; catch (e =&amp;gt; &amp;#123;    this.$message.error(e)  &amp;#125;)&amp;#125; async 带来了很大的方便，但是try/catch 却破坏了写作的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-6-13awaitcall">
+<meta name="twitter:description" content="js/ts 如何享受async 舒适下远离try{}catch{}1234567async login () &amp;#123;  try &amp;#123;    await userLogin()  &amp;#125; catch (e =&amp;gt; &amp;#123;    this.$message.error(e)  &amp;#125;)&amp;#125; async 带来了很大的方便，但是try/catch 却破坏了写作的">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-6-13awaitcall</h2>
+  <p class="sub">Jun 13, 2019</p>
+  <article class="content">
+    <h2 id="js-ts-如何享受async-舒适下远离try-catch"><a href="#js-ts-如何享受async-舒适下远离try-catch" class="headerlink" title="js/ts 如何享受async 舒适下远离try{}catch{}"></a><strong>js/ts 如何享受async 舒适下远离try{}catch{}</strong></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> login () &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> userLogin()</span><br><span class="line">  &#125; <span class="keyword">catch</span> (<span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.$message.error(e)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>async 带来了很大的方便，但是try/catch 却破坏了写作的美感。</p>
+<p>我们想要这样的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callAsync, &#123; call &#125; = <span class="built_in">require</span>(<span class="string">'awaitCall'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> login () &#123;</span><br><span class="line">  <span class="comment">// callAsync allows promise as input</span></span><br><span class="line">  <span class="keyword">const</span> [err, response] = <span class="keyword">await</span> callAsync(userLogin())</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="keyword">this</span>.$message.eror(err)</span><br><span class="line">  <span class="comment">// user login successfully</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> writeFile (input) &#123;</span><br><span class="line">  <span class="comment">// call allows any function which can be accepted by require('util').promisify with a promise output</span></span><br><span class="line">  <span class="keyword">const</span> [err, res] = <span class="keyword">await</span> call(fs.write, input)</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">  <span class="comment">// fs.write successfully</span></span><br><span class="line">  <span class="keyword">const</span> [openErr, openRes] = <span class="keyword">await</span> call(fs.open, <span class="string">'a.txt'</span>, <span class="string">'r+'</span>, <span class="number">0o654</span>)</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上提供了两个方法callAsync、call。</p>
+<p>callAsync 允许输入promise 之后flattern 回调。</p>
+<p>call 支持输入function，帮助用户转化为promise 之后flattern 回调(function 必须支持<code>require(&#39;util&#39;).promisify</code> 转化为promise 类型)。</p>
+<p>核心代码不多，支持JS、Typescript</p>
+<p>awaitCall.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">callAsync</span>(<span class="params">promise</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">    .then(<span class="function">(<span class="params">data</span>) =&gt;</span> [<span class="literal">null</span>, data])</span><br><span class="line">    .catch(<span class="function"><span class="params">err</span> =&gt;</span> [err, <span class="literal">null</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">call</span>(<span class="params">func, ...args</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = util.promisify(func).call(<span class="keyword">this</span>, ...args)</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> promise !== <span class="string">'object'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'func should match util.promisify'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> callAsync(promise)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> callAsync</span><br></pre></td></tr></table></figure>
+<p>awaitCall.d.ts</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="built_in">module</span> callAsync &#123;</span><br><span class="line">  export function callAsync&lt;T, U = any&gt;(promise: Promise&lt;T&gt;): Promise&lt;[U | null, T | null]&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">call</span>(<span class="params">func: Function, ...args: any[]</span>): <span class="title">Promise</span>&lt;<span class="title">any</span>&gt;</span></span><br><span class="line"><span class="function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>Typescript 完整实现</p>
+<p>awaitCall.ts</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> util <span class="keyword">from</span> <span class="string">'util'</span></span><br><span class="line"></span><br><span class="line">export function callAsync&lt;T, U = any&gt;(promise: Promise&lt;T&gt;): Promise&lt;[U | null, T | null]&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> promise</span><br><span class="line">      .then&lt;[<span class="literal">null</span>, T]&gt;<span class="function">(<span class="params">(data: T</span>) =&gt;</span> [<span class="literal">null</span>, data])</span><br><span class="line">      .catch&lt;[U, <span class="literal">null</span>]&gt;(<span class="function"><span class="params">err</span> =&gt;</span> [err, <span class="literal">null</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">call</span>(<span class="params">func: Function, ...args: any[]</span>): <span class="title">Promise</span>&lt;<span class="title">any</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> promise = util.promisify(func).call(<span class="keyword">this</span>, ...args)</span><br><span class="line">  <span class="comment">// promise is object type</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> promise !== <span class="string">'object'</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="string">'func should match util.promisify'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> _promise = promise <span class="keyword">as</span> <span class="built_in">Promise</span>&lt;any&gt;</span><br><span class="line">  <span class="keyword">return</span> callAsync(_promise)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> callAsync</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>符合util.promisify 方法特征 \<br>\<br>1 输入的方法参数最后一个<code>typeof === &#39;function&#39;</code> \<br>2 最后一个参数返回的第一个参数，总是err</p>
+</blockquote>
+<blockquote>
+<p>注意this 指针丢失需要开发主动避免哦 \<br>\<br>可以使用 bind(this) 将指针重新找回 \<br>const bindCall = call.bind(that) \<br>await bindCall(fs.write, input) \<br>await bindCall(fs.open, ‘a.txt’, ‘r+’, 0o654)</p>
+</blockquote>
+<p>参考：</p>
+<p><a href="https://github.com/scopsy/await-to-js" target="_blank" rel="noopener">await-to-js</a></p>
+<p>callAsync 思想完全来源于 《await-to-js》，做了点演进。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/06/13/2019-6-13qiniu/" class="link f-fl">⟵2019-6-13qiniu</a>
+    
+    
+      <a href="/2019/06/13/2019-6-13heroku/" class="link f-fr">2019-6-13heroku⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

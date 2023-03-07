@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20221121window_cmake | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用windows开发gcc使用windows开发gcc重要在于系统很方便，这里记录以备之后要用windows开发gcc，能快速还原当时的配置。 使用mingw64开发配置环境变量: 此电脑 - 属性 - 高级系统设置 - 环境变量 - Path(编辑) - 增加mingw64的bin目录位置(我这里是D:\msys64\mingw64\bin) 安装cmake正常安装cmake，同样环境变量增加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20221121window_cmake">
+<meta property="og:url" content="https://akerdi.github.io/2022/11/20/20221121window-cmake/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="使用windows开发gcc使用windows开发gcc重要在于系统很方便，这里记录以备之后要用windows开发gcc，能快速还原当时的配置。 使用mingw64开发配置环境变量: 此电脑 - 属性 - 高级系统设置 - 环境变量 - Path(编辑) - 增加mingw64的bin目录位置(我这里是D:\msys64\mingw64\bin) 安装cmake正常安装cmake，同样环境变量增加">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20221121window_cmake">
+<meta name="twitter:description" content="使用windows开发gcc使用windows开发gcc重要在于系统很方便，这里记录以备之后要用windows开发gcc，能快速还原当时的配置。 使用mingw64开发配置环境变量: 此电脑 - 属性 - 高级系统设置 - 环境变量 - Path(编辑) - 增加mingw64的bin目录位置(我这里是D:\msys64\mingw64\bin) 安装cmake正常安装cmake，同样环境变量增加">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20221121window_cmake</h2>
+  <p class="sub">Nov 20, 2022</p>
+  <article class="content">
+    <h1 id="使用windows开发gcc"><a href="#使用windows开发gcc" class="headerlink" title="使用windows开发gcc"></a>使用windows开发gcc</h1><p>使用windows开发gcc重要在于系统很方便，这里记录以备之后要用windows开发gcc，能快速还原当时的配置。</p>
+<h2 id="使用mingw64开发"><a href="#使用mingw64开发" class="headerlink" title="使用mingw64开发"></a>使用mingw64开发</h2><p>配置环境变量: 此电脑 - 属性 - 高级系统设置 - 环境变量 - Path(编辑) - 增加mingw64的bin目录位置(我这里是<code>D:\msys64\mingw64\bin</code>)</p>
+<h2 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h2><p>正常安装cmake，同样环境变量增加cmake的bin目录(我这里是<code>C:\Program Files\CMake\bin</code>)</p>
+<h2 id="使用cmake"><a href="#使用cmake" class="headerlink" title="使用cmake"></a>使用cmake</h2><p>由于使用的是mingw64，所以不能直接调用cmake，而应该使用语句: <code>cmake -G &quot;MinGW Makefiles&quot; .</code></p>
+<p>并且windows某些原因无法在vscode的Tasks中编辑cmake详细参数，所以这个命令我使用手敲的。这也就是说，文件不增加的情况下，直接F5执行make；如果代码文件有修改，则cmake需要先手动执行一遍上面的语句来修改Makefile。</p>
+<p>cmake 目前就是这种方法操作，有更好的方法可以联系交流。</p>
+<h2 id="配置F5断点调试"><a href="#配置F5断点调试" class="headerlink" title="配置F5断点调试"></a>配置F5断点调试</h2><p>目录:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/.vscode/launch.json</span><br><span class="line">/.vscode/tasks.json</span><br><span class="line">/CMakeLists.txt</span><br><span class="line">/main.c</span><br><span class="line">/.gitignore</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">launch.json:</span><br><span class="line">&#123;</span><br><span class="line">  &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">  &quot;configurations&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Launch&quot;,</span><br><span class="line">      &quot;type&quot;: &quot;lldb&quot;, // vscode插件需要下载对应的插件</span><br><span class="line">      &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">      &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/clispy.exe&quot;, // program启动声明需要调用的exe文件</span><br><span class="line">      &quot;args&quot;: [],</span><br><span class="line">      &quot;stopAtEntry&quot;: false,</span><br><span class="line">      &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">      &quot;environment&quot;: [],</span><br><span class="line">      &quot;externalConsole&quot;: true,</span><br><span class="line">      &quot;MIMode&quot;: &quot;lldb&quot;,</span><br><span class="line">      &quot;setupCommands&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">          &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">          &quot;ignoreFailures&quot;: true</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;preLaunchTask&quot;: &quot;make&quot; // 断点启动前执行的任务，对应tasks的label。</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">tasks.json</span><br><span class="line">&#123;</span><br><span class="line">  &quot;version&quot;: &quot;2.0.0&quot;,</span><br><span class="line">  &quot;options&quot;: &#123;</span><br><span class="line">    &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;tasks&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;label&quot;: &quot;cmake&quot;, // 单任务，为launch.json 的preLaunchTask做调用</span><br><span class="line">      &quot;command&quot;: &quot;cmake&quot;,</span><br><span class="line">      &quot;args&quot;: [</span><br><span class="line">        &quot;-G&quot;,</span><br><span class="line">        &quot;&apos;MinGW Makefiles&apos;&quot;,</span><br><span class="line">        &quot;.&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;label&quot;: &quot;make&quot;,  // 单任务，为launch.json 的preLaunchTask做调用</span><br><span class="line">      &quot;command&quot;: &quot;make&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;label&quot;: &quot;CMake Build&quot;, // 多任务，为launch.json 的preLaunchTask做调用</span><br><span class="line">      &quot;dependsOn&quot;:[&quot;cmake&quot;, &quot;make&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CMakeLists.txt</span><br><span class="line"></span><br><span class="line">cmake_minimum_required(VERSION 2.8)</span><br><span class="line"></span><br><span class="line"># 声明编译工具目录</span><br><span class="line">set (CMAKE_C_COMPILER &quot;d:/msys64/mingw64/bin/gcc.exe&quot;)</span><br><span class="line">set (CMAKE_CXX_COMPILER &quot;d:/msys64/mingw64/bin/g++.exe&quot;)</span><br><span class="line">project(clispy)</span><br><span class="line"></span><br><span class="line">set(CMAKE_BUILD_TYPE DEBUG)</span><br><span class="line">set(clispy_VERSION_MAJOR 1)</span><br><span class="line">set(clispy_VERSION_MINOR 0)</span><br><span class="line">set(SRC_LIST mpc.c main.c )</span><br><span class="line"></span><br><span class="line">add_executable(clispy $&#123;SRC_LIST&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.gitignore</span><br><span class="line"></span><br><span class="line">game</span><br><span class="line">*.DSYM</span><br><span class="line">CMakeFiles</span><br><span class="line">cmake_install.cmake</span><br><span class="line">CMakeCache.txt</span><br><span class="line">Learngl</span><br><span class="line">.vscode/settings.json</span><br><span class="line">.vscode/launch.json</span><br><span class="line">.vscode/tasks.json</span><br><span class="line">!.vscode/</span><br><span class="line">*.out</span><br><span class="line">Makefile</span><br><span class="line">*.exe</span><br></pre></td></tr></table></figure>
+<p>剩下就是执行<code>cmake -G &quot;MinGW Makefiles&quot; .</code> 然后<code>按F5</code>执行了。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/11/23/20221123opengl/" class="link f-fl">⟵20221123opengl</a>
+    
+    
+      <a href="/2022/11/20/20221120杭州出差/" class="link f-fr">20221120杭州出差⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

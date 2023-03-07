@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018-12-1lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近继续服务修行打造docker 容器守护采用docker-compose 多重容器聚合，一键配置。一开始配置上出问题，mongodb连接不上。当前成功配置： 1234567891011121314151617181920212223version: &amp;quot;3&amp;quot;services:mongo:image: &amp;quot;mongo:3.6.9-stretch&amp;quot;volumes:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-12-1lesson">
+<meta property="og:url" content="https://akerdi.github.io/2018/12/01/2018-12-1lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="最近继续服务修行打造docker 容器守护采用docker-compose 多重容器聚合，一键配置。一开始配置上出问题，mongodb连接不上。当前成功配置： 1234567891011121314151617181920212223version: &amp;quot;3&amp;quot;services:mongo:image: &amp;quot;mongo:3.6.9-stretch&amp;quot;volumes:">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-12-1lesson">
+<meta name="twitter:description" content="最近继续服务修行打造docker 容器守护采用docker-compose 多重容器聚合，一键配置。一开始配置上出问题，mongodb连接不上。当前成功配置： 1234567891011121314151617181920212223version: &amp;quot;3&amp;quot;services:mongo:image: &amp;quot;mongo:3.6.9-stretch&amp;quot;volumes:">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018-12-1lesson</h2>
+  <p class="sub">Dec 1, 2018</p>
+  <article class="content">
+    <h1 id="最近继续服务修行"><a href="#最近继续服务修行" class="headerlink" title="最近继续服务修行"></a>最近继续服务修行</h1><h2 id="打造docker-容器守护"><a href="#打造docker-容器守护" class="headerlink" title="打造docker 容器守护"></a>打造docker 容器守护</h2><p>采用docker-compose 多重容器聚合，一键配置。<br>一开始配置上出问题，mongodb连接不上。<br>当前成功配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3&quot;</span><br><span class="line">services:</span><br><span class="line">mongo:</span><br><span class="line">image: &quot;mongo:3.6.9-stretch&quot;</span><br><span class="line">volumes:</span><br><span class="line">- ./data:/data/db</span><br><span class="line">ports:</span><br><span class="line">- &quot;27017:27017&quot;</span><br><span class="line">redis:</span><br><span class="line">image: &quot;redis:alpine&quot;</span><br><span class="line">web:</span><br><span class="line">build: .</span><br><span class="line">image: nodejap</span><br><span class="line">command: npm run debug</span><br><span class="line">volumes:</span><br><span class="line">- ./dist:/server/dist</span><br><span class="line">ports:</span><br><span class="line">- &quot;3000:9527&quot;</span><br><span class="line">- &quot;9222:9222&quot;</span><br><span class="line">links:</span><br><span class="line">- mongo</span><br><span class="line">depends_on:</span><br><span class="line">- mongo</span><br></pre></td></tr></table></figure>
+<p>mongo先启动，然后到了web 启动的时候，配置启动采用<a href="https://github.com/docker/hub-feedback/issues/1255" target="_blank" rel="noopener">github issue</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">autoIndex: <span class="literal">true</span>,</span><br><span class="line">reconnectTries: <span class="number">30</span>,</span><br><span class="line">reconnectInterval: <span class="number">500</span>,</span><br><span class="line">poolSize: <span class="number">10</span>,</span><br><span class="line">bufferMaxEntries: <span class="number">0</span>,</span><br><span class="line">useNewUrlParser: <span class="literal">true</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> connectWithRetry = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"MongoDB connection with retry"</span>);</span><br><span class="line">mongoose.connect(db_url, options).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"MongoDB is connected"</span>);</span><br><span class="line">&#125;).catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"MongoDB connection unsuccessful, retry after 5 seconds."</span>);</span><br><span class="line">setTimeout(connectWithRetry, <span class="number">5000</span>)</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line">connectWithRetry();</span><br></pre></td></tr></table></figure>
+<p>这时，每次启动最后一行就都是<code>web_1_9cf04d6b74a9 | MongoDB is connected</code></p>
+<p>接下来顺顺利利的写不久，遇到两个问题：</p>
+<p>首先得知Schema 有<code>_id</code> 和<code>id</code>区分。</p>
+<p><code>_id</code> 是为了分布式而取的对象，根据时间戳生成，当然就具有createdAt 的能力。</p>
+<p><code>id</code> 是字符串，唯一字符串。</p>
+<p>再者遇到unique 对象可以重复创建相同键：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/Automattic/mongoose/issues/7194</span><br><span class="line"></span><br><span class="line">mongoose.set(&quot;debug&quot;, true);</span><br><span class="line">mongoose.set(&apos;useNewUrlParser&apos;, true);</span><br><span class="line">mongoose.set(&apos;useFindAndModify&apos;, false);</span><br><span class="line">mongoose.set(&apos;useCreateIndex&apos;, true);</span><br></pre></td></tr></table></figure>
+<p>原因是mongodb 升级上来，这篇必看的，被我这半路出家的终于花了<em>周六</em>一天才解决掉。</p>
+<h2 id="使用vscode-配合docker-compose-yml-debug"><a href="#使用vscode-配合docker-compose-yml-debug" class="headerlink" title="使用vscode 配合docker-compose.yml debug"></a>使用vscode 配合docker-compose.yml debug</h2><p>参考这篇<a href="https://github.com/Microsoft/vscode-recipes/tree/master/Docker-TypeScript" target="_blank" rel="noopener">vscode 官方原文</a></p>
+<p>使用起来太爽了。</p>
+<h2 id="再分享我的Dockerfile-的长相"><a href="#再分享我的Dockerfile-的长相" class="headerlink" title="再分享我的Dockerfile 的长相"></a>再分享我的Dockerfile 的长相</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM node:<span class="number">8.12</span><span class="number">.0</span>-alpine</span><br><span class="line"></span><br><span class="line">WORKDIR /server</span><br><span class="line"></span><br><span class="line">COPY . /server</span><br><span class="line">RUN npm install</span><br><span class="line"></span><br><span class="line">EXPOSE <span class="number">9527</span></span><br><span class="line">CMD [<span class="string">"yarn"</span>, <span class="string">"debug"</span>]</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/12/09/2018-12-9lesson/" class="link f-fl">⟵2018-12-9lesson</a>
+    
+    
+      <a href="/2018/11/14/2018-11-14lesson/" class="link f-fr">2018-11-14lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

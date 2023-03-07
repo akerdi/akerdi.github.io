@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20220208gccbuild | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一次gcc windows 打包。以为超级难，使用 -static，但是报一堆错误。 最终使用加入dll 动态包打包的。  首先我开发时使用 gcc *.c -lcurl -o app 在Cgywin 是能正常执行使用的。新哥教我双击要能使用，那么就使用 everything 一个个找出里面的需要的库文件，而且在新哥那边嫖来了公司统一打包环境，好处就是随着公司统一第三方版本升级，和我当前使用的差">
+<meta name="keywords" content="gcc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20220208gccbuild">
+<meta property="og:url" content="https://akerdi.github.io/2022/02/11/20220208gccbuild/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="第一次gcc windows 打包。以为超级难，使用 -static，但是报一堆错误。 最终使用加入dll 动态包打包的。  首先我开发时使用 gcc *.c -lcurl -o app 在Cgywin 是能正常执行使用的。新哥教我双击要能使用，那么就使用 everything 一个个找出里面的需要的库文件，而且在新哥那边嫖来了公司统一打包环境，好处就是随着公司统一第三方版本升级，和我当前使用的差">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20220208gccbuild">
+<meta name="twitter:description" content="第一次gcc windows 打包。以为超级难，使用 -static，但是报一堆错误。 最终使用加入dll 动态包打包的。  首先我开发时使用 gcc *.c -lcurl -o app 在Cgywin 是能正常执行使用的。新哥教我双击要能使用，那么就使用 everything 一个个找出里面的需要的库文件，而且在新哥那边嫖来了公司统一打包环境，好处就是随着公司统一第三方版本升级，和我当前使用的差">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20220208gccbuild</h2>
+  <p class="sub">Feb 11, 2022</p>
+  <article class="content">
+    <p>第一次gcc windows 打包。以为超级难，使用 -static，但是报一堆错误。</p>
+<p>最终使用加入dll 动态包打包的。</p>
+<hr>
+<p>首先我开发时使用 <code>gcc *.c -lcurl -o app</code> 在Cgywin 是能正常执行使用的。新哥教我双击要能使用，那么就使用 <code>everything</code> 一个个找出里面的需要的库文件，而且在新哥那边嫖来了公司统一打包环境，好处就是随着公司统一第三方版本升级，和我当前使用的差不太多。</p>
+<p>新哥指导下打包成功后在本地出现app.exe, 但是双击或者 cmd 中执行是失败的, 说明库文件没找对。新哥可能太久不记得怎么操作了，不行了，得麻烦春哥了。</p>
+<p>接着请教春哥，春哥当晚很晚给我把动态库找齐，放在一起执行。我自己操作了下也成功，满意的回家了。</p>
+<p>这里写个插曲: 春哥给我整好后，我把app.exe 拖到桌面，双击，唉，春哥，运行不起来啊(他已经回去了)。春哥想了又想，我给他截了个图，他看到了他的那些可爱的动态库去哪了。诶，这货双击执行还需要那些个玩意嘛。哦，明白了，经常下载exe安装包，里面就有这些，我自己试下，哦，soga，真有意思。</p>
+<p>这是该app, 好用着呢: <a href="https://github.com/akerdi/postftp" target="_blank" rel="noopener">https://github.com/akerdi/postftp</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/02/18/20220218too-many-open-files/" class="link f-fl">⟵20220218too_many_open_files</a>
+    
+    
+      <a href="/2022/01/25/20220122paihupai/" class="link f-fr">20220122拍沪牌⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

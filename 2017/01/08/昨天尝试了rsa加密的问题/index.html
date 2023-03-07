@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>昨天尝试了rsa加密的问题 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-06-16 11:59:05) 这几天的问题出现在，当时后台的底层构架他们没法改，在请求头将sign给服务器的同时，在parameter传送过程也需要将sign（数据库钥匙）以及用户账号密码等也在此中。这时出现的一个问题，在charles截取数据，sign、密码等都是明文，这是很恐怖的：服务器钥匙串、密码等都是暴露在人前。你说你去银行，这时你的账号、密码以及银行最重要的钥匙只要有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="昨天尝试了rsa加密的问题">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/昨天尝试了rsa加密的问题/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-06-16 11:59:05) 这几天的问题出现在，当时后台的底层构架他们没法改，在请求头将sign给服务器的同时，在parameter传送过程也需要将sign（数据库钥匙）以及用户账号密码等也在此中。这时出现的一个问题，在charles截取数据，sign、密码等都是明文，这是很恐怖的：服务器钥匙串、密码等都是暴露在人前。你说你去银行，这时你的账号、密码以及银行最重要的钥匙只要有">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="昨天尝试了rsa加密的问题">
+<meta name="twitter:description" content="发表于(2016-06-16 11:59:05) 这几天的问题出现在，当时后台的底层构架他们没法改，在请求头将sign给服务器的同时，在parameter传送过程也需要将sign（数据库钥匙）以及用户账号密码等也在此中。这时出现的一个问题，在charles截取数据，sign、密码等都是明文，这是很恐怖的：服务器钥匙串、密码等都是暴露在人前。你说你去银行，这时你的账号、密码以及银行最重要的钥匙只要有">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">昨天尝试了rsa加密的问题</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-06-16 11:59:05)</p>
+<p>这几天的问题出现在，当时后台的底层构架他们没法改，在请求头将sign给服务器的同时，在parameter传送过程也需要将sign（数据库钥匙）以及用户账号密码等也在此中。这时出现的一个问题，在charles截取数据，sign、密码等都是明文，这是很恐怖的：服务器钥匙串、密码等都是暴露在人前。你说你去银行，这时你的账号、密码以及银行最重要的钥匙只要有点经验的人都能获取得到，谁还敢将钱放在银行。<br>这时前段将密码过滤多少次都没用，唯一的就是服务器和前段进行密码加密才可解决（服务器那边说没办法，只能这么处理，目前没去更改https，也没法将密码、sign值等放入header中），ok，下面是我们的处理。<br>可以参考这篇文章：<a href="http://www.tuicool.com/articles/bAN7BrR" target="_blank" rel="noopener">http://www.tuicool.com/articles/bAN7BrR</a></p>
+<p>#!/usr/bin/env bash echo “Generating RSA key pair …” echo “1024 RSA key: private_key.pem” openssl genrsa -out private_key.pem 1024 echo “create certification require file: rsaCertReq.csr” openssl req -new -key private_key.pem -out rsaCertReq.csr echo “create certification using x509: rsaCert.crt” openssl x509 -req -days 3650 -in rsaCertReq.csr -signkey private_key.pem -out rsaCert.crt echo “create public_key.der For IOS” openssl x509 -outform der -in rsaCert.crt -out public_key.der echo “create private_key.p12 For IOS. Please remember your password. The password will be used in iOS.” openssl pkcs12 -export -out private_key.p12 -inkey private_key.pem -in rsaCert.crt echo “create rsa_public_key.pem For Java” openssl rsa -in private_key.pem -out rsa_public_key.pem -pubout echo “create pkcs8_private_key.pem For Java” openssl pkcs8 -topk8 -in private_key.pem -out pkcs8_private_key.pem -nocrypt echo “finished.”</p>
+<p>上面的为分开处理，一条一条的哟，有需要填入比如密码、公司信息、province一堆信息，记得信息记录下来哦。</p>
+<p>Tips:</p>
+<ul>
+<li>在创建证书的时候, terminal会提示输入证书信息. 根据wizard输入对应信息就OK. </li>
+<li>在创建p12密匙时, 会提示输入密码, 此时的密码必须记住, 之后会用到.</li>
+<li>如果上面指令有问题,请参考最新的openssl官方文档, 以官方的为准. 之前在网上搜索指令, 被坑了一圈之后, 还是会到啃官方文档上. 每条指令文档在最后都会有几个sample,参考sample即可.</li>
+</ul>
+<p>里面有个RSAEncryptor,自己去github上下载。base64在NSData里边，从iOS 7.0开始自动支持</p>
+<p>加密</p>
+<p><code>RSAEncryptor *rsa = [[RSAEncryptor alloc] init]; NSLog(@&quot;encryptor using rsa&quot;); NSString *publicKeyPath = [[NSBundle mainBundle] pathForResource:@&quot;public_key&quot; ofType:@&quot;der&quot;]; NSLog(@&quot;public key: %@&quot;, publicKeyPath); [rsa loadPublicKeyFromFile:publicKeyPath]; NSString *securityText = @&quot;hello ~&quot;; NSString *encryptedString = [rsa rsaEncryptString:securityText]; NSLog(@&quot;encrypted data: %@&quot;, encryptedString);</code></p>
+<p><strong>[rsa rsaEncryptString:securityText]</strong>会返回decrypted base64编码的字符串:</p>
+<p>console out 写道<br>encrypted data: I1Mnu33cU7QcgaC9uo2bxV0vyfJSqAwyC3DZ+p8jm0G2EmcClarrR5R2xLDdXqvtKj+UJbES7TT+AgkK1NDoQvOJBY+jkmrpAchmRbV2jvi3cEZYQG955jrdSAu21NzQe8xWtEc3YzP+TACPdP4B3Cyy0u8N2RcSFWyxu0YKPXE=</p>
+<p>解密:<br><code>NSLog(@&quot;decryptor using rsa&quot;); [rsa loadPrivateKeyFromFile:[[NSBundle mainBundle] pathForResource:@&quot;private_key&quot; ofType:@&quot;p12&quot;] password:@&quot;123456&quot;]; NSString *decryptedString = [rsa rsaDecryptString:encryptedString]; NSLog(@&quot;decrypted data: %@&quot;, decryptedString);</code></p>
+<p>服务器那边就让他们服务器去弄，这就是我们前段需要处理的地方</p>
+<p>上边整理下来的文件有7个   .gem .der p12等等</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/GPUImage如何创建，图文介绍/" class="link f-fl">⟵GPUImage如何创建，图文介绍</a>
+    
+    
+      <a href="/2017/01/08/swift的xib在模拟器显示正常，真机不显示/" class="link f-fr">swift的xib在模拟器显示正常，真机不显示⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

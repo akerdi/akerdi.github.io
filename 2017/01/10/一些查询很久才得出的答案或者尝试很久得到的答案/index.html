@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>一些查询很久才得出的答案或者尝试很久得到的答案 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2 months ago) 地址 一些查询很久才得出的答案或者尝试很久得到的答案，类目主要用在chat、social、video、multi pic、watermark、filter、audio、Parse（FB）、个人无后台开发 1：由于用到贴图，网上寻觅不得，只说 UIGraphicsBeginImageContext(&amp;lt;#CGSize size#&amp;gt;)-&amp;gt;换成UIGr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些查询很久才得出的答案或者尝试很久得到的答案">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/10/一些查询很久才得出的答案或者尝试很久得到的答案/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2 months ago) 地址 一些查询很久才得出的答案或者尝试很久得到的答案，类目主要用在chat、social、video、multi pic、watermark、filter、audio、Parse（FB）、个人无后台开发 1：由于用到贴图，网上寻觅不得，只说 UIGraphicsBeginImageContext(&amp;lt;#CGSize size#&amp;gt;)-&amp;gt;换成UIGr">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些查询很久才得出的答案或者尝试很久得到的答案">
+<meta name="twitter:description" content="发表于(2 months ago) 地址 一些查询很久才得出的答案或者尝试很久得到的答案，类目主要用在chat、social、video、multi pic、watermark、filter、audio、Parse（FB）、个人无后台开发 1：由于用到贴图，网上寻觅不得，只说 UIGraphicsBeginImageContext(&amp;lt;#CGSize size#&amp;gt;)-&amp;gt;换成UIGr">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">一些查询很久才得出的答案或者尝试很久得到的答案</h2>
+  <p class="sub">Jan 10, 2017</p>
+  <article class="content">
+    <p>发表于(2 months ago)</p>
+<p><a href="https://github.com/shaohung001/One-person-project" target="_blank" rel="noopener">地址</a></p>
+<p>一些查询很久才得出的答案或者尝试很久得到的答案，类目主要用在chat、social、video、multi pic、watermark、filter、audio、Parse（FB）、个人无后台开发</p>
+<p>1：由于用到贴图，网上寻觅不得，只说 UIGraphicsBeginImageContext(&lt;#CGSize size#&gt;)-&gt;换成UIGraphicsBeginImageContextWithOptions(&lt;#CGSize size#&gt;,&lt;#Bool opaque#&gt;,&lt;#CGFloat scale#&gt;) 上面这句话是重点 scale是缩放因子，使用[UIScreen mainScreen].scale即可； 中间的opaque是识别里面有没有alpha通道，如果有通道则填入NO，相反的哦； size则为你的图片的大小，比如上面一张大图，下面一张watermark，这size为大图的大小，毕竟大图在下面，第一个放入的； 这样子图片就会变为高清！！！没错，如果还没有变为高清，是有另一个原因的，那就是你的贴图不是@2x或者@3x的倍率，将其放入图片文件夹或者source，加入后缀，一定使用@3x，@2x也不怎么清晰！！！ 最后一步才是本文重点，网上没人说，自己尝试出来的</p>
+<p>这一段是苹果私密api，用来找出Reveal的各个APP的bundleID，挺好用的</p>
+<p><code>Class LSApplicationWorkspace_class = objc_getClass(&quot;LSApplicationWorkspace&quot;);
+    NSObject* workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];
+    NSArray *array = [workspace performSelector:@selector(allApplications)];
+    id a = array[0];
+    NSLog(@&quot;apps: %@&quot;, [workspace performSelector:@selector(allApplications)]);</code></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/10/UIBazier学习和CAMediaTimingFunction/" class="link f-fl">⟵UIBazier学习和CAMediaTimingFunction</a>
+    
+    
+      <a href="/2017/01/09/iOS导航栏颜色和给的颜色不一样/" class="link f-fr">iOS导航栏颜色和给的颜色不一样⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20220610学习工作遇到的问题 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Learn写sqlite遇到的问题小心指针写错有方法: (void*)(*leaf_node_value)(void* node, uint32_t cell_num) void(*serialize_row)(void* target, Row* source) 调用时居然没有报类型错误: serialize_row(*leaf_node_value(destination_node, inde">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20220610学习工作遇到的问题">
+<meta property="og:url" content="https://akerdi.github.io/2022/06/10/20220610lession/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Learn写sqlite遇到的问题小心指针写错有方法: (void*)(*leaf_node_value)(void* node, uint32_t cell_num) void(*serialize_row)(void* target, Row* source) 调用时居然没有报类型错误: serialize_row(*leaf_node_value(destination_node, inde">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20220610学习工作遇到的问题">
+<meta name="twitter:description" content="Learn写sqlite遇到的问题小心指针写错有方法: (void*)(*leaf_node_value)(void* node, uint32_t cell_num) void(*serialize_row)(void* target, Row* source) 调用时居然没有报类型错误: serialize_row(*leaf_node_value(destination_node, inde">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20220610学习工作遇到的问题</h2>
+  <p class="sub">Jun 10, 2022</p>
+  <article class="content">
+    <h1 id="Learn"><a href="#Learn" class="headerlink" title="Learn"></a>Learn</h1><h2 id="写sqlite遇到的问题"><a href="#写sqlite遇到的问题" class="headerlink" title="写sqlite遇到的问题"></a>写sqlite遇到的问题</h2><h3 id="小心指针写错"><a href="#小心指针写错" class="headerlink" title="小心指针写错"></a>小心指针写错</h3><p>有方法: <code>(void*)(*leaf_node_value)(void* node, uint32_t cell_num)</code></p>
+<p><code>void(*serialize_row)(void* target, Row* source)</code></p>
+<p>调用时居然没有报类型错误: serialize_row(*leaf_node_value(destination_node, index), value), 此处传入的target是对象类型，居然没有报错。正确的是: <code>serialize_row(leaf_node_value(destination_node, index), value)</code></p>
+<h3 id="传入Row-但是入参是uint32-t-则会被转为数字"><a href="#传入Row-但是入参是uint32-t-则会被转为数字" class="headerlink" title="传入Row* 但是入参是uint32_t 则会被转为数字"></a>传入Row* 但是入参是uint32_t 则会被转为数字</h3><p>入参会直接拷贝: <code>void(*leaf_node_split_and_insert)(Cursor* cursor, uint32_t key, uint32_t value)</code> 如果传入leaf_node_split_and_insert(cursor, key, value); 这个value是Row*对象，则会直接拷贝地址转为uint32_t值。</p>
+<h2 id="docker宿主机模式"><a href="#docker宿主机模式" class="headerlink" title="docker宿主机模式"></a>docker宿主机模式</h2><p>遇到个问题: 服务要使用ssh连接本机，但是使用全局ip，会走网关，网关管理方(其他公司)似乎将速度降的很慢，于是就想着使用127.0.0.1。</p>
+<p>docker有个属性: <code>network_mode: host</code>，这将直接把适配了环境的服务，单独将网络服务拉到和宿主机一致。</p>
+<p>既然和宿主机网络一致了，那就不能使用虚拟网卡: networks, 并且相同的docker-compose.yml 文件中的服务，要是有数据库之类的，就无法使用同一个网络服务，于是使用127.0.0.1:${db_port}:${db_port}，都不走外网端口。</p>
+<p>当前处理方案示例:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  mongo:</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:27017:27017</span></span><br><span class="line"><span class="attr">  web:</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DB_HOST=127.0.0.1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">DB_PORT=27017</span></span><br><span class="line"><span class="attr">    network_mode:</span> <span class="string">host</span></span><br></pre></td></tr></table></figure>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/07/01/20220701lesson/" class="link f-fl">⟵20220701生活琐碎</a>
+    
+    
+      <a href="/2022/04/20/20220420lesson/" class="link f-fr">20220420生活琐碎⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

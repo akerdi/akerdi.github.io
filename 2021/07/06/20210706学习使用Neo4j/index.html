@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210706学习使用Neo4j | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习使用Neo4jNeo4j 本身提供7474端口的及时UI操作服务。如: http://localhost:7474 登录上即可。 这里以nodejs 链接代码: 12345678910111213141516171819const neo4j = require(&quot;neo4j-driver&quot;)let session = nullfunction connect(conf:&amp;#123;url:s">
+<meta name="keywords" content="neo4j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210706学习使用Neo4j">
+<meta property="og:url" content="https://akerdi.github.io/2021/07/06/20210706学习使用Neo4j/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="学习使用Neo4jNeo4j 本身提供7474端口的及时UI操作服务。如: http://localhost:7474 登录上即可。 这里以nodejs 链接代码: 12345678910111213141516171819const neo4j = require(&quot;neo4j-driver&quot;)let session = nullfunction connect(conf:&amp;#123;url:s">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210706学习使用Neo4j">
+<meta name="twitter:description" content="学习使用Neo4jNeo4j 本身提供7474端口的及时UI操作服务。如: http://localhost:7474 登录上即可。 这里以nodejs 链接代码: 12345678910111213141516171819const neo4j = require(&quot;neo4j-driver&quot;)let session = nullfunction connect(conf:&amp;#123;url:s">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210706学习使用Neo4j</h2>
+  <p class="sub">Jul 6, 2021</p>
+  <article class="content">
+    <h1 id="学习使用Neo4j"><a href="#学习使用Neo4j" class="headerlink" title="学习使用Neo4j"></a>学习使用Neo4j</h1><p>Neo4j 本身提供7474端口的及时UI操作服务。如: <a href="http://localhost:7474" target="_blank" rel="noopener">http://localhost:7474</a> 登录上即可。</p>
+<p>这里以nodejs 链接代码:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> neo4j = <span class="built_in">require</span>(<span class="string">"neo4j-driver"</span>)</span><br><span class="line"><span class="keyword">let</span> session = <span class="literal">null</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params">conf:&#123;url:<span class="built_in">string</span>, username:<span class="built_in">string</span>, password:<span class="built_in">string</span>&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> driver = neo4j.v1.driver(conf.url, neo4j.v1.auth.basic(conf.username, conf.password))</span><br><span class="line">    session = driver.session(neo4j.v1.session.WRITE)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">executeCypher</span>(<span class="params">data:&#123;cql:<span class="built_in">string</span>&#125;</span>) </span>&#123;</span><br><span class="line">    session.run(data.cql, data).subscribe(&#123;</span><br><span class="line">        onNext:<span class="function">(<span class="params">record</span>)=&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"[neo4j.onNext] record:"</span>, record)</span><br><span class="line">        &#125;,</span><br><span class="line">        onCompleted: <span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"[neo4j.onCompleted] ..."</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        onError: <span class="function">(<span class="params">err</span>)=&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"[neo4j.onError] err: "</span>, err)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="cql语法"><a href="#cql语法" class="headerlink" title="cql语法"></a>cql语法</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><pre><code>$CREATE (m:Movie {title: &quot;The Matrix&quot;, released: 1990})
+$CREATE (m:Movie {title: &quot;Apollo 13&quot;, released: 2000})
+</code></pre><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><pre><code>$match (m:Movie {title: &quot;The Matrix&quot;}) return m # match (m:Movie) where m.title = &quot;The Matrix&quot;
+</code></pre><h3 id="创建边"><a href="#创建边" class="headerlink" title="创建边"></a>创建边</h3><pre><code>// m0-r-&gt;m1
+$match (m0:Movie {title: &quot;The Matrix&quot;}) match (m1:Movie {title: &quot;Apollo 13&quot;}) \
+create (m0)-[r:ACTED_IN]-&gt;(m1) return m0, r, m1 # 每次只能创建一个方向
+// 在创建一个反向m0&lt;-r-m1
+$match (m0:Movie {title: &quot;The Matrix&quot;}) match (m1:Movie {title: &quot;Apollo 13&quot;}) \
+create (m0)&lt;-[r:ACTED_IN]-(m1) return m0, r, m1
+</code></pre><h3 id="删除边、node"><a href="#删除边、node" class="headerlink" title="删除边、node"></a>删除边、node</h3><pre><code>$match (m0:Movie {title: &quot;The Matrix&quot;}) match (m1:Movie {title: &quot;Apollo 13&quot;}) \
+optional match(m0)&lt;-[r0:ACTED_IN]-(m1) \
+optional match(m0)-[r1:ACTED_IN]-&gt;(m1) \
+DELETE r0, r1, m0 # 必须先删除所有边才可以删除node
+</code></pre><h3 id="STARTS-WITH-ENDS-WITH-CONTAINS"><a href="#STARTS-WITH-ENDS-WITH-CONTAINS" class="headerlink" title="STARTS WITH / ENDS WITH / CONTAINS"></a>STARTS WITH / ENDS WITH / CONTAINS</h3><pre><code>$where a.name STARTS WITH &apos;Ake&apos;
+$where a.name ENDS WITH &apos;ker&apos;
+$where a.name CONTAINS &apos;ke&apos;
+</code></pre><h3 id="EXISTS-属性检查"><a href="#EXISTS-属性检查" class="headerlink" title="EXISTS 属性检查"></a>EXISTS 属性检查</h3><pre><code>$match (m:Movie) where EXISTS(m.title)
+</code></pre><h3 id="NOT-取反"><a href="#NOT-取反" class="headerlink" title="NOT 取反"></a>NOT 取反</h3><pre><code>$where NOT m.title ends with &quot;ker&quot;
+</code></pre><h3 id="’regexp’-语法继承来自Java正则表达式"><a href="#’regexp’-语法继承来自Java正则表达式" class="headerlink" title="=~’regexp’ 语法继承来自Java正则表达式"></a>=~’regexp’ 语法继承来自Java正则表达式</h3><pre><code>$match (m:Movie) where m.title =~&apos;The Matr*&apos;
+</code></pre><h3 id="i-非大小写敏感"><a href="#i-非大小写敏感" class="headerlink" title="(?i) 非大小写敏感"></a>(?i) 非大小写敏感</h3><pre><code>$where n.name =~(?i)TOM.*&apos; return n
+</code></pre><h3 id="模式过滤"><a href="#模式过滤" class="headerlink" title="模式过滤"></a>模式过滤</h3><pre><code>$match (m0:Movie {title: &quot;The Matrix&quot;}), (m1:Movie) \
+where (m0)-[r:ACTED_IN]-(m1) return m0, m1
+相当于:
+$match (m0:Movie {title: &quot;The Matrix})-[r:ACTED_IN]-(m1:Movie) return m0, m1
+</code></pre><h3 id="关系类型过滤"><a href="#关系类型过滤" class="headerlink" title="关系类型过滤"></a>关系类型过滤</h3><pre><code>$match (n)-[r]-() where type(r)=~&apos;DIRE.*&apos; return n
+</code></pre><h3 id="IN运算符"><a href="#IN运算符" class="headerlink" title="IN运算符"></a>IN运算符</h3><pre><code>$match (m:Movie) where m.title IN [&quot;The Matrix&quot;, &quot;Apollo 13&quot;, &quot;the matrix&quot;]
+</code></pre><h3 id="OR-AND-IS-NULL-ORDER-BY"><a href="#OR-AND-IS-NULL-ORDER-BY" class="headerlink" title="OR/AND/IS NULL/ORDER BY"></a>OR/AND/IS NULL/ORDER BY</h3><pre><code>$match (m:Movie) where m.title = &quot;The Matrix&quot; OR m.title IS NULL return m ORDER BY m.title
+</code></pre><h3 id="DISTINCT-返回结果去掉重名"><a href="#DISTINCT-返回结果去掉重名" class="headerlink" title="DISTINCT 返回结果去掉重名"></a>DISTINCT 返回结果去掉重名</h3><pre><code>$match (m:Movie) return DISTINCT m.title
+</code></pre><h3 id="LIMIT-SKIP"><a href="#LIMIT-SKIP" class="headerlink" title="LIMIT / SKIP"></a>LIMIT / SKIP</h3><h3 id="FOREACH"><a href="#FOREACH" class="headerlink" title="FOREACH"></a>FOREACH</h3><pre><code>$match p=(m0:Movie {title: &quot;The Matrix&quot;})-[r:ACTED_IN]-(m1) FOREACH (n IN nodes(p) | set n.marked = true)
+</code></pre><h3 id="SIZE"><a href="#SIZE" class="headerlink" title="SIZE"></a>SIZE</h3><pre><code>$match p=(m0:Movie)-[r:ACTED_IN]-(m1:Movie) where m0.title=&quot;The Matrix&quot; return m0, SIZE(nodes(p))
+</code></pre><h3 id="COLLECT-将资源转为array"><a href="#COLLECT-将资源转为array" class="headerlink" title="COLLECT 将资源转为array"></a>COLLECT 将资源转为array</h3><h3 id="WITH-UNWIND"><a href="#WITH-UNWIND" class="headerlink" title="WITH / UNWIND"></a>WITH / UNWIND</h3><pre><code>$match (m:Movie) WITH COLLECT(m) as c UNWIND c as x return x
+</code></pre><h3 id="MERGE-CREATE-区别在于已存在"><a href="#MERGE-CREATE-区别在于已存在" class="headerlink" title="MERGE / CREATE 区别在于已存在"></a>MERGE / CREATE 区别在于已存在</h3><pre><code>$create (m:Movie {Id: 10}) create (m:Movie {Id: 10}) # 此时有两个Id=10 的movie
+$MERGE (m:Movie {Id: 20}) MERGE (m:Movie {Id: 20}) # 此时只会有一个Id=20 的movie
+</code></pre><h3 id="UNION-合并"><a href="#UNION-合并" class="headerlink" title="UNION 合并"></a>UNION 合并</h3><pre><code>// foreach 设置属性
+$match (cc:CreditCard) with collect(cc) as arr foreach(c in arr | set c.type = &quot;cc&quot;)
+// 合并CreditCard 和DebitCard 数据
+$match (cc:CreditCard) return cc.Id as Id, cc.name as name, cc.number as number order by cc.Id \
+union \
+match (dc:DebitCard) return dc.Id as Id, dc.name as name, dc.number as number order by dc.Id
+</code></pre><h3 id="ON-MERGE-CREATE-更新或者新建"><a href="#ON-MERGE-CREATE-更新或者新建" class="headerlink" title="ON MERGE / CREATE 更新或者新建"></a>ON MERGE / CREATE 更新或者新建</h3><pre><code>$MERGE (p:Person {name: &quot;Peter&quot;}) \
+ON MATCH SET peter += { hungry: true, position: &quot;GAO TOU&quot;}
+ON CREATE SET peter += {last: &quot;aker&quot;}
+</code></pre><p><a href="https://www.huaweicloud.com/articles/53b4cf274b3463273fd5b03d845163f9.html" target="_blank" rel="noopener">参考1</a><br><a href="https://blog.csdn.net/chengyuqiang/article/details/102563408" target="_blank" rel="noopener">merge参考</a><br><a href="https://www.w3cschool.cn/neo4j/neo4j_cql_union.html" target="_blank" rel="noopener">union参考</a><br><a href="https://stackoverflow.com/a/25179644/6677202" target="_blank" rel="noopener">on merge/create参考</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/07/06/20210705cpp学习/" class="link f-fl">⟵20210705cpp学习</a>
+    
+    
+      <a href="/2021/06/16/20210616我的新目标cpp/" class="link f-fr">20210616我的新目标cpp⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

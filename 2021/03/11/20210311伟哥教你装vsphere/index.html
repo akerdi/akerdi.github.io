@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210311伟哥教你装vsphere | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="伟哥教你装vsphere这几天公司研发部乔迁，距离很近，三楼到四楼。 长话短说: 机房重新整理，所以测试环境也要整理。当前机器未到，于是伟哥喊上还在加班的同学学上一学，加班福利。 正题首先是服务器要先装上Raid卡(2000+软妹币)，接下来往服务器上插入硬盘。  硬盘顺序是左边从上到下0,1,2 然后到右边依次。本次是开头的0,1,2,3 SSD，其他机械盘和SSD 混装。 系统进入后 CTRL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210311伟哥教你装vsphere">
+<meta property="og:url" content="https://akerdi.github.io/2021/03/11/20210311伟哥教你装vsphere/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="伟哥教你装vsphere这几天公司研发部乔迁，距离很近，三楼到四楼。 长话短说: 机房重新整理，所以测试环境也要整理。当前机器未到，于是伟哥喊上还在加班的同学学上一学，加班福利。 正题首先是服务器要先装上Raid卡(2000+软妹币)，接下来往服务器上插入硬盘。  硬盘顺序是左边从上到下0,1,2 然后到右边依次。本次是开头的0,1,2,3 SSD，其他机械盘和SSD 混装。 系统进入后 CTRL">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/11lesson/01.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/11lesson/02.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/11lesson/03.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/11lesson/04.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/11lesson/05.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210311伟哥教你装vsphere">
+<meta name="twitter:description" content="伟哥教你装vsphere这几天公司研发部乔迁，距离很近，三楼到四楼。 长话短说: 机房重新整理，所以测试环境也要整理。当前机器未到，于是伟哥喊上还在加班的同学学上一学，加班福利。 正题首先是服务器要先装上Raid卡(2000+软妹币)，接下来往服务器上插入硬盘。  硬盘顺序是左边从上到下0,1,2 然后到右边依次。本次是开头的0,1,2,3 SSD，其他机械盘和SSD 混装。 系统进入后 CTRL">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/11lesson/01.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210311伟哥教你装vsphere</h2>
+  <p class="sub">Mar 11, 2021</p>
+  <article class="content">
+    <h1 id="伟哥教你装vsphere"><a href="#伟哥教你装vsphere" class="headerlink" title="伟哥教你装vsphere"></a>伟哥教你装vsphere</h1><p>这几天公司研发部乔迁，距离很近，三楼到四楼。</p>
+<p>长话短说: 机房重新整理，所以测试环境也要整理。当前机器未到，于是伟哥喊上还在加班的同学学上一学，加班福利。</p>
+<h2 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h2><p>首先是服务器要先装上Raid卡(2000+软妹币)，接下来往服务器上插入硬盘。</p>
+<p><img src="/css/images/11lesson/01.jpg" alt="1"></p>
+<p>硬盘顺序是左边从上到下0,1,2 然后到右边依次。本次是开头的0,1,2,3 SSD，其他机械盘和SSD 混装。</p>
+<p>系统进入后 CTRL+R 进入配置Raid界面。</p>
+<p>可以看到有<code>Unconfigured Physical Disks</code>，这时在根一栏按F2 进入Operations 选择组Raid模式。可以选 0 / 1 / 10 / 5/ 6 等，选好按Enter 就好了。</p>
+<p><img src="/css/images/11lesson/02.jpg" alt="2"></p>
+<p>如果发现少了块盘情况，按Ctrl + N 切tab 到 <code>PD Mgmt</code>界面，可能是那块盘被直接作为盘符使用了(Non-RAID, 可以选择<code>Convert to Raid Capable</code>)。</p>
+<p>组完Raid之后，磁盘就完了。</p>
+<p><img src="/css/images/11lesson/03.jpg" alt="3"></p>
+<p><img src="/css/images/11lesson/04.jpg" alt="4"></p>
+<hr>
+<blockquote>
+<p>插内存条这事需要自己上网找，并且伟哥说了，这个很重要，插不好，性能会很差!单颗CPU插法和多颗CPU插法也不一样!</p>
+</blockquote>
+<hr>
+<p>接下来装vsphere。vsphere 是专门做虚拟化的linux，把整个服务器资源统一安排。</p>
+<p>首先: 伟哥把USB 插上插口，然后Boot 那个USB，把他当做安装系统。然后就好了。</p>
+<p>装完之后需要注意把IP 固定。然后下方有个测试Ping 的功能。比如伟哥这里就测试ping 研发网段、网卡网段、114.114.114.114，然后其他都是界面操作了。</p>
+<p>欧了。</p>
+<p><img src="/css/images/11lesson/05.jpg" alt="5"></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/05/16/20210516学习杂项记录/" class="link f-fl">⟵20210516学习杂项记录</a>
+    
+    
+      <a href="/2021/02/18/20210218定房日记/" class="link f-fr">20210218定房日记⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

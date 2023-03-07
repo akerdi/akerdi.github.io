@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20220218too_many_open_files | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="too_many_open_files前方技术传过来服务报错: too many open files，这个第一眼看出来就是服务器句柄消耗空了。但是我这里无法定位，所以需要精确到是哪些文件被打开，然后我找找附近代码即可。 下载lsof 离线包首先离线原因，我需要lsof的离线安装。 centos: yum install yum-utils -y 下载后能得到yumdownloader 工具 然后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20220218too_many_open_files">
+<meta property="og:url" content="https://akerdi.github.io/2022/02/18/20220218too-many-open-files/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="too_many_open_files前方技术传过来服务报错: too many open files，这个第一眼看出来就是服务器句柄消耗空了。但是我这里无法定位，所以需要精确到是哪些文件被打开，然后我找找附近代码即可。 下载lsof 离线包首先离线原因，我需要lsof的离线安装。 centos: yum install yum-utils -y 下载后能得到yumdownloader 工具 然后">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20220218too_many_open_files">
+<meta name="twitter:description" content="too_many_open_files前方技术传过来服务报错: too many open files，这个第一眼看出来就是服务器句柄消耗空了。但是我这里无法定位，所以需要精确到是哪些文件被打开，然后我找找附近代码即可。 下载lsof 离线包首先离线原因，我需要lsof的离线安装。 centos: yum install yum-utils -y 下载后能得到yumdownloader 工具 然后">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20220218too_many_open_files</h2>
+  <p class="sub">Feb 18, 2022</p>
+  <article class="content">
+    <h1 id="too-many-open-files"><a href="#too-many-open-files" class="headerlink" title="too_many_open_files"></a>too_many_open_files</h1><p>前方技术传过来服务报错: too many open files，这个第一眼看出来就是服务器句柄消耗空了。但是我这里无法定位，所以需要精确到是哪些文件被打开，然后我找找附近代码即可。</p>
+<h2 id="下载lsof-离线包"><a href="#下载lsof-离线包" class="headerlink" title="下载lsof 离线包"></a>下载lsof 离线包</h2><p>首先离线原因，我需要lsof的离线安装。</p>
+<p>centos: <code>yum install yum-utils -y</code> 下载后能得到yumdownloader 工具</p>
+<p>然后使用yumdownloader 下载lsof 包: <code>yumdownloader lsof --resolve --destdir=/root/mytest</code></p>
+<p>–resolve 会下载对应依赖；–destdir 会将rpm包下载到对应文件夹。</p>
+<p>接下来将该安装包拖到内网服务器。</p>
+<h2 id="rpm安装该包"><a href="#rpm安装该包" class="headerlink" title="rpm安装该包"></a>rpm安装该包</h2><p><code>rpm -ivh *.rpm</code></p>
+<h2 id="使用docker-ps-查找对应的容器"><a href="#使用docker-ps-查找对应的容器" class="headerlink" title="使用docker ps 查找对应的容器"></a>使用docker ps 查找对应的容器</h2><p>推荐使用对应容器查找方案，单独隔离，如果打印很多，那该进程肯定是满的。</p>
+<p><code>docker ps</code></p>
+<h2 id="根据docker-容器找到实际进程pid"><a href="#根据docker-容器找到实际进程pid" class="headerlink" title="根据docker 容器找到实际进程pid"></a>根据docker 容器找到实际进程pid</h2><pre><code>docker inspect -f &apos;{{ .State.Pid }}&apos; ${docker 容器名 / dockerId}
+</code></pre><p>这个能获取实际进程pid</p>
+<h2 id="打印所有open-的句柄"><a href="#打印所有open-的句柄" class="headerlink" title="打印所有open 的句柄"></a>打印所有open 的句柄</h2><p><code>lsof -p ${pid}</code></p>
+<p>列出所有打开的句柄。 lsof: list open file</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>没有结尾，搞定收工</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/02/21/20220221关于21年总结/" class="link f-fl">⟵20220221关于21年总结</a>
+    
+    
+      <a href="/2022/02/11/20220208gccbuild/" class="link f-fr">20220208gccbuild⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

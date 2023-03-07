@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210129docker-aarch64v8 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Docker服务运行在aarch64 服务器之前公司的服务都在x86架构服务器上，机缘下客户提供了一台华为云的aarch64 服务器。 一开始我以为也就最多2小时全部搞完毕，没想到2小时环境都搭不起来，docker 都运行不了。两天才搞好。 安装yum 源首先试了下原本的源很慢很慢，$ sudo yum update 超级慢。 故使用 $ sudo cp /etc/yum.repos.d/Cent">
+<meta name="keywords" content="docker, aarch64v8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210129docker-aarch64v8">
+<meta property="og:url" content="https://akerdi.github.io/2021/01/29/20210129docker-aarch64v8/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Docker服务运行在aarch64 服务器之前公司的服务都在x86架构服务器上，机缘下客户提供了一台华为云的aarch64 服务器。 一开始我以为也就最多2小时全部搞完毕，没想到2小时环境都搭不起来，docker 都运行不了。两天才搞好。 安装yum 源首先试了下原本的源很慢很慢，$ sudo yum update 超级慢。 故使用 $ sudo cp /etc/yum.repos.d/Cent">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210129docker-aarch64v8">
+<meta name="twitter:description" content="Docker服务运行在aarch64 服务器之前公司的服务都在x86架构服务器上，机缘下客户提供了一台华为云的aarch64 服务器。 一开始我以为也就最多2小时全部搞完毕，没想到2小时环境都搭不起来，docker 都运行不了。两天才搞好。 安装yum 源首先试了下原本的源很慢很慢，$ sudo yum update 超级慢。 故使用 $ sudo cp /etc/yum.repos.d/Cent">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210129docker-aarch64v8</h2>
+  <p class="sub">Jan 29, 2021</p>
+  <article class="content">
+    <h1 id="Docker服务运行在aarch64-服务器"><a href="#Docker服务运行在aarch64-服务器" class="headerlink" title="Docker服务运行在aarch64 服务器"></a>Docker服务运行在aarch64 服务器</h1><p>之前公司的服务都在x86架构服务器上，机缘下客户提供了一台华为云的aarch64 服务器。</p>
+<p>一开始我以为也就最多2小时全部搞完毕，没想到2小时环境都搭不起来，docker 都运行不了。两天才搞好。</p>
+<h2 id="安装yum-源"><a href="#安装yum-源" class="headerlink" title="安装yum 源"></a>安装yum 源</h2><p>首先试了下原本的源很慢很慢，<code>$ sudo yum update</code> 超级慢。</p>
+<p>故使用 <code>$ sudo cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup &amp;&amp; sudo wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</code></p>
+<p>发现<code>$ sudo yum makecache</code> 一直报404错误。</p>
+<p><code>$ arch # 或者uname -a</code> 看到aarch64.</p>
+<p>网上查是arm64 位版本。</p>
+<p>根据<a href="https://blog.csdn.net/smart9527_zc/article/details/84976097" target="_blank" rel="noopener">文章</a>，使用以下ali云源内容替换 <code>/etc/yum.repos.d/CentOS-Base.repo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># CentOS-Base.repo</span><br><span class="line">#</span><br><span class="line"># The mirror system uses the connecting IP address of the client and the</span><br><span class="line"># update status of each mirror to pick mirrors that are updated to and</span><br><span class="line"># geographically close to the client.  You should use this for CentOS updates</span><br><span class="line"># unless you are manually picking other mirrors.</span><br><span class="line">#</span><br><span class="line"># If the mirrorlist= does not work for you, as a fall back you can try the</span><br><span class="line"># remarked out baseurl= line instead.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos-altarch/$releasever/os/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos-altarch/$releasever/updates/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#additional packages that may be useful</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos-altarch/$releasever/extras/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</span><br><span class="line">enabled=1</span><br><span class="line"></span><br><span class="line">#additional packages that extend functionality of existing packages</span><br><span class="line">[centosplus]</span><br><span class="line">name=CentOS-$releasever - Plus</span><br><span class="line">baseurl=https://mirrors.aliyun.com/centos-altarch/$releasever/centosplus/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/centos/RPM-GPG-KEY-CentOS-7</span><br></pre></td></tr></table></figure>
+<p>其他没有替换，接下来执行:</p>
+<p><code>sudo yum clean all &amp;&amp; sudo yum makecache sudo yum update</code> 速度很快。</p>
+<h2 id="安装Docker-Docker-compose"><a href="#安装Docker-Docker-compose" class="headerlink" title="安装Docker Docker-compose"></a>安装Docker Docker-compose</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line">$ sudo yum-config-manager --add-repo https://download.docker.com/Linux/centos/docker-cce.repo</span><br><span class="line"></span><br><span class="line">$ sudo yum update</span><br><span class="line"></span><br><span class="line">$ sudo yum install docker-ce</span><br><span class="line"></span><br><span class="line">$ sudo usermod -aG docker <span class="variable">$&#123;USER_NAME&#125;</span> <span class="comment"># 加入docker到用户组</span></span><br><span class="line"></span><br><span class="line">$ sudo systemctl <span class="built_in">enable</span> docker <span class="comment"># 添加docker到开机启动</span></span><br><span class="line"></span><br><span class="line">$ sudo docker run hello-world <span class="comment"># 验证安装</span></span><br></pre></td></tr></table></figure>
+<p>安装docker-compose:</p>
+<p><code>$ sudo yum install -y docker-compose</code></p>
+<h2 id="服务适配aarch64"><a href="#服务适配aarch64" class="headerlink" title="服务适配aarch64"></a>服务适配aarch64</h2><p>此时启动服务会报: <code>exec user process caused &quot;exec format error&quot;</code></p>
+<p>说明该服务镜像不支持aarch64架构。</p>
+<p>根据<a href="https://www.docker.com/blog/multi-arch-images/" target="_blank" rel="noopener">文章2</a>, 成功打了对应的包:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker 版本大于2.0以上</span></span><br><span class="line"><span class="comment">#勾选 Preference - Command Line - Enable experimental features</span></span><br><span class="line"></span><br><span class="line">$ docker buildx ls</span><br><span class="line">NAME/NODE    DRIVER/ENDPOINT             STATUS  PLATFORMS</span><br><span class="line">default      docker</span><br><span class="line">  default    default                     running linux/amd64, linux/arm64, linux/ppc64le, linux/s390x, linux/386, linux/arm/v7, linux/arm/v6</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们当前使用的是一个默认builder，我们创建一个新的builder 替换老的builder</span></span><br><span class="line">$ docker buildx create --name mybuilder</span><br><span class="line">mybuilder</span><br><span class="line"><span class="comment"># 使用该builder</span></span><br><span class="line">$ docker buildx use mybuilder</span><br><span class="line"><span class="comment"># --bootstrap 不是必须的，他形容了立即开启编译容器</span></span><br><span class="line">$ docker buildx inspect --bootstrap</span><br></pre></td></tr></table></figure>
+<p>此时根据之前的服务，再打一个arm64 的包:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建平台为arm64架构镜像并推送到package</span></span><br><span class="line">$ docker buildx build --platform linux/arm64 -t akerdi/onlyone:arm64-20210112 --push registry.akerdi.com/akerdi/onlyone .</span><br><span class="line"><span class="comment"># 查看镜像信息</span></span><br><span class="line">$ docker buildx imagetools inspect akerdi/onlyone:arm64-20210112</span><br><span class="line"><span class="comment"># 下载该镜像并运行</span></span><br><span class="line">$ docker run -p 7200:7200 --rm registry.akerdi.com/akerdi/onlyone:arm64-20210112</span><br><span class="line"><span class="comment"># 将该镜像保存</span></span><br><span class="line">$ docker save -o onlyone.tar registry.akerdi.com/akerdi/onlyone:arm64-20210112</span><br></pre></td></tr></table></figure>
+<p>我们也可以运行并查看是否是对应平台包:</p>
+<p><code>docker run --rm registry.akerdi.com/akerdi/onlyone:arm64-20210112 uname -m</code></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/02/18/20210115公司年会/" class="link f-fl">⟵20210115公司年会</a>
+    
+    
+      <a href="/2021/01/29/20210129hackintosh/" class="link f-fr">20210129hackintosh⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

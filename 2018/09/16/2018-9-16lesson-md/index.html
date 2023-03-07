@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018-9-16lesson.md | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2018/8/27typedef CF_ENUM(uint32_t, CGImageAlphaInfo) { kCGImageAlphaNone,               /* For example, RGB. */  kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */  kCGImageAlphaPr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-9-16lesson.md">
+<meta property="og:url" content="https://akerdi.github.io/2018/09/16/2018-9-16lesson-md/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="2018/8/27typedef CF_ENUM(uint32_t, CGImageAlphaInfo) { kCGImageAlphaNone,               /* For example, RGB. */  kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */  kCGImageAlphaPr">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-9-16lesson.md">
+<meta name="twitter:description" content="2018/8/27typedef CF_ENUM(uint32_t, CGImageAlphaInfo) { kCGImageAlphaNone,               /* For example, RGB. */  kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */  kCGImageAlphaPr">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018-9-16lesson.md</h2>
+  <p class="sub">Sep 16, 2018</p>
+  <article class="content">
+    <h2 id="2018-8-27"><a href="#2018-8-27" class="headerlink" title="2018/8/27"></a>2018/8/27</h2><p>typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {</p>
+<pre><code>kCGImageAlphaNone,               /* For example, RGB. */
+
+kCGImageAlphaPremultipliedLast,  /* For example, premultiplied RGBA */
+
+kCGImageAlphaPremultipliedFirst, /* For example, premultiplied ARGB */
+
+kCGImageAlphaLast,               /* For example, non-premultiplied RGBA */
+
+kCGImageAlphaFirst,              /* For example, non-premultiplied ARGB */
+
+kCGImageAlphaNoneSkipLast,       /* For example, RBGX. */
+
+kCGImageAlphaNoneSkipFirst,      /* For example, XRGB. */
+
+kCGImageAlphaOnly                /* No color data, alpha data only */
+</code></pre><p>};</p>
+<h2 id="重写OpenGL-纹理篇出错原因"><a href="#重写OpenGL-纹理篇出错原因" class="headerlink" title="重写OpenGL 纹理篇出错原因"></a>重写OpenGL 纹理篇出错原因</h2><ol>
+<li>glDrawxx 函数是必要的，把东西呈现上去的</li>
+<li>纹理贴上去，很糊（<code>glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);</code>可以解决纹理模糊问题），有颗粒点，不晓得为啥。</li>
+<li>纹理的图片索引定点，没有完全弄懂。</li>
+</ol>
+<p>###<br>离开“粉粉”二个月了，来谈谈周身变化。</p>
+<ol>
+<li>找了个离得比较近的公司，上下班骑车更快到啦。</li>
+<li>早上9点出发上班。路上买包子，一路吃过去，吃饭正常后，精神状态等都好多了，记忆力现在强多了。</li>
+<li>晚上相对回住所吃饭就早多了。太舒服了好吧。终于不用吃完饭，一看，哦，10点半了。写东西的么得了，现在吃完饭，楼下逛一圈还能有时间写、学东西。棒！</li>
+<li>空闲时间增加，不会那么那么那么的忙累、紧迫。因为“粉粉”给一个功能都是临界时间，然后拼命写，发现中间有逻辑漏洞，或者涉及其他，于是其实相对的给的时间是一个完整开发时间的70%。根本不够，严重不够！<br>也由于空闲时间多了，我把OpenGL 终于入门了。小公司同时由于没有产品定位等，目前去做游戏去了，iOS 放一旁。不要太好，我就喜欢学新的东西。哈哈</li>
+<li>周末都是双休了，学知识、去办事情、不亦乐乎啊。</li>
+<li>以前是工作压力大，现在是赚钱压力大，想方法自己赚钱的压力。所以，出了“粉粉”，心里开心。已经没有太多要问的，在里面该学的也拼命学够了。<br>开森！</li>
+</ol>
+<h3 id="pod-install-失败"><a href="#pod-install-失败" class="headerlink" title="pod install 失败"></a>pod install 失败</h3><p>弹出#-bash: /usr/local/bin/pod: /usr/local/opt/ruby/bin/ruby: bad interpreter: No such file or directory#<br>查到<a href="https://www.jianshu.com/p/e4a70c40bfea" target="_blank" rel="noopener">https://www.jianshu.com/p/e4a70c40bfea</a><br>先尝试<br><code>$ brew link --overwrite cocoapods</code><br>我这里提示#Error: No such keg: /usr/local/Cellar/cocoapods#</p>
+<p>于是直接执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">brew reinstall cocoapods</span><br><span class="line"></span><br><span class="line">brew install ruby</span><br><span class="line"></span><br><span class="line">brew link --overwrite cocoapods</span><br><span class="line">``` </span><br><span class="line">完美解决问题</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 价值</span><br><span class="line">之前一直在想，什么能保值？</span><br><span class="line">什么才是有价值的？</span><br><span class="line">RMB？美元？黄金？车子、房子、实物、食物？</span><br><span class="line">RMB 会贬值，如果货币超发，政府和人民抢钱，最后就会和津巴布韦币一样；反正RMB 价值话语权不在自己手上，我不认同；</span><br><span class="line">中国那么多富二代、官二代，一个个拽得一批，我想，我要比王思聪有钱，我说话能“喷喷喷”他一脸、“滋滋滋”格力一姐一脸。有什么好嘚瑟的，最多不赚你钱，凶个奶子。</span><br><span class="line">不跟他们一般见识，百年人生而已，活好自己的，不用比较。他们会斥责下属，说明很看重身份、排名、地位、权力。自己有余粮，活得潇洒，心是红的，眼睛黑的，何必跟这些眼睛变红了，心就变黑了的人计较，继续。</span><br><span class="line">美元？同样，美国也想抢其他国家的钱。货币只是一种等值替换，跟RMB 好那么一丢丢，毕竟他相对信誉体系稳定；</span><br><span class="line">但是，货币不如实物，毕竟人这一生就只有短短百年，如果是“龙哥”这类就更要珍惜，活在社会只有短短10数年，其他都在监狱度过，然后就躺下了。</span><br><span class="line">所以，让自己这一生过的舒坦，那就实物：有车有房、有实物、有食物。我觉得我会那么知足点。</span><br><span class="line">但是，有没有更好的，实物等都是会消耗的，没有前景，所以也不是我想探讨的，我这里直接给出答案：</span><br><span class="line">女人、技术。</span><br><span class="line">就是这两个玩意s，复数。</span><br><span class="line">集合多几个女人，多个技术，持续不断赚钱，才是能保值的。</span><br><span class="line">人多，力量大，自己女人，还有什么不可信任（不过女人多几个后，信任度肯定会降低，毕竟是女人这种生物，爱的不均与，不患寡而患不均嘛）。</span><br><span class="line">技术去学习，各种学习，不必全都创新、研发，只需将他人技术学会，和自己的技能点融合，运用，产出。</span><br><span class="line"></span><br><span class="line">最近也一直感受到，其实技术赚钱，这事是可以做到的，但是要持续耕耘，不断推陈出新。反正只要你在领域付出、思考，就能有收获（不要钻牛角尖，大家不是傻子）。</span><br><span class="line">所以接下来大家懂了吧，什么才是将财富聚集、保存实力的方法了吧：多聚集信任之人（最好是女人，毕竟女人好玩嘛），然后深入技术，去运用，去产出。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### Cannot find module &apos;webpack&apos;</span><br><span class="line">在安装完webpack 之后，出现标题提示，使用`npm link webpack`</span><br><span class="line"></span><br><span class="line">## glTexParameteri方法说明</span><br><span class="line"></span><br><span class="line">设置纹理循环模式、设置纹理过滤模式</span><br><span class="line"></span><br><span class="line">https://blog.csdn.net/d04421024/article/details/5089641</span><br><span class="line"></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLEAMP);</span><br><span class="line">GLTEXTURE_2D:操作2D 纹理；GL_TEXTURE_WRAP_S:S方向上的贴图模式;GL_CLAMP:将纹理坐标限制在0.0~1.0范围内，超过作拉伸填充</span><br><span class="line"></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);</span><br><span class="line"></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span><br><span class="line">GL_TEXTURE_MAG_FILTER:放大过滤；GL_LINEAR：线性过滤，使用距离当前渲染像素中心最近的4个像素加权平均值；</span><br><span class="line"></span><br><span class="line">glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);</span><br><span class="line">GL_TEXTURE_MIN_FILTER:缩小过滤；GL_LINEAR_MIPMAP_NEAREST：使用GL_NEAREST 对最接近当前多边形的解析度的两个层级贴图进行采样，然后用这两个值进行线性插值。</span><br><span class="line"></span><br><span class="line">## glTexImage2D</span><br><span class="line"></span><br><span class="line">加载图像数据并上传纹理</span><br><span class="line"></span><br><span class="line">https://blog.csdn.net/jeffasd/article/details/78135588</span><br><span class="line"></span><br><span class="line">glTexImage2D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid *pixels)</span><br><span class="line"></span><br><span class="line">target: 指定活动纹理单元的目标纹理。GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 或GL_TEXTURE_CUBE_MAP_NEGATIVE_Z。</span><br><span class="line"></span><br><span class="line">level: 指定详细程度编号。级别0是基本图像级别。级别n是第n个缩略图缩小图像。</span><br><span class="line"></span><br><span class="line">internalformat: 指定纹理的内部格式。必须是下列符号常量之一：GL_ALPHA, GL_LUMINANCE, GL_LUMINANCE_ALPHA, GL_RGB, GL_RGBA.</span><br><span class="line"></span><br><span class="line">width, height</span><br><span class="line"></span><br><span class="line">border: 指定边框宽度。必须为0.</span><br><span class="line"></span><br><span class="line">format: 指定纹理数据格式。必须匹配internalformat。 下面符号被接受: GL_ALPHA, GL_RGB, GL_RGBZ, GL_LUMINANCE, GL_LUMINANCE_ALPHA.</span><br><span class="line"></span><br><span class="line">type: 指定纹理数据的数据类型。下面的符号值被接受: GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT_5_6_5, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT_5_5_5_1.</span><br><span class="line"></span><br><span class="line">data: 指向内存中图像数据的指针。</span><br><span class="line"></span><br><span class="line">## glActiveTexture(GLenum texUnit)</span><br><span class="line"></span><br><span class="line">https://www.douban.com/note/627332677/</span><br><span class="line"></span><br><span class="line">该函数选择一个纹理单元，线面的纹理函数将作用于该纹理单元上，参数为符号常量GL_TEXTUREi.</span><br><span class="line">Active 应该理解为选择(Select)某纹理单元(Texture Unit)，即表示后续的glEnable(GL_TEXTURE_2D) 和glBindTexture(GL_TEXTURE_2D, texture)作用域此所选的纹理单元。</span><br></pre></td></tr></table></figure></p>
+<p>void glActiveTexture(GLenum textureUnit) {<br>    currentTextureUnit = textureUnit - GL_TEXTURE0;<br>}</p>
+<p>void glBindTexture(GLenum textureTarget, GLuint textureObject) {<br>    TextureUnit *texUnit = &amp;textureUnits[currentTextureUnit];<br>    switch(textureTarget) {<br>        case GL_TEXTURE_1D: texUnit-&gt;targetTexture1D = textureObject; break;<br>        case GL_TEXTURE_2D: texUnit-&gt;targetTexture1D = textureObject; break;<br>        case GL_TEXTURE_3D: texUnit-&gt;targetTexture1D = textureObject; break;<br>        case GL_TEXTURE_CUBEMAP: texUnit-&gt;targetTextureCube = textureObject; break;<br>    }<br>}<br><code>`</code></p>
+<h2 id="回顾最近学习OpenGLES-学习参考路线"><a href="#回顾最近学习OpenGLES-学习参考路线" class="headerlink" title="回顾最近学习OpenGLES 学习参考路线"></a>回顾最近学习OpenGLES 学习参考路线</h2><p>一个合适自己的学习路线比什么什么讲师什么什么高级书都重要一万倍，如果找到了对应的路，将对带给自己事半功倍的效果。<br>我直接说出根据哪个博客，那些系列，之后再讲这些博客能得到什么。</p>
+<ol>
+<li><a href="https://www.jianshu.com/u/a309d4c4dc47" target="_blank" rel="noopener">简书-清墨</a></li>
+<li><a href="https://zhuanlan.zhihu.com/zangqilong" target="_blank" rel="noopener">知乎-叶孤城的iOS杂货铺</a></li>
+<li><a href="https://www.jianshu.com/u/815d10a4bdce" target="_blank" rel="noopener">简书-落影</a></li>
+</ol>
+<p>以上是按顺序学习。</p>
+<p>清墨的博文教学很简单易懂，这个大哥应该去当老师。很细心，能把他全部学完，就能做个3D 的场景了。他最后一个提问：为什么图片模糊，线段有棱角？<br>解答是:</p>
+<ol>
+<li><code>glTexParamiv</code> 的 <code>gl_Texture2D_Mag_Filter</code>、<code>gl_Texture2D_Min_Filter</code> 设置为<code>gl_clamp_to_edge</code>，这样线段就不会有棱角;</li>
+<li>将<code>self.view.contentFactor</code> 设置为<code>[UIScreen mainSceen].scale</code>, 同时设置各个要放大的地方为相应倍数，这样图片就不会模糊。</li>
+</ol>
+<p>iOS 码农介的吴彦祖在知乎开了新的ID：叶孤城。名号多，但是写的也是非常好。同时期待他能写出更多好文章，小弟很受用，非常非常感谢。<br>他的<strong>从0打造一个GPUImage</strong>从(1)~(6.2)学完就能做一个pipeline 滤镜。</p>
+<p>提醒一点，必须先学完清墨的博文，叶孤城估计太忙，中间一小部分没有完全讲透一些语句的作用，会很疑惑。</p>
+<p>落影的文章很全，先学习OpenGLES 文集，不要学太深(目前要用的知识学完就好)，然后看GPUIMage 文集。对落影大哥的文集点评一下，他的文集很全，但是注释的关键地方都少，代码关键地方注解还不够。有些很迷糊。</p>
+<p>可以理解为升级版学习。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/09/27/2018-9-27lesson/" class="link f-fl">⟵2018-9-27lesson</a>
+    
+    
+      <a href="/2018/08/25/2018-8-3lesson/" class="link f-fr">2018-8-3lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018/3/4Lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2017/10/12 Xcode 9 beta 3 breaks the new os_log logger #8831234567891011121314151617if (message) &amp;#123;        const char *msg = [message UTF8String];        switch (logMessage-&amp;gt;_flag) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018&#x2F;3&#x2F;4Lesson">
+<meta property="og:url" content="https://akerdi.github.io/2018/03/04/2018-3-3lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="2017/10/12 Xcode 9 beta 3 breaks the new os_log logger #8831234567891011121314151617if (message) &amp;#123;        const char *msg = [message UTF8String];        switch (logMessage-&amp;gt;_flag) &amp;#123;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018&#x2F;3&#x2F;4Lesson">
+<meta name="twitter:description" content="2017/10/12 Xcode 9 beta 3 breaks the new os_log logger #8831234567891011121314151617if (message) &amp;#123;        const char *msg = [message UTF8String];        switch (logMessage-&amp;gt;_flag) &amp;#123;">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018/3/4Lesson</h2>
+  <p class="sub">Mar 4, 2018</p>
+  <article class="content">
+    <p>2017/10/12</p>
+<h3 id="Xcode-9-beta-3-breaks-the-new-os-log-logger-883"><a href="#Xcode-9-beta-3-breaks-the-new-os-log-logger-883" class="headerlink" title="Xcode 9 beta 3 breaks the new os_log logger #883"></a>Xcode 9 beta 3 breaks the new os_log logger #883</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">if (message) &#123;</span><br><span class="line">        const char *msg = [message UTF8String];</span><br><span class="line">        switch (logMessage-&gt;_flag) &#123;</span><br><span class="line">            case DDLogFlagError     :</span><br><span class="line">                os_log_error(OS_LOG_DEFAULT, &quot;%s&quot;, msg);</span><br><span class="line">                break;</span><br><span class="line">            case DDLogFlagWarning   :</span><br><span class="line">            case DDLogFlagInfo      :</span><br><span class="line">                os_log_info(OS_LOG_DEFAULT, &quot;%s&quot;, msg);</span><br><span class="line">                break;</span><br><span class="line">            case DDLogFlagDebug     :</span><br><span class="line">            case DDLogFlagVerbose   :</span><br><span class="line">            default                 :</span><br><span class="line">                os_log_debug(OS_LOG_DEFAULT, &quot;%s&quot;, msg);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="记一下昨晚2017-10-30-学习拆换苹果手机电池过程"><a href="#记一下昨晚2017-10-30-学习拆换苹果手机电池过程" class="headerlink" title="记一下昨晚2017/10/30 学习拆换苹果手机电池过程"></a>记一下昨晚2017/10/30 学习拆换苹果手机电池过程</h3><p>1：手机底部螺丝拧开<br>2：用提供的吸盘将屏幕吸起（可以用个牙签什么的顶住，然后一一打开）<br>3：将电池右下角的一个金属盖拧开，有两个螺丝<br>4：此时已经可以拔起该连接线<br>接下来几步是重点：<br>5：刮下电池底部膜，刮到出现白色黏条<br>6：白色黏条最重要！：慢慢把他抽出来。<br>总共左右两条黏条，千万不要抽断，不然要翘起电池，用牙签或其他方便工具卷着给他抽出来。<br>7：然后于是就把电池取出来了。<br>8：装上新电池，测试一下能不能成功开机。<br>9：买电池会送白色黏条。这时留一点在外面，白色黏条箭头在顶部。先把白色黏条黏在电池底部，然后黏在电池仓。<br>10：按着之前方式拧上螺丝，合上盖。<br>完成</p>
+<h3 id="git-回退到本地commit的某个SHA-1"><a href="#git-回退到本地commit的某个SHA-1" class="headerlink" title="git 回退到本地commit的某个SHA-1"></a>git 回退到本地commit的某个SHA-1</h3><p>根据-–soft -–mixed -–hard，会对working tree和index和HEAD进行重置:<br>    git reset -–mixed：此为默认方式，不带任何参数的git reset，即时这种方式，它回退到某个版本，只保留源码，回退commit和index信息<br>    git reset -–soft：回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit即可<br>    git reset -–hard：彻底回退到某个版本，本地的源码也会变为上一个版本的内容</p>
+<p>例如：git reset –hard SHA-1   此时的SHA-1 可以使用sourcetree 查看；或者使用git log 也可查看到该SHA-1</p>
+<h3 id="iOS-手机震动"><a href="#iOS-手机震动" class="headerlink" title="iOS 手机震动"></a>iOS 手机震动</h3><p>// 普通短震，3D Touch 中 Peek 震动反馈<br>AudioServicesPlaySystemSound(1519);</p>
+<p>// 普通短震，3D Touch 中 Pop 震动反馈<br>AudioServicesPlaySystemSound(1520);</p>
+<p>// 连续三次短震<br>AudioServicesPlaySystemSound(1521);</p>
+<h3 id="这里记录一次昨天下午讨论团队职业规划过程及感悟"><a href="#这里记录一次昨天下午讨论团队职业规划过程及感悟" class="headerlink" title="这里记录一次昨天下午讨论团队职业规划过程及感悟"></a>这里记录一次昨天下午讨论团队职业规划过程及感悟</h3><p>既然是团队职业规划，那当时是要将团队提升作为目标。<br>个人升级是最重要，自己不升级，怎么有话题，如何跟别人谈共享、交流、提升？<br>OK，自己升级，学习完，交流，交流之中补足，这很好。<br>最近任务要稍微好些，比刚从海外团队回来时间要充沛一些。早上从10点开始搞，基本下午进度好，能在8点左右完成，回家。此时基本整个人再也不想看电脑屏幕了，我想吐~~~咦，你不是热爱写代码吗？我去你妈的热爱写代码，去你妈的热爱。热爱是建立的单纯的想写代码，当和职业挂钩，每天重重复复，去你妈的还能每时每刻保有最初的心。<br>接着回到家，嗯，团队升级嘛，但是自己还有挺多的事，比如我自己手上还有3、4个小玩意进度才开启；哦，我还没吃饭，世界最好吃的饭是陪家人，于是等老婆也累的半死回到家，俩人在21点到22：20之间吃完饭。这时心里有点空荡荡的，接下来的时间每天比例，一半休息掉（再嘴里吼着“不能浪费时间，学习工作”的，你把头伸过来，大哥给你看个宝贝），另一半写自己的小东西，探索道路。玩能到12点半，工作也能到12点半。<br>第二天早上来，把公司所为的“两小时一次记录工作了啥”的邮件发了。真不知道这“两小时”记录是什么鬼，写重复的也不是，但是不写，更不是，又是心里一句去他妈的, 当然知道这是上上上层安排的，对大师博士还是一如既往尊敬。<br>周六是单双休，周日是都有休息。周六当时的规定是到公司学习，补足，交流，如果工作有没完成的，可以完成。你懂得，工作太足，就怕你闲着，怕你闲出病到时按工伤就不好了，于是基本周六都是工作木有两样。之前我有过思路：如果早上把PPT 赶好，中午的时候和大家交流最近学习、工作进展。那这挺好。但是从来周六都是工作，嘿嘿，这理由真他妈给力。周六要不就是我单纯学习自己的小知识点，但是能拿来讲的没能汇聚，只能自己独自搞一些小工程进行最佳实践。所以大师那句，“都没见你分享几篇”，给蛋疼的，不是不想不愿，而是无时无力。<br>“时间是挤出来的”<br>谁谁谁，这句话谁说的，把头伸过来，我给他看个宝贝。<br>你有生活，我没有生活的啊？你每天都能跟狗一样学习，不知疲倦？每天还跟大学一般拼了这条狗命的？<br>是的，我工作时候用心，我特么在工作中确实拼了这条狗命。每天下班都是难得休息，难得让脑袋放空。<br>团队提升，团队职业规划。这些都是要建立良好的机制，良好的环境。我特么自己忙的死了，还要陪他们玩团队职业规划的游戏。<br>我曰。<br>每天自己加油了。只能自己Add Oil了。<br>之前也有几次，他们讲一些知识，我去学习听讲。如果有机会，我就只能当做code review 来跟进。这是最好的结果了。<br>当然，一切建立在，周六上午能空闲一下的基础上。</p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>1：由于用到贴图，网上寻觅不得.<br>只说 UIGraphicsBeginImageContext(&lt;#CGSize size#&gt;)-&gt;换成UIGraphicsBeginImageContextWithOptions(&lt;#CGSize size#&gt;,&lt;#Bool opaque#&gt;,&lt;#CGFloat scale#&gt;)<br>上面这句话是重点 scale是缩放因子，使用[UIScreen mainScreen].scale即可；<br>中间的opaque是识别里面有没有alpha通道，如果有通道则填入NO，相反的哦；<br>size则为你的图片的大小，比如上面一张大图，下面一张watermark，这size为大图的大小，毕竟大图在下面，第一个放入的； 这样子图片就会变为高清！！！没错，如果还没有变为高清，是有另一个原因的，那就是你的贴图不是@2x或者@3x的倍率，将其放入图片文件夹或者source，加入后缀，一定使用@3x，@2x也不怎么清晰！！！<br>最后一步才是本文重点.<br>网上没人说，自己尝试出来的</p>
+<p>这一段是苹果私密api，用来找出Reveal的各个APP的bundleID，挺好用的<br>// Class<br>LSApplicationWorkspace_class = objc_getClass(“LSApplicationWorkspace”);<br>//<br>NSObject<em> workspace = [LSApplicationWorkspace_class performSelector:@selector(defaultWorkspace)];<br>//<br>NSArray </em>array = [workspace performSelector:@selector(allApplications)];<br>// id a = array[0];<br>//<br>NSLog(@”apps: %@”, [workspace performSelector:@selector(allApplications)]);</p>
+<h3 id="ASOverLayoutSpec"><a href="#ASOverLayoutSpec" class="headerlink" title="ASOverLayoutSpec"></a>ASOverLayoutSpec</h3><p>这里用到ASStackLayoutSpec 布局。之前都是从上往下布局完，样式OK。<br>但是新的需求来了，要求在其上面加上一个蒙版：<br>布局，我使用ASBackgroundLayoutSpec child 是上面的蒙版；back 是之前的背景布局；<br>但是总是出现拉伸；<br>后来试试使用ASOverLayoutSpec 返回来，试图终于如愿了。</p>
+<h3 id="最近在学习js"><a href="#最近在学习js" class="headerlink" title="最近在学习js"></a>最近在学习js</h3><p>看阮一峰的文章ing…<br>从其早期JavaScript 文章往现在的时间线看。边看边敲command+shift+i<br>看廖雪峰JavaScript 文章</p>
+<h3 id="scrollView-contentSize"><a href="#scrollView-contentSize" class="headerlink" title="scrollView.contentSize"></a>scrollView.contentSize</h3><p>如果scrollView 不想上下出现拉动bug，将contentSize.height 设为0；否则contentSize.width 设为0；会默认设置为等大小试图</p>
+<h3 id="2018-1-10打包静态库-包含第三方库"><a href="#2018-1-10打包静态库-包含第三方库" class="headerlink" title="2018/1/10打包静态库(包含第三方库)"></a>2018/1/10打包静态库(包含第三方库)</h3><p><a href="https://www.jianshu.com/p/155a3cfb765e?utm_campaign=hugo" target="_blank" rel="noopener">https://www.jianshu.com/p/155a3cfb765e?utm_campaign=hugo</a><br><a href="https://www.jianshu.com/p/13bf46df9387" target="_blank" rel="noopener">https://www.jianshu.com/p/13bf46df9387</a><br>1：此处注意一点：需要输出包含有第三方的静态库，那么直接在拖进控件的时候不要选择”add to target”;<br>2：在Build Phrase 的compile Source 确认需要到处的多少个类<br>3：设置适配所有模拟器架构 project -&gt; buildSeting -&gt; Build Active Architecture Only 设为NO<br>以上两个目录把所有需要打包静态库的步骤和所需操作都罗列了。</p>
+<h3 id="创建podSpec"><a href="#创建podSpec" class="headerlink" title="创建podSpec"></a>创建podSpec</h3><p><a href="https://www.jianshu.com/p/d7d1942dd3f1" target="_blank" rel="noopener">https://www.jianshu.com/p/d7d1942dd3f1</a><br>此处source 需要把目录改为对应目录。比如里面的文件夹需要/xxx/$.h/m</p>
+<h3 id="记录一次粉粉匿名做动画CAAnimation-的keyframe-动画和POP-动画同时存在产生的问题"><a href="#记录一次粉粉匿名做动画CAAnimation-的keyframe-动画和POP-动画同时存在产生的问题" class="headerlink" title="记录一次粉粉匿名做动画CAAnimation 的keyframe 动画和POP 动画同时存在产生的问题"></a>记录一次粉粉匿名做动画CAAnimation 的keyframe 动画和POP 动画同时存在产生的问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">POPAnimatableProperty *property = [POPAnimatableProperty propertyWithName:@&quot;com.ffrj.starMove&quot; initializer:^(POPMutableAnimatableProperty *prop) &#123;</span><br><span class="line">                prop.writeBlock = ^(CALayer *obj, const CGFloat *values) &#123;</span><br><span class="line">                    CGFloat currentTime = values[0];</span><br><span class="line">                    obj.timeOffset = currentTime;</span><br><span class="line">                &#125;;</span><br><span class="line">                prop.threshold = 0.01;</span><br><span class="line">            &#125;];</span><br><span class="line">            POPBasicAnimation *animation = [POPBasicAnimation animation];</span><br><span class="line">            animation.fromValue = @0;</span><br><span class="line">            animation.duration = 0;</span><br><span class="line">            animation.property = property;</span><br><span class="line">            [popArr addObject:animation];</span><br><span class="line">            //</span><br><span class="line">            CGPoint startPoint = YYTextCGRectGetCenter(starBtn.frame);</span><br><span class="line">            CGPoint endPoint = CGPointMake((i+1)*minScaleWidth+30, 35+kTopStatusBarAndNavHeight);</span><br><span class="line">            CGPoint controlPoint = CGPointMake((endPoint.x+30), (YYTextCGRectGetCenter(starBtn.frame).y-endPoint.y)/2.0);</span><br><span class="line">            UIBezierPath *path = [UIBezierPath bezierPath];</span><br><span class="line">            [path moveToPoint:startPoint];</span><br><span class="line">            [path addQuadCurveToPoint:endPoint controlPoint:controlPoint];</span><br><span class="line">            CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animation];</span><br><span class="line">            positionAnimation.keyPath = @&quot;position&quot;;</span><br><span class="line">            positionAnimation.path = path.CGPath;</span><br><span class="line">            CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@&quot;transform.scale&quot;];</span><br><span class="line">            scaleAnimation.fromValue    = @1;</span><br><span class="line">            scaleAnimation.toValue      = @0.0;</span><br><span class="line">            CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@&quot;opacity&quot;];</span><br><span class="line">            opacityAnimation.fromValue  = @1.0;</span><br><span class="line">            opacityAnimation.toValue    = @0.0;</span><br><span class="line">            CAAnimationGroup *animationGroup = [CAAnimationGroup animation];</span><br><span class="line">            [animationGroup setAnimations:@[positionAnimation,scaleAnimation, opacityAnimation]];</span><br><span class="line">            animationGroup.duration = 1.0;</span><br><span class="line">            animationGroup.removedOnCompletion=NO;</span><br><span class="line">            animationGroup.fillMode=kCAFillModeForwards;</span><br><span class="line">            [starBtn.layer addAnimation:animationGroup forKey:@&quot;animationGroup&quot;];</span><br><span class="line">            starBtn.layer.speed = 0.0;</span><br></pre></td></tr></table></figure>
+<p>上面是加了CAAnimation 动画， 但是同时还加入了POP 某一个animation 的上下浮动位移动画:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (!_startedAnimated) &#123;</span><br><span class="line">        _startedAnimated = YES;</span><br><span class="line">        [self.starArray enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) &#123;</span><br><span class="line">            POPBasicAnimation *basicAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerPositionY];</span><br><span class="line">            basicAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];</span><br><span class="line">            basicAnimation.duration = 1.3;</span><br><span class="line">            basicAnimation.beginTime = CACurrentMediaTime()+(arc4random()%30*0.033);</span><br><span class="line">            basicAnimation.toValue = @(obj.centerY-8);</span><br><span class="line">            basicAnimation.autoreverses = YES;</span><br><span class="line">            basicAnimation.repeatForever = YES;</span><br><span class="line">            [obj.layer pop_addAnimation:basicAnimation forKey:NSStringFromSelector(_cmd)];</span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这时出现了浮动POP 动画无法启动情况。<br>这里处理为: 在 prop.writeBlock 里面，使用贝塞尔数值计算进行位移。</p>
+<h3 id="这里记录一次js-function-和箭头函数不同点"><a href="#这里记录一次js-function-和箭头函数不同点" class="headerlink" title="这里记录一次js function 和箭头函数不同点"></a>这里记录一次js function 和箭头函数不同点</h3><ul>
+<li>function 里面的this 指针是内部函数，外部需要const 一个。</li>
+</ul>
+<p>箭头函数 由于内部将this 置空，他是没有this 的，他的this 属于外部调用的。同时，由于没有this 指针，所以其arguments 也是undefined 的。</p>
+<ul>
+<li>module.export = xxx / exports default xxx / export = xxx 区别</li>
+</ul>
+<h3 id="写一个比较简洁的iOS-并发获取数据，combine-之后返回"><a href="#写一个比较简洁的iOS-并发获取数据，combine-之后返回" class="headerlink" title="写一个比较简洁的iOS 并发获取数据，combine 之后返回"></a>写一个比较简洁的iOS 并发获取数据，combine 之后返回</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">- (void)getPlannerRShopBanner</span><br><span class="line">&#123;</span><br><span class="line">    @weakify(self);</span><br><span class="line">    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^&#123;</span><br><span class="line">        @strongify(self);</span><br><span class="line">        __block NSArray *recommandArray = nil;</span><br><span class="line">        __block NSArray *plannerNewsArray = nil;</span><br><span class="line">        __block NSUInteger count = 0;</span><br><span class="line">        dispatch_semaphore_t semaphore_t = dispatch_semaphore_create(0);</span><br><span class="line">        [self.apiSession getPlannerShopBannerAndCallback:^(NSArray *model, PCError *error) &#123;</span><br><span class="line">            if (isValidArray(model) &amp;&amp; model.count &gt; 0) &#123;</span><br><span class="line">                count ++;</span><br><span class="line">                recommandArray = model;</span><br><span class="line">                if (count == 2) &#123;</span><br><span class="line">                    dispatch_semaphore_signal(semaphore_t);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dispatch_semaphore_signal(semaphore_t);</span><br><span class="line">            &#125;</span><br><span class="line">            [self autoSavePlannerDataChange];</span><br><span class="line">        &#125;];</span><br><span class="line">        [self.apiSession getNewPlannerBannerCallback:^(NSArray *model, PCError *error) &#123;</span><br><span class="line">            if (isValidArray(model) &amp;&amp; model.count &gt; 0) &#123;</span><br><span class="line">                count ++;</span><br><span class="line">                plannerNewsArray = model;</span><br><span class="line">                if (count == 2) &#123;</span><br><span class="line">                    dispatch_semaphore_signal(semaphore_t);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                dispatch_semaphore_signal(semaphore_t);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;];</span><br><span class="line">        dispatch_semaphore_wait(semaphore_t, DISPATCH_TIME_FOREVER);</span><br><span class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">            if (count == 2) &#123;</span><br><span class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</span><br><span class="line">                    self.view.headerRecommandDict = [recommandArray firstObject];</span><br><span class="line">                    self.view.headerPlannerNewsDict = [plannerNewsArray firstObject];</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                DLog(@&quot;没有获取到ad 或者某个ad 获取失败&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="这里记录一个前端在解析json字符串-内容包含-n-产生无法解析且报错情景"><a href="#这里记录一个前端在解析json字符串-内容包含-n-产生无法解析且报错情景" class="headerlink" title="这里记录一个前端在解析json字符串,内容包含#\n# 产生无法解析且报错情景"></a>这里记录一个前端在解析json字符串,内容包含#\n# 产生无法解析且报错情景</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ([json containsString:@&quot;\n&quot;]) &#123;</span><br><span class="line">        json = [json stringByReplacingOccurrencesOfString:@&quot;\n&quot; withString:@&quot;\\u000A&quot;];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>首先解决方案如上，在解析前先替换该字符为ascii码。</p>
+<p>出现的错误：<code>Printing description of error:Error Domain=NSCocoaErrorDomain Code=3840 &quot;Unescaped control character around character 90.&quot; UserInfo={NSDebugDescription=Unescaped control character around character 90.}</code></p>
+<p>出现的类似语句:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"font"</span>:&#123;&#125;,<span class="attr">"stickDate"</span>:<span class="string">""</span>,<span class="attr">"bookId"</span>:<span class="number">18558</span>,<span class="attr">"diaryType"</span>:<span class="number">0</span>,<span class="attr">"diaryEmotionNode"</span>:&#123;<span class="attr">"content"</span>:<span class="string">"1♡</span></span><br><span class="line"><span class="string">可乐要加冰</span></span><br><span class="line"><span class="string">柠檬要加水</span></span><br><span class="line"><span class="string">我的生活要加你</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">咖啡要加糖</span></span><br><span class="line"><span class="string">披萨要加盐</span></span><br><span class="line"><span class="string">我们的感情要加点油</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">别说什么东南西北都是你</span></span><br><span class="line"><span class="string">别说什么天涯海角都是你</span></span><br><span class="line"><span class="string">别说什么心里眼里都是你</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">我只需要你说</span></span><br><span class="line"><span class="string">你的生活加点我.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">或者给我一条人生建议</span></span><br><span class="line"><span class="string">让我和你在一起.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">感情不要甜言蜜语</span></span><br><span class="line"><span class="string">不要纠缠不休.</span></span><br><span class="line"><span class="string">只需要一句“我喜欢你”</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">感谢收听悦兮电台第六期《要加点你》</span></span><br><span class="line"><span class="string">我是主播:苏雨诺</span></span><br><span class="line"><span class="string">编辑:苏雨纤</span></span><br><span class="line"><span class="string">写文:江抒</span></span><br><span class="line"><span class="string">本次播音结束，请大家期待下一期～"</span>,<span class="attr">"imageList"</span>:[]&#125;,<span class="attr">"geo"</span>:&#123;<span class="attr">"region"</span>:<span class="string">"普陀区"</span>,<span class="attr">"city"</span>:<span class="string">"上海市"</span>,<span class="attr">"address"</span>:<span class="string">"上海市普陀区云岭东路靠近东渡国际嘉庭广场"</span>,<span class="attr">"longitude"</span>:<span class="string">"121.387844"</span>,<span class="attr">"latitude"</span>:<span class="string">"31.222706"</span>,<span class="attr">"name"</span>:<span class="string">"东渡国际嘉庭广场"</span>,<span class="attr">"province"</span>:<span class="string">"上海市"</span>&#125;,<span class="attr">"lbsChange"</span>:<span class="number">0</span>,<span class="attr">"lbs"</span>:&#123;<span class="attr">"region"</span>:<span class="string">"普陀区"</span>,<span class="attr">"city"</span>:<span class="string">"上海市"</span>,<span class="attr">"address"</span>:<span class="string">"上海市普陀区云岭东路靠近东渡国际嘉庭广场"</span>,<span class="attr">"longitude"</span>:<span class="string">"121.387844"</span>,<span class="attr">"latitude"</span>:<span class="string">"31.222706"</span>,<span class="attr">"name"</span>:<span class="string">"东渡国际嘉庭广场"</span>,<span class="attr">"province"</span>:<span class="string">"上海市"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"content"</span>:<span class="string">"23333♡\n可乐要加冰\n柠檬要加水\n我的生活要加你\n\n咖啡要加糖\n披萨要加盐\n我们的感情要加点油\n\n别说什么东南西北都是你\n别说什么天涯海角都是你\n别说什么心里眼里都是你\n\n我只需要你说\n你的生活加点我.\n\n或者给我一条人生建议\n让我和你在一起.\n\n感情不要甜言蜜语\n不要纠缠不休.\n只需要一句“我喜欢你”\n\n感谢收听悦兮电台第六期《要加点你》\n我是主播:苏雨诺\n编辑:苏雨纤\n写文:江抒\n本次播音结束，请大家期待下一期～"</span>,<span class="attr">"imageList"</span>:[]&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="今天2018-2-9-放假过年啦"><a href="#今天2018-2-9-放假过年啦" class="headerlink" title="今天2018/2/9 放假过年啦"></a>今天2018/2/9 放假过年啦</h3><h3 id="2018-2-24-redis-的homebrew-安装"><a href="#2018-2-24-redis-的homebrew-安装" class="headerlink" title="2018/2/24 redis 的homebrew 安装"></a>2018/2/24 redis 的homebrew 安装</h3><p><a href="http://blog.csdn.net/chenshuai1993/article/details/51519384" target="_blank" rel="noopener">http://blog.csdn.net/chenshuai1993/article/details/51519384</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">什么是原子性,什么是原子性操作？</span><br><span class="line">举个例子：</span><br><span class="line">A想要从自己的帐户中转1000块钱到B的帐户里。那个从A开始转帐，到转帐结束的这一个过程，称之为一个事务。在这个事务里，要做如下操作：</span><br><span class="line"> 1. 从A的帐户中减去1000块钱。如果A的帐户原来有3000块钱，现在就变成2000块钱了。</span><br><span class="line"> 2. 在B的帐户里加1000块钱。如果B的帐户如果原来有2000块钱，现在则变成3000块钱了。</span><br><span class="line">如果在A的帐户已经减去了1000块钱的时候，忽然发生了意外，比如停电什么的，导致转帐事务意外终止了，而此时B的帐户里还没有增加1000块钱。那么，我们称这个操作失败了，要进行回滚。回滚就是回到事务开始之前的状态，也就是回到A的帐户还没减1000块的状态，B的帐户的原来的状态。此时A的帐户仍然有3000块，B的帐户仍然有2000块。</span><br><span class="line">我们把这种要么一起成功（A帐户成功减少1000，同时B帐户成功增加1000），要么一起失败（A帐户回到原来状态，B帐户也回到原来状态）的操作叫原子性操作。</span><br><span class="line">如果把一个事务可看作是一个程序,它要么完整的被执行,要么完全不执行。这种特性就叫原子性。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>mac 下安装也可以使用 homebrew，homebrew 是 mac 的包管理器。</p>
+</blockquote>
+<p>1、执行 brew install redis</p>
+<p>2、启动 redis，可以使用后台服务启动 brew services start redis。或者直接启动：redis-server /usr/local/etc/redis.conf</p>
+<p>在远程服务上执行命令<br>redis-cli -h host -p port -a password</p>
+<p>查看redis服务是否启动</p>
+<p>ps aux | grep redis</p>
+<p>这篇文章也不错<br><a href="https://www.jianshu.com/p/af33284aa57a" target="_blank" rel="noopener">https://www.jianshu.com/p/af33284aa57a</a></p>
+<h3 id="记一次Mac-node-logger-保存path-权限问题"><a href="#记一次Mac-node-logger-保存path-权限问题" class="headerlink" title="记一次Mac node logger 保存path 权限问题"></a>记一次Mac node logger 保存path 权限问题</h3><p>记一次运行node 服务器，其logger 记录path 在xxxx。<br>该目录没有获得权限，为只读。<br>错误表现：console 一直print：<br>ERROR 29252 [egg-logger] [/data0/wwwlogs/envelop.xxxx.com/logs/xxx-envelop-2000/egg-web.log] Error: EACCES: permission denied, open ‘/data0/wwwlogs/envelop.xxxx.com/logs/xxx-envelop-2018/egg-web.log’<br>解决方案:</p>
+<ol>
+<li><p>ctrl C 打断输出</p>
+</li>
+<li><p>在ternimal cd 到该目录,如:<code>$ cd /data0/wwwlogs/envelop.xxxx.com/logs/xxx-envelop-2000</code></p>
+</li>
+<li>然后 <code>$ chmod -R 777 *</code></li>
+</ol>
+<blockquote>
+<p>将该目录下使用递归 赋予777 权限(chmod : change mode ,-R recursive, 777 可读可写权限)</p>
+</blockquote>
+<h3 id="将本地git-push-到远程repository"><a href="#将本地git-push-到远程repository" class="headerlink" title="将本地git push 到远程repository"></a>将本地git push 到远程repository</h3><p>git init<br>git commit -m “first commit”<br>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:shaohung001/ahuang_project.git<br>git push -u origin master</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/04/22/2018-04-22lesson/" class="link f-fl">⟵2018-04-22lesson</a>
+    
+    
+      <a href="/2017/10/06/2017-08-29lesson/" class="link f-fr">2017-08-29lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>UIBazier学习和CAMediaTimingFunction | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="UIBezier，这篇文章写得很好，简洁易懂。我认为主要用到的有：1：创建UIBezierPath* aPath = [UIBezierPath bezierPath];2：设置初始位置[aPath moveToPoint:CGPointMake(100.0, 0.0)];3：拐点aPath.lineCapStyle = kCGLineCapRound;//线条拐角aPath.lineJoinSt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIBazier学习和CAMediaTimingFunction">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/10/UIBazier学习和CAMediaTimingFunction/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="UIBezier，这篇文章写得很好，简洁易懂。我认为主要用到的有：1：创建UIBezierPath* aPath = [UIBezierPath bezierPath];2：设置初始位置[aPath moveToPoint:CGPointMake(100.0, 0.0)];3：拐点aPath.lineCapStyle = kCGLineCapRound;//线条拐角aPath.lineJoinSt">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3993684-22d35b19984fed4d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIBazier学习和CAMediaTimingFunction">
+<meta name="twitter:description" content="UIBezier，这篇文章写得很好，简洁易懂。我认为主要用到的有：1：创建UIBezierPath* aPath = [UIBezierPath bezierPath];2：设置初始位置[aPath moveToPoint:CGPointMake(100.0, 0.0)];3：拐点aPath.lineCapStyle = kCGLineCapRound;//线条拐角aPath.lineJoinSt">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3993684-22d35b19984fed4d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">UIBazier学习和CAMediaTimingFunction</h2>
+  <p class="sub">Jan 10, 2017</p>
+  <article class="content">
+    <p>UIBezier，这篇文章写得很好，简洁易懂。<br>我认为主要用到的有：<br>1：创建<br><code>UIBezierPath* aPath = [UIBezierPath bezierPath];</code><br>2：设置初始位置<br><code>[aPath moveToPoint:CGPointMake(100.0, 0.0)];</code><br>3：拐点<br><code>aPath.lineCapStyle = kCGLineCapRound;</code>//线条拐角<br><code>aPath.lineJoinStyle = kCGLineCapRound;</code>//终点处理<br>4：stroke和fill的区别<br>5：<code>- (void)addQuadCurveToPoint:(CGPoint)endPoint controlPoint:(CGPoint)controlPoint</code>方法<br>由于有setToPoint初始位置，有endPoint，然后controlPoint为改变曲面的<br>可以参考下图<br><img src="http://upload-images.jianshu.io/upload_images/3993684-22d35b19984fed4d.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片1"><br>6：<code>- (void)addCurveToPoint:(CGPoint)endPoint controlPoint1:(CGPoint)controlPoint1 controlPoint2:(CGPoint)controlPoint2</code>//多参值<br>7：这句话很好：<br>使用UIBezierPath创建多边形—在path下面添加直线条形成多边形<br>多边形是一些简单的形状,这些形状是由一些直线线条组成，我们可以用moveToPoint: 和 addLineToPoint:方法去构建。<br>方法moveToPoint:设置我们想要创建形状的起点。从这点开始，我们可以用方法addLineToPoint:去创建一个形状的线段。<br>我们可以连续的创建line，每一个line的起点都是先前的终点，终点就是指定的点。<br><code>// Only override drawRect: if you perform custom drawing.</code><br><code>// An empty implementation adversely affects performance during animation.</code><br><code>- (void)drawRect:(CGRect)rect{
+    UIColor *color = [UIColor redColor];
+    [color set];//设置线条颜色
+    UIBezierPath* aPath = [UIBezierPath bezierPath];
+    aPath.lineWidth = 5.0;
+    aPath.lineCapStyle = kCGLineCapRound;//线条拐角
+    aPath.lineJoinStyle = kCGLineCapRound;//终点处理
+    // Set the starting point of the shape.
+    [aPath moveToPoint:CGPointMake(100.0, 0.0)];
+    // Draw the lines
+    [aPath addLineToPoint:CGPointMake(200.0, 40.0)];
+    [aPath addLineToPoint:CGPointMake(160, 140)];
+    [aPath addLineToPoint:CGPointMake(40.0, 140)];
+    [aPath addLineToPoint:CGPointMake(0.0, 40.0)];
+    [aPath closePath];//第五条线通过调用closePath方法得到的
+    [aPath stroke];//Draws line 根据坐标点连线
+}</code></p>
+<p>CAMediaTimingFunction时间线可以通过<br><code>CAMediaTimingFunction *a = [CAMediaTimingFunction functionWithControlPoints:0.85 :0.01 :0.33 :1.14];</code>//创建</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/10/mac升级到10-11cocoapods不能用/" class="link f-fl">⟵mac升级到10.11cocoapods不能用</a>
+    
+    
+      <a href="/2017/01/10/一些查询很久才得出的答案或者尝试很久得到的答案/" class="link f-fr">一些查询很久才得出的答案或者尝试很久得到的答案⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

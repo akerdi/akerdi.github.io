@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-3-27lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="connect-mongo 用户登录后杀死浏览器,用户还得重新登录 - bug 解决过程表现为用户正常登录。cookie、session 被正常记录。把浏览器关闭又打开时，需要重新登录。 猜测：  cookie 没有记录  不对，记录了。front 在SignIn时Cookies.set(&amp;#39;secret&amp;#39;, userInfo)。每次打开时都是有的。  session 没有记录  流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-3-27lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/04/25/2019-3-27lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="connect-mongo 用户登录后杀死浏览器,用户还得重新登录 - bug 解决过程表现为用户正常登录。cookie、session 被正常记录。把浏览器关闭又打开时，需要重新登录。 猜测：  cookie 没有记录  不对，记录了。front 在SignIn时Cookies.set(&amp;#39;secret&amp;#39;, userInfo)。每次打开时都是有的。  session 没有记录  流">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-3-27lesson">
+<meta name="twitter:description" content="connect-mongo 用户登录后杀死浏览器,用户还得重新登录 - bug 解决过程表现为用户正常登录。cookie、session 被正常记录。把浏览器关闭又打开时，需要重新登录。 猜测：  cookie 没有记录  不对，记录了。front 在SignIn时Cookies.set(&amp;#39;secret&amp;#39;, userInfo)。每次打开时都是有的。  session 没有记录  流">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-3-27lesson</h2>
+  <p class="sub">Apr 25, 2019</p>
+  <article class="content">
+    <h3 id="connect-mongo-用户登录后杀死浏览器-用户还得重新登录-bug-解决过程"><a href="#connect-mongo-用户登录后杀死浏览器-用户还得重新登录-bug-解决过程" class="headerlink" title="connect-mongo 用户登录后杀死浏览器,用户还得重新登录 - bug 解决过程"></a>connect-mongo 用户登录后杀死浏览器,用户还得重新登录 - bug 解决过程</h3><p>表现为用户正常登录。cookie、session 被正常记录。把浏览器关闭又打开时，需要重新登录。</p>
+<p>猜测：</p>
+<ol>
+<li>cookie 没有记录</li>
+</ol>
+<p>不对，记录了。front 在<strong>SignIn</strong>时<code>Cookies.set(&#39;secret&#39;, userInfo)</code>。每次打开时都是有的。</p>
+<ol start="2">
+<li>session 没有记录</li>
+</ol>
+<p>流程对的。cookieParser、expressSession、passport.initialize、passport.session、passport.serilizeUser、passport.deserializeUser</p>
+<p>但是注意到mongo 的session 表里面，expires、originalMaxAge 等都为null,说明session 写进去了，但是设置session expire 方式不对：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">app.use(expressSession(&#123;</span><br><span class="line">    name:</span><br><span class="line">    secret</span><br><span class="line">    maxAge: expireTime</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">以上设置过期时间方法不对，可以使用下面两种方法之一：</span><br><span class="line"></span><br><span class="line">[1] 全部永久统一设置</span><br><span class="line">expressSession(&#123;</span><br><span class="line">    name:</span><br><span class="line">    secret:</span><br><span class="line">    cookie:</span><br><span class="line">        maxAge: expireTime //这是统一设置方式的正确方式</span><br><span class="line">&#125;)</span><br><span class="line">[2] 灵活设置session过期时间</span><br><span class="line">用户确认登录后，使用req.session.cookie.expire = expireTime</span><br></pre></td></tr></table></figure>
+<p>以上正确的解决了session 设置过期问题。</p>
+<p>然后接下来尝试登录操作。发现登录后，退出浏览器，重新打开浏览器并进入页面，发现又打开了登录页。</p>
+<p>难道问题还在？首先排除之前已经成功解决了cookie session 设置问题；是backend 有问题还是frontend 有问题？</p>
+<p>这时尝试使用浏览器打开某个没有界面的接口时，居然打开了，同时返回了用户的基本信息！说明后端的确没有问题，后端将cookie 认证过后的信息正确的返回了。</p>
+<p>后端校验没有问题，那么该问题就可能由frontend产生，frontend自己验证，自己处理了该route？</p>
+<p>尝试找了下源码，确实发现了其在route.beforeEach(SPA 第一次加载或者重刷新调用)方法中，自我检验了一番，但是却缺少验证信息，自己误判自己。</p>
+<blockquote>
+<p>从上面分析得到，全栈工程需要先各自分析问题由来和可能出处。当都有问题时就会很难判别，这时可以从一些不正常的地方打开突破口，一个个解决后，才能知道靠近真相。</p>
+</blockquote>
+<p>这也是我第一次跟着老大一起改第一个大bug。自己没能贡献太多帮助，测试过程方法不熟练、分析来由不清晰、尝试过程比较靠蒙。</p>
+<p>多多努力啊，努力才是回报老大苦心栽培！！</p>
+<h3 id="U盘格式为Fat32-最多只能4G-左右内容"><a href="#U盘格式为Fat32-最多只能4G-左右内容" class="headerlink" title="U盘格式为Fat32 最多只能4G 左右内容"></a>U盘格式为Fat32 最多只能4G 左右内容</h3><p>Mac 大文件总是复制不进U盘，是因为Fat32格式原因。但是格式为NTFS 格式时Mac 又识别不了。</p>
+<p>解决：取github 下载NTFS X；或者Mac 里面的NTFS 操作软件即可识别并进项curd 操作。</p>
+<h3 id="同局域网传输文件方法"><a href="#同局域网传输文件方法" class="headerlink" title="同局域网传输文件方法"></a>同局域网传输文件方法</h3><p>PC.A在相关文件夹使用Python 打开权限<code>python -m SimpleHTTPServer 8000</code></p>
+<p>意思是打开8000 端口。此时另一台打开浏览器，输入${PC.A.ip:8000}即可进入该文件夹。同时选取对应文件即可下载</p>
+<h3 id="terminal-zsh-翻墙"><a href="#terminal-zsh-翻墙" class="headerlink" title="terminal zsh 翻墙"></a>terminal zsh 翻墙</h3><pre><code>vim ~/.zshrc # 修改terminal 源文件
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alias proxy=&apos;export all_proxy=socks5://127.0.0.1:$&#123;port&#125;&apos; # port 一般为1080；查看：- 偏好设置 - 高级 - 本地Socks5监听端口</span><br><span class="line">alias unproxy=&apos;unset all_proxy&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source ~/.zshrc</span><br><span class="line">curl cip.cc # 显示了国内地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">proxy</span><br><span class="line">curl cip.cc # 已翻墙的地址</span><br></pre></td></tr></table></figure>
+<pre><code>unproxy # 关闭翻墙
+</code></pre><p><a href="https://github.com/mrdulin/blog/issues/18" target="_blank" rel="noopener">参考</a></p>
+<h3 id="centos6增加Swap分区"><a href="#centos6增加Swap分区" class="headerlink" title="centos6增加Swap分区"></a>centos6增加Swap分区</h3><p>1.检查swap大小和硬盘空间</p>
+<pre><code>free -m
+</code></pre><p>2.添加交换文件</p>
+<pre><code>mkdir -p /opt/temp
+# 增加内存为2G
+dd if=/dev/zero of=/opt/temp/swap bs=1024 count=2048000
+</code></pre><p>3.创建交换空间</p>
+<pre><code>mkswap -f /opt/temp/swap
+</code></pre><p>4.启动新增加的2G交换空间</p>
+<pre><code>swapon /opt/temp/swap
+</code></pre><p>5.修改/etc/fstab 使新加的2G交换空间在系统重新启动后自动生效</p>
+<pre><code>echo &quot;/opt/temp/swap swap swap defaults 0 0&quot; &gt;&gt;/etc/fstab
+</code></pre><p>6.重新启动系统</p>
+<pre><code>reboot
+</code></pre><p><a href="https://blog.csdn.net/lym152898/article/details/77133260" target="_blank" rel="noopener">参考</a></p>
+<h3 id="Dockerfile-容器不能连接另一个容器的端口"><a href="#Dockerfile-容器不能连接另一个容器的端口" class="headerlink" title="Dockerfile 容器不能连接另一个容器的端口"></a>Dockerfile 容器不能连接另一个容器的端口</h3><p>错误原因是自身错误，情况：我以前就是写127.0.0.1 连接本地mongo、redis，但是我忘了我以前使用的是docker-compose</p>
+<p>我现在不想用docker-compose，操作是使用真实物理地址, 如192.168.1.2、server Ip，反正不能为127.0.0.1 即可。</p>
+<p>这样即可成功，仅仅只是这个错误.</p>
+<p>导致我一个大中午在：构建容器400多M、上传容器、运行-出错，反复。本地debug运行都是可以连接的。然后我本地使用容器，咦，果然连不上。</p>
+<h3 id="重新Certbot-auto"><a href="#重新Certbot-auto" class="headerlink" title="重新Certbot-auto"></a>重新Certbot-auto</h3><p>域名过期，重新搞了个免费的域名:gogal.ml <a href="freenom.com">官网</a><br>控制台等会还要用到，需要填写certbot token</p>
+<p>首先去<a href="https://certbot.eff.org/lets-encrypt" target="_blank" rel="noopener">certbot 官网</a>，我选择centos6-nginx 于是是这里-<a href="https://certbot.eff.org/lets-encrypt/centos6-nginx" target="_blank" rel="noopener">直达</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$cd</span> ~/</span><br><span class="line"><span class="variable">$mkdir</span> download &amp;&amp; <span class="built_in">cd</span> download</span><br><span class="line"><span class="variable">$wget</span> https://dl.eff.org/certbot-auto</span><br><span class="line"><span class="variable">$sudo</span> mv certbot-auto /usr/<span class="built_in">local</span>/bin/certbot-auto</span><br><span class="line"><span class="variable">$sudo</span> chown root /usr/<span class="built_in">local</span>/bin/certbot-auto</span><br><span class="line"><span class="variable">$sudo</span> chmod 0755 /usr/<span class="built_in">local</span>/bin/certbot-auto</span><br><span class="line"></span><br><span class="line"><span class="variable">$pip</span> install certbot-nginx</span><br></pre></td></tr></table></figure>
+<p>到这里需要先前去nginx.conf 填写对应443 的server_name。 比如：server_name <a href="http://www.gogal.ml" target="_blank" rel="noopener">www.gogal.ml</a> gogal.ml;下面会用到</p>
+<p>$/usr/local/bin/certbot-auto –server <a href="https://acme-v02.api.letsencrypt.org/directory" target="_blank" rel="noopener">https://acme-v02.api.letsencrypt.org/directory</a> –manual –preferred-challenges dns  –installer nginx -d *.gogal.ml -d gogal.ml # gogal.ml 就是我的域名</p>
+<p>前几句都可以直接忽略，yes or enter</p>
+<p>直到出现这句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Please deploy a DNS TXT record under the name</span><br><span class="line">_acme-challenge.gogal.ml with the following value:</span><br><span class="line"></span><br><span class="line">EfurJLgnrwahc7g_6k7odGVXp6sffOruJaDceBdiAmU</span><br><span class="line"></span><br><span class="line">Before continuing, verify the record is deployed.</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br></pre></td></tr></table></figure>
+<p>这时将里面那个拷贝到freenom 控制台-managedns</p>
+<p>Add Records</p>
+<p>name 填 <strong>_ACME-CHALLENGE</strong><br>Target 填 <strong>${你自己得到的那个，比如EfurJLgnrwahc7g_6k7odGVXp6sffOruJaDceBdiAmU}</strong></p>
+<p>回到ssh 按下enter 键，之后还有几步都没那么关键了。</p>
+<p>这时你用postman 可以测试，之前的都是可用的了。</p>
+<p>这里提一点：一开始我碰到certbot 升级的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Saving debug log to /var/log/letsencrypt/letsencrypt.log</span><br><span class="line"></span><br><span class="line">How would you like to authenticate with the ACME CA?</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">1: Nginx Web Server plugin (nginx)</span><br><span class="line">2: Spin up a temporary webserver (standalone)</span><br><span class="line">3: Place files in webroot directory (webroot)</span><br><span class="line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span><br><span class="line">Select the appropriate number [1-3] then [enter] (press &apos;c&apos; to cancel): 1</span><br><span class="line">Plugins selected: Authenticator nginx, Installer None</span><br><span class="line">Obtaining a new certificate</span><br><span class="line">Performing the following challenges:</span><br><span class="line">http-01 challenge for gogal.ml</span><br><span class="line">Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA. You may need to use an authenticator plugin that can do challenges over DNS.</span><br><span class="line">Client with the currently selected authenticator does not support any combination of challenges that will satisfy the CA. You may need to use an authenticator plugin that can do challenges over DNS.</span><br></pre></td></tr></table></figure>
+<p>我就是直接前往官网，下载最新的certbot-auto 即解决了。</p>
+<h3 id="利用Vue-2-x-Templates-Legacy-脚手架搭建项目"><a href="#利用Vue-2-x-Templates-Legacy-脚手架搭建项目" class="headerlink" title="利用Vue 2.x Templates(Legacy) 脚手架搭建项目"></a>利用Vue 2.x Templates(Legacy) 脚手架搭建项目</h3><p><a href="https://cli.vuejs.org/guide/creating-a-project.html#vue-create" target="_blank" rel="noopener">Vue 官网</a></p>
+<pre><code>yarn global add @vue/cli-init
+
+vue init webpack &lt;my-project&gt;
+</code></pre><p>接下来就可以愉快的写了</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/04/25/2019-4-22lesson/" class="link f-fl">⟵2019-4-22lesson</a>
+    
+    
+      <a href="/2019/02/19/2019-2-19lesson/" class="link f-fr">2019-2-19lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

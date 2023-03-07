@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210812初步练习redis | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="初步练习redisredis 包含数据类型: string list set zset(sort set), 另有事务、发布订阅等，这篇是自己简单练习数据类型总结 stringset key1 v1 get key1 mset key2 v2 key3 v3 keys * exists key1 del key2 expire key3 20 ttl key3 persist key3 hashh">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210812初步练习redis">
+<meta property="og:url" content="https://akerdi.github.io/2021/08/12/20210812初步练习redis/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="初步练习redisredis 包含数据类型: string list set zset(sort set), 另有事务、发布订阅等，这篇是自己简单练习数据类型总结 stringset key1 v1 get key1 mset key2 v2 key3 v3 keys * exists key1 del key2 expire key3 20 ttl key3 persist key3 hashh">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.385Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210812初步练习redis">
+<meta name="twitter:description" content="初步练习redisredis 包含数据类型: string list set zset(sort set), 另有事务、发布订阅等，这篇是自己简单练习数据类型总结 stringset key1 v1 get key1 mset key2 v2 key3 v3 keys * exists key1 del key2 expire key3 20 ttl key3 persist key3 hashh">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210812初步练习redis</h2>
+  <p class="sub">Aug 12, 2021</p>
+  <article class="content">
+    <h1 id="初步练习redis"><a href="#初步练习redis" class="headerlink" title="初步练习redis"></a>初步练习redis</h1><p>redis 包含数据类型: string list set zset(sort set), 另有事务、发布订阅等，这篇是自己简单练习数据类型总结</p>
+<h2 id="string"><a href="#string" class="headerlink" title="string"></a>string</h2><pre><code>set key1 v1
+get key1
+mset key2 v2 key3 v3
+keys *
+exists key1
+del key2
+expire key3 20
+ttl key3
+persist key3
+</code></pre><h2 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h2><pre><code>hmset user:1000 username aker age 16 job it
+hget user:1000 username
+hmget user:1000 username age job
+hgetall user:1000
+hset user:1000 job chifan
+hset user:1000 home sh
+hvals user:1000
+hdel user:1000 job [field2...]
+</code></pre><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><pre><code>sadd set1 1 2 3 4 5
+smembers set1
+srem set1 1 4
+sadd set2 1 3 4 5 1 3
+sdiff set1 set2
+sinter set1 set2
+sunion set1 set2
+</code></pre><h2 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h2><pre><code>zadd zkey0 1 redis 2 mongo  5 mysql 6 tidb 6 mariadb
+zrange zkey0 0 -1 [withscores]
+zcard zkey0
+zincrby zkey0 2 redis
+</code></pre><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><pre><code>rpush list1 A
+rpush list1 B
+lpush list1 top1
+lrange list1 0 -1
+lrange list1 1 2
+lrange list1 -3 -1
+rpop list1
+lpop list1
+llen list1
+lindex list1
+lrem list1 -1 A
+</code></pre><p><a href="https://www.jianshu.com/p/2f93bb771469" target="_blank" rel="noopener">参考</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/08/20/CMakeLists入门/" class="link f-fl">⟵CMakeLists入门</a>
+    
+    
+      <a href="/2021/08/07/20210807制作cpp_dylib/" class="link f-fr">20210807制作cpp dylib⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

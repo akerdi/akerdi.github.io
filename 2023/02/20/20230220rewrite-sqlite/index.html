@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20230220rewrite_sqlite | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="重写sqlite遇到的问题记录注意点 stat返回问题#include &amp;lt;sys/stat.h&amp;gt; stat(filename, &amp;amp;st) 当成功时 = 0, 否则 = -1 fopen模式为a+时的问题fopen模式为a+时，fseek失效，其会继续从后面补充。 解决方法: stat判断文件是否存在，不存在使用 w+; 存在使用 r+; fwrite每次要写入时，都需要重置位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230220rewrite_sqlite">
+<meta property="og:url" content="https://akerdi.github.io/2023/02/20/20230220rewrite-sqlite/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="重写sqlite遇到的问题记录注意点 stat返回问题#include &amp;lt;sys/stat.h&amp;gt; stat(filename, &amp;amp;st) 当成功时 = 0, 否则 = -1 fopen模式为a+时的问题fopen模式为a+时，fseek失效，其会继续从后面补充。 解决方法: stat判断文件是否存在，不存在使用 w+; 存在使用 r+; fwrite每次要写入时，都需要重置位置">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20230220rewrite_sqlite">
+<meta name="twitter:description" content="重写sqlite遇到的问题记录注意点 stat返回问题#include &amp;lt;sys/stat.h&amp;gt; stat(filename, &amp;amp;st) 当成功时 = 0, 否则 = -1 fopen模式为a+时的问题fopen模式为a+时，fseek失效，其会继续从后面补充。 解决方法: stat判断文件是否存在，不存在使用 w+; 存在使用 r+; fwrite每次要写入时，都需要重置位置">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20230220rewrite_sqlite</h2>
+  <p class="sub">Feb 20, 2023</p>
+  <article class="content">
+    <h1 id="重写sqlite遇到的问题"><a href="#重写sqlite遇到的问题" class="headerlink" title="重写sqlite遇到的问题"></a>重写sqlite遇到的问题</h1><p>记录注意点</p>
+<h2 id="stat返回问题"><a href="#stat返回问题" class="headerlink" title="stat返回问题"></a>stat返回问题</h2><p>#include &lt;sys/stat.h&gt;</p>
+<p>stat(filename, &amp;st) 当成功时 = 0, 否则 = -1</p>
+<h2 id="fopen模式为a-时的问题"><a href="#fopen模式为a-时的问题" class="headerlink" title="fopen模式为a+时的问题"></a>fopen模式为a+时的问题</h2><p>fopen模式为a+时，fseek失效，其会继续从后面补充。</p>
+<p>解决方法: stat判断文件是否存在，不存在使用 w+; 存在使用 r+;</p>
+<h2 id="fwrite"><a href="#fwrite" class="headerlink" title="fwrite"></a>fwrite</h2><p>每次要写入时，都需要重置位置坐标: fseek到指定位置后写入。</p>
+<h2 id="fgets-fread"><a href="#fgets-fread" class="headerlink" title="fgets/fread"></a>fgets/fread</h2><p>在方法 <code>get_page</code> 时，误将fread 写成fgets。</p>
+<p>fread 为将内容读取到指针内存中；fgets 为将内容通过文本文件读取到指针内存中。</p>
+<p>当内容出现uint32_t = 10，也就是<code>0A</code>，fgets 识别为<code>\n</code>，并且接下来的内存都置为<code>\0</code>。</p>
+<blockquote>
+<p>根据断点查看对比hex16进制内容时 <code>po *(uint32_t*)((char*)node+6)</code> 内容都是对应得上的，并且文本文件也是能看到数据是存在的。但是一读取到0A数据时，就发现之后的内存都为<code>\0</code>了。所以直接断定为读取方式为文本方式读取。\<br>fopen使用<code>rb+</code>/<code>wb+</code> 仍然没有作用，写入fwrite没有错误，那么就是写入发生了错误!</p>
+</blockquote>
+<h2 id="插入算法"><a href="#插入算法" class="headerlink" title="插入算法"></a>插入算法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> LEAF_NODE_RIGHT_SPLIT_COUNT = (LEAF_NODE_MAX_COUNT+<span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">uint32_t</span> LEAF_NODE_LEFT_SPLIT_COUNT = (LEAF_NODE_MAX_COUNT+<span class="number">1</span>) - LEAF_NODE_RIGHT_SPLIT_COUNT;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">leaf_node_split_and_insert</span><span class="params">(Cursor* cursor, <span class="keyword">uint32_t</span> key, Row* value)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int32_t</span> i = LEAF_NODE_MAX_COUNT; i &gt;= <span class="number">0</span> i--) &#123;</span><br><span class="line">    <span class="keyword">void</span>* destination_node;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= LEAF_NODE_LEFT_SPLIT_COUNT) &#123;</span><br><span class="line">      destination_node = new_node;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      destination_node = old_node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">uint32_t</span> index = i % LEAF_NODE_LEFT_SPLIT_COUNT;</span><br><span class="line">    <span class="keyword">void</span>* destination = leaf_node_cell(destination_node, index);</span><br><span class="line">    <span class="keyword">if</span> (i == cursor-&gt;row_num) &#123;</span><br><span class="line">      serializedData(leaf_node_value(destination_node), index);</span><br><span class="line">      *leaf_node_key(destination_node, index) = key;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i &gt; cursor-&gt;row_num) &#123;</span><br><span class="line">      <span class="built_in">memcpy</span>(destination, leaf_node_cell(old_node, i<span class="number">-1</span>), PAGE_SIZE);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">memcpy</span>(destination, leaf_node_cell(old_node, i), PAGE_SIZE);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2023/03/07/Overview/" class="link f-fl">⟵</a>
+    
+    
+      <a href="/2023/02/02/20230202forspringfestival/" class="link f-fr">2022年新春⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-6-10lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="docker mongo dump restoreDumpdocker run --name newMongo -p 27018:27017 --rm mongo 另开一个terminal docker exec -it newMongo /bin/bash  mongodump -h 127.0.0.1 --port 27017 -d ${your db} -o /test/mongodBack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-6-10lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/09/13/2019-6-10lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="docker mongo dump restoreDumpdocker run --name newMongo -p 27018:27017 --rm mongo 另开一个terminal docker exec -it newMongo /bin/bash  mongodump -h 127.0.0.1 --port 27017 -d ${your db} -o /test/mongodBack">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-6-10lesson">
+<meta name="twitter:description" content="docker mongo dump restoreDumpdocker run --name newMongo -p 27018:27017 --rm mongo 另开一个terminal docker exec -it newMongo /bin/bash  mongodump -h 127.0.0.1 --port 27017 -d ${your db} -o /test/mongodBack">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-6-10lesson</h2>
+  <p class="sub">Sep 13, 2019</p>
+  <article class="content">
+    <h1 id="docker-mongo-dump-restore"><a href="#docker-mongo-dump-restore" class="headerlink" title="docker mongo dump restore"></a>docker mongo dump restore</h1><h2 id="Dump"><a href="#Dump" class="headerlink" title="Dump"></a>Dump</h2><pre><code>docker run --name newMongo -p 27018:27017 --rm mongo
+</code></pre><p>另开一个terminal</p>
+<pre><code>docker exec -it newMongo /bin/bash
+
+mongodump -h 127.0.0.1 --port 27017 -d ${your db} -o /test/mongodBack
+
+exit # 退出docker mongo容器
+
+docker cp newMongo:/test/mongodBack/ /mongodBack/ # 将docker 内文件拷到/mongodBack/
+</code></pre><h2 id="Restore"><a href="#Restore" class="headerlink" title="Restore"></a><strong>Restore</strong></h2><p>待撸待撸</p>
+<p>参考：<a href="https://www.cnblogs.com/qiyc/p/10150433.html" target="_blank" rel="noopener">https://www.cnblogs.com/qiyc/p/10150433.html</a></p>
+<h1 id="OAuth2-server-撸saas-微应用化"><a href="#OAuth2-server-撸saas-微应用化" class="headerlink" title="OAuth2-server 撸saas 微应用化"></a><strong>OAuth2-server 撸saas 微应用化</strong></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Client frontend] GET /auth/honglian to [Client backend]</span><br><span class="line">[Client backdnd] redirectTo [Server frontend] page : /oauth/authorize?clientId=x&amp;redirectUri=x&amp;response_code=code</span><br><span class="line">[Server frontend] POST /oauth/login/authorise to [Server backend] to fetch oauth authorization_code</span><br><span class="line">[Server frontend] redirectTo(window.location) redirectUri + code=$&#123;authorization_code&#125;</span><br><span class="line">[Client backend] get authorization_code</span><br><span class="line">[Client backend] POST /oauth/access_token/?client_id=x -H &apos;authorization=$&#123;authorization_code&#125;&apos; to [Server backend] to fetch access_token</span><br><span class="line">[Server backend] return access_token to [Client backend]</span><br><span class="line">[Client backend] GET /api/user/?client_id=x&amp;client_secret=x&amp;access_token to [Server backend]</span><br><span class="line">[Server backend] return userProfile to [Client backend]</span><br><span class="line">[Client backend] redirectTo [/user/home]</span><br></pre></td></tr></table></figure>
+<p>beyond over!</p>
+<p>参考：</p>
+<ol>
+<li><p><a href="https://gist.github.com/tabone/d74fb922669e4edc22bfd0833b5ae88b" target="_blank" rel="noopener">https://gist.github.com/tabone/d74fb922669e4edc22bfd0833b5ae88b</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/vipzhou/p/8125924.html" target="_blank" rel="noopener">https://www.cnblogs.com/vipzhou/p/8125924.html</a></p>
+</li>
+</ol>
+<h1 id="www-form-urlencoded-d-里面的-空格-被替换成-的问题"><a href="#www-form-urlencoded-d-里面的-空格-被替换成-的问题" class="headerlink" title="www-form-urlencoded -d 里面的 空格 被替换成+的问题"></a><strong>www-form-urlencoded -d 里面的 <code>空格</code> 被替换成<code>+</code>的问题</strong></h1><p>场景是用户发送一个<code>www-form-urlencoded</code> 内容是一个机器码，比如<code>MH20ew2r9RuTyGcX+rrmxF7X40U=</code> 但是发现传到服务器时，却变成了<code>MH20ew2r9RuTyGcX rrmxF7X40U=</code>. 中间是空格代替。</p>
+<p>原因是空格在urlencoded 中就是”+”。于是参数从软件客户端发到web 时都是正确的。但是到了body-parser 时，body-parser 看到一个 <strong>+</strong>，想都不想，直接就转成空格了。、</p>
+<p>临时处理办法：将该文本转回去: string.replace(/\s/g, ‘+’)</p>
+<p>最终解决方案：软件客户端使用urlencoded 刷新string</p>
+<h1 id="Chrome-Extension-使用Vue-遇到的一些问题"><a href="#Chrome-Extension-使用Vue-遇到的一些问题" class="headerlink" title="Chrome Extension 使用Vue 遇到的一些问题"></a><strong>Chrome Extension 使用Vue 遇到的一些问题</strong></h1><p>Vue 使用webpack。但是background.js 属于后台，使用nodejs，于是webpack 找require 函数时可能会找不到比如<strong>fs</strong> 的库：Module not found.</p>
+<p>做的第一种尝试: 在webpack 打包target 默认为的<code>web</code> 替换为<code>node</code>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    target: &apos;web&apos;,</span><br><span class="line">    node: &#123;</span><br><span class="line">        console:false,</span><br><span class="line">        global: true,</span><br><span class="line">        process: true,</span><br><span class="line">        fs: true,</span><br><span class="line">        __filename: &apos;mock&apos;,</span><br><span class="line">        ___dirname: &quot;mock&quot;,</span><br><span class="line">        Buffer: true,</span><br><span class="line">        setImmediate: false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是这样的也导致输出的是node 环境。界面上的css 样式全部都不识别了。<br>于是替换一种思路。</p>
+<p>第二种尝试: 前段还是按照前段，后端之所以称之为后端，那么便是另外一个项目了。webpack 打包时，打一个虚拟的，没有任务的background 包。于是<code>yarn watch</code> 阶段background 包打进去之后，手动替换里面background.js。</p>
+<p>终于，里面运行的非常正常了。</p>
+<p>这种方法不同点是，之前的background 配置是page,现在应为scripts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background: &#123;</span><br><span class="line">    page: &quot;./background.html&quot;</span><br><span class="line">    scripts: [&quot;./background.js&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/section/1477428" target="_blank" rel="noopener">https://cloud.tencent.com/developer/section/1477428</a></li>
+<li><a href="https://cloud.tencent.com/developer/section/1477500" target="_blank" rel="noopener">https://cloud.tencent.com/developer/section/1477500</a></li>
+</ul>
+<h2 id="Typescript-mocha-chai-单元测试"><a href="#Typescript-mocha-chai-单元测试" class="headerlink" title="Typescript + mocha + chai 单元测试"></a><strong>Typescript + mocha + chai 单元测试</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yarn add mocha @types/mocha chai @types/chai chai-http @types/chai-http -D</span><br><span class="line"></span><br><span class="line">package.json</span><br><span class="line">    scripts</span><br><span class="line">        test: NODE_ENV=test mocha -t 5000 --require ts-node/register test/**/*.ts</span><br><span class="line"></span><br><span class="line">/test</span><br><span class="line">    diary.spec.ts</span><br></pre></td></tr></table></figure>
+<p>diary.spec.ts:</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; app &#125; <span class="keyword">from</span> <span class="string">'../src/app'</span></span><br><span class="line"><span class="keyword">import</span> chai, &#123; expect &#125; <span class="keyword">from</span> <span class="string">'chai'</span></span><br><span class="line"><span class="keyword">import</span> chaiHttp <span class="keyword">from</span> <span class="string">'chai-http'</span></span><br><span class="line">chai.use(chaiHttp)</span><br><span class="line"><span class="keyword">import</span> <span class="string">'mocha'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userLoginCookie = <span class="string">'123456'</span> <span class="comment">// 由于使用OAuth 服务，那块代码就没有测，直接使用Cookie</span></span><br><span class="line">describe(<span class="string">'测试diary 接口'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.beforeEach(<span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'等待数据库载入完毕'</span>)</span><br><span class="line">            done()</span><br><span class="line">        &#125;, <span class="number">1000</span>) <span class="comment">// 时间可以加长，这里链接了mlab ，比较慢，可以为4000(有时仍然会出错)</span></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    it(<span class="string">'Test getBudgetList'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">done</span>) </span>&#123;</span><br><span class="line">        chai.request(app)</span><br><span class="line">            .post(<span class="string">'/api/diary/getBudgetList'</span>)</span><br><span class="line">            .set(<span class="string">'Cookie'</span>, userLoginCookie)</span><br><span class="line">            .end(<span class="function">(<span class="params">err, res</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (res.status === <span class="number">403</span>) &#123;</span><br><span class="line">                    done(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'403 用户需要先登录'</span>))</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">const</span> arr = res.body <span class="keyword">as</span> <span class="built_in">any</span>[]</span><br><span class="line">                    expect(arr.length).to.equal(<span class="number">0</span>)</span><br><span class="line">                    done()</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="fs-read-readFile-在读取中文时乱码"><a href="#fs-read-readFile-在读取中文时乱码" class="headerlink" title="fs.read/readFile 在读取中文时乱码"></a><strong>fs.read/readFile 在读取中文时乱码</strong></h2><p>需求：文件使用Buffer 读出, 然后一个一个解析里面的中英文<br>环境：文件很大, 所以没办法直接读出、直接写出</p>
+<p><em>注意：这个需求不是编码的问题。比如GBK。GBK使用iconv_lite 解决</em></p>
+<p>英文占一个字节，中文三个字节，所以一个个读出的buffer， 中文时便出现该字找不到，所以nodejs 使用<buffer ef df db> 进行替换。</buffer></p>
+<p>nodejs 那些常见的读写库其实都导入了<code>string_decoder</code> 的库</p>
+<p>使用是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; StringDecoder &#125; <span class="keyword">from</span> <span class="string">'string_decoder'</span></span><br><span class="line"><span class="keyword">const</span> decoder = <span class="keyword">new</span> StringDecoder(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> next = decoder.write(readBuffer)</span><br><span class="line">  <span class="keyword">if</span> (next.length) &#123;</span><br><span class="line">    <span class="comment">// 这就是得到的buffer</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>decoder 原理是解析出来的，如果是中文三字节找不到，那么就储存起来，等到合并成一个。</p>
+<p>附上 oneByOne 读写每个文本</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; StringDecoder &#125; <span class="keyword">from</span> <span class="string">"string_decoder"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> fs <span class="keyword">from</span> <span class="string">'fs'</span></span><br><span class="line"><span class="keyword">import</span> &#123; call &#125; <span class="keyword">from</span> <span class="string">'./awaitCall'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> one_openFile = <span class="keyword">async</span> (absolutePath: <span class="built_in">string</span>, mode=<span class="string">'r'</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [e, fd] = <span class="keyword">await</span> call(fs.open ,absolutePath, mode, <span class="number">0o666</span>)</span><br><span class="line">  <span class="keyword">if</span> (e) <span class="keyword">throw</span> e</span><br><span class="line">  <span class="keyword">return</span> fd</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> one_readFile = <span class="keyword">async</span> (fd: <span class="built_in">number</span>, offset=<span class="number">0</span>, cb?: <span class="built_in">Function</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> oneByOneSize = <span class="number">1</span></span><br><span class="line">  <span class="keyword">const</span> len = oneByOneSize</span><br><span class="line">  <span class="keyword">let</span> readIndex = <span class="number">0</span></span><br><span class="line">  <span class="keyword">const</span> decoder = <span class="keyword">new</span> StringDecoder(<span class="string">'utf-8'</span>)</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> readBuffer = Buffer.alloc(oneByOneSize)</span><br><span class="line">    <span class="keyword">const</span> [err, res] = <span class="keyword">await</span> call(fs.read, fd, readBuffer, offset, len, readIndex)</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">    <span class="keyword">if</span> (!res.bytesRead) &#123;</span><br><span class="line">      <span class="comment">// 文件读完了</span></span><br><span class="line">      <span class="keyword">return</span> <span class="string">"文件读写完毕"</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> next = decoder.write(readBuffer)</span><br><span class="line">    <span class="keyword">if</span> (next.length) &#123;</span><br><span class="line">      <span class="keyword">if</span> (cb)</span><br><span class="line">        cb(next)</span><br><span class="line">    &#125;</span><br><span class="line">    readIndex ++</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Run-Mocha-programmatically"><a href="#Run-Mocha-programmatically" class="headerlink" title="Run Mocha programmatically"></a><strong>Run Mocha programmatically</strong></h2><p>在代码中执行mocha。在实际环境中进行单元测试。</p>
+<p><a href="https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically" target="_blank" rel="noopener">mocha 官网示例</a></p>
+<p><a href="https://stackoverflow.com/questions/29050720/run-mocha-programmatically-and-pass-results-to-variable-or-function" target="_blank" rel="noopener">stackoverflow</a></p>
+<h2 id="express-limiter"><a href="#express-limiter" class="headerlink" title="express-limiter"></a><strong>express-limiter</strong></h2><p>遇到情况：有一个注册、即立即登录，快速注册快速登录的接口，这里express-limiter 可以多次请求</p>
+<p>去redis 上看了下，key 每次都不同</p>
+<p>去express-limiter 里看了下, 他的redis key 来自line17: var key = opts.keyFormatter(opts.lookup(req))</p>
+<h2 id="Nginx-默认上传文件大小-1M"><a href="#Nginx-默认上传文件大小-1M" class="headerlink" title="Nginx 默认上传文件大小:1M"></a><strong>Nginx 默认上传文件大小:1M</strong></h2><p>server {<br>  listen 80;<br>  server_name xxx;<br>  client_max_body_size 100M;<br>}</p>
+<h2 id="vue-electron-使用electron-builder-不能打包win"><a href="#vue-electron-使用electron-builder-不能打包win" class="headerlink" title="vue-electron 使用electron-builder 不能打包win"></a><strong>vue-electron 使用electron-builder 不能打包win</strong></h2><p>issue:<a href="https://github.com/SimulatedGREG/electron-vue/issues/487" target="_blank" rel="noopener">https://github.com/SimulatedGREG/electron-vue/issues/487</a></p>
+<p>yarn build:win : “node .electron-vue/build.js &amp;&amp; electron-builder -w”</p>
+<h2 id="TS-获取自身Class"><a href="#TS-获取自身Class" class="headerlink" title="TS 获取自身Class"></a>TS 获取自身Class</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MyClass &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> instance = <span class="keyword">new</span> MyClass();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(instance.constructor.name); <span class="comment">// MyClass</span></span><br><span class="line"><span class="built_in">console</span>.log(MyClass.name);              <span class="comment">// MyClass</span></span><br></pre></td></tr></table></figure>
+<p><code>instance.constructor</code> 就是得到的class 转义后的Class 对象。</p>
+<h4 id="Nginx-设置同源策略"><a href="#Nginx-设置同源策略" class="headerlink" title="Nginx 设置同源策略"></a>Nginx 设置同源策略</h4><p>这里还是使用上面文章说明：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">add_header</span> Access-Control-Allow-Origin *;</span><br><span class="line"><span class="attribute">add_header</span> Access-Control-Allow-Headers X-Requested-With;</span><br><span class="line"><span class="attribute">add_header</span> Access-Control-Allow-Methods GET,POST,OPTIONS;</span><br></pre></td></tr></table></figure>
+<p>然后使用自己的域名。</p>
+<p>以上完成了本次要搭建直播、理解推流、拉流的动作过程。</p>
+<h3 id="人生苦短，我们用go"><a href="#人生苦短，我们用go" class="headerlink" title="人生苦短，我们用go"></a>人生苦短，我们用go</h3><p>有句话挺有意思的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nodejs 可玩性还是蛮高的，可以C艹binding。</span><br><span class="line">但是又多学一个，为什么不用golang?</span><br></pre></td></tr></table></figure>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/12/26/2019-12-26lesson/" class="link f-fl">⟵2019-12-26lesson.md</a>
+    
+    
+      <a href="/2019/09/06/2019-9-6lesson/" class="link f-fr">2019-9-6lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>展示大图出现卡顿 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-09-18 12:06:12) 这里拿iOS里边代码做考究：图片页面，我之前不是说会很卡吗？？如果用户拿去很大的图片的话，我这里之前的处理是压缩这里压缩是把相同临近像素融合，减小像素密度，，但是卡顿原因不是这个，，其实是—》这样理解，就是我有一张比如一个墙壁大的图片，相框只有200*200，于是照片要放进去就比较麻烦，但是我减小照片大小，这样图片不大，放进相框就好放啦，，，100">
+<meta property="og:type" content="article">
+<meta property="og:title" content="展示大图出现卡顿">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/展示大图出现卡顿/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-09-18 12:06:12) 这里拿iOS里边代码做考究：图片页面，我之前不是说会很卡吗？？如果用户拿去很大的图片的话，我这里之前的处理是压缩这里压缩是把相同临近像素融合，减小像素密度，，但是卡顿原因不是这个，，其实是—》这样理解，就是我有一张比如一个墙壁大的图片，相框只有200*200，于是照片要放进去就比较麻烦，但是我减小照片大小，这样图片不大，放进相框就好放啦，，，100">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://s10.sinaimg.cn/mw690/003479W3zy74WlkrbAZ69&690">
+<meta property="og:image" content="http://s6.sinaimg.cn/mw690/003479W3zy74WlmwDU975&690">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="展示大图出现卡顿">
+<meta name="twitter:description" content="发表于(2016-09-18 12:06:12) 这里拿iOS里边代码做考究：图片页面，我之前不是说会很卡吗？？如果用户拿去很大的图片的话，我这里之前的处理是压缩这里压缩是把相同临近像素融合，减小像素密度，，但是卡顿原因不是这个，，其实是—》这样理解，就是我有一张比如一个墙壁大的图片，相框只有200*200，于是照片要放进去就比较麻烦，但是我减小照片大小，这样图片不大，放进相框就好放啦，，，100">
+<meta name="twitter:image" content="http://s10.sinaimg.cn/mw690/003479W3zy74WlkrbAZ69&690">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">展示大图出现卡顿</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-09-18 12:06:12)</p>
+<p>这里拿iOS里边代码做考究：<br>图片页面，我之前不是说会很卡吗？？如果用户拿去很大的图片的话，我这里之前的处理是压缩<br><img src="http://s10.sinaimg.cn/mw690/003479W3zy74WlkrbAZ69&amp;690" alt="图片1"><br>这里压缩是把相同临近像素融合，减小像素密度，，但是卡顿原因不是这个，，其实是—》<br>这样理解，就是我有一张比如一个墙壁大的图片，相框只有200*200，于是照片要放进去就比较麻烦，但是我减小照片大小，<br><img src="http://s6.sinaimg.cn/mw690/003479W3zy74WlmwDU975&amp;690" alt="图片2"><br>这样图片不大，放进相框就好放啦，，，1000是系数，可以自行比例系数哦</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/09/RN了SecRandomCopyBytes-ignoring-return-value/" class="link f-fl">⟵RN了SecRandomCopyBytes_ignoring_return_value</a>
+    
+    
+      <a href="/2017/01/08/这里记录一个获取图片时，图片旋转问题/" class="link f-fr">这里记录一个获取图片时，图片旋转问题⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

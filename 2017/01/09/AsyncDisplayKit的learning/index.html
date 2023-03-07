@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>AsyncDisplayKit的learning | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-11-29 17:35:30) 文章一这篇文章讲了布局调用顺序measureWithSizeRange当我们使用 ASDK 布局时，需要做下面四件事情中的一件：提供 layoutSpecBlock 覆写 - layoutSpecThatFits: 方法覆写 - calculateSizeThatFits: 方法 覆写 - calculateLayoutThatFits: 方法*只">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AsyncDisplayKit的learning">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/09/AsyncDisplayKit的learning/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-11-29 17:35:30) 文章一这篇文章讲了布局调用顺序measureWithSizeRange当我们使用 ASDK 布局时，需要做下面四件事情中的一件：提供 layoutSpecBlock 覆写 - layoutSpecThatFits: 方法覆写 - calculateSizeThatFits: 方法 覆写 - calculateLayoutThatFits: 方法*只">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AsyncDisplayKit的learning">
+<meta name="twitter:description" content="发表于(2016-11-29 17:35:30) 文章一这篇文章讲了布局调用顺序measureWithSizeRange当我们使用 ASDK 布局时，需要做下面四件事情中的一件：提供 layoutSpecBlock 覆写 - layoutSpecThatFits: 方法覆写 - calculateSizeThatFits: 方法 覆写 - calculateLayoutThatFits: 方法*只">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">AsyncDisplayKit的learning</h2>
+  <p class="sub">Jan 9, 2017</p>
+  <article class="content">
+    <p>发表于(2016-11-29 17:35:30)</p>
+<p><a href="http://www.open-open.com/lib/view/open1472701267252.html" target="_blank" rel="noopener">文章一</a><br>这篇文章讲了布局调用顺序measureWithSizeRange<br>当我们使用 ASDK 布局时，需要做下面四件事情中的一件：<br><em>提供 layoutSpecBlock
+</em>覆写 - layoutSpecThatFits: 方法<br><em>覆写 - calculateSizeThatFits: 方法
+</em>覆写 - calculateLayoutThatFits: 方法<br>*只有做上面四件事情中的其中一件才能对 ASDK 中的视图或者说结点进行布局。<br>同时给了一个网址<a href="http://nguyenhuy.github.io/froggy-asdk-layout/" target="_blank" rel="noopener">Foggy-ASDK-Layout</a>，我学了一下，对比React-native，一模一样。<br>然后找了下这篇文章<a href="http://www.qingpingshan.com/rjbc/ios/167576.html" target="_blank" rel="noopener">文章二</a><br>里面主要讲了有哪些基本属性enum可以使用</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/09/用for循环的出操作中操作错误/" class="link f-fl">⟵was mutated while being enumerate 这个错误</a>
+    
+    
+      <a href="/2017/01/09/CMTime中fps的scale理解和UIPanGestureRecorgnize的手势记录/" class="link f-fr">CMTime中fps的scale理解和UIPanGestureRecorgnize的手势记录⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

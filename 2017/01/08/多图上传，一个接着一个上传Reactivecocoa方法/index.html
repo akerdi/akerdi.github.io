@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>多图上传，一个接着一个上传Reactivecocoa方法 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-03-17 16:49:49)这里使用RAC方法，发送多图上传的方法，目标是七牛，可以作为队列使用。图片会一个一个的有序上传。username拼接上idx是为了防止图片上传速度过快，名字重名，导致失败，于是拼上idx的话，可以有唯一性。链式需求可以很好解决。在图片超过9张那里，没有设置timeout：30，记得加入哟，，还有可以优化的地方。希望能帮到你。final code:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多图上传，一个接着一个上传Reactivecocoa方法">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/多图上传，一个接着一个上传Reactivecocoa方法/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-03-17 16:49:49)这里使用RAC方法，发送多图上传的方法，目标是七牛，可以作为队列使用。图片会一个一个的有序上传。username拼接上idx是为了防止图片上传速度过快，名字重名，导致失败，于是拼上idx的话，可以有唯一性。链式需求可以很好解决。在图片超过9张那里，没有设置timeout：30，记得加入哟，，还有可以优化的地方。希望能帮到你。final code:">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://s4.sinaimg.cn/mw690/003479W3gy70bAat4vpa3&690">
+<meta property="og:image" content="http://s14.sinaimg.cn/mw690/003479W3gy70bzRX6572d&690">
+<meta property="og:image" content="http://s2.sinaimg.cn/mw690/003479W3gy70bAp6g5X51&690">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多图上传，一个接着一个上传Reactivecocoa方法">
+<meta name="twitter:description" content="发表于(2016-03-17 16:49:49)这里使用RAC方法，发送多图上传的方法，目标是七牛，可以作为队列使用。图片会一个一个的有序上传。username拼接上idx是为了防止图片上传速度过快，名字重名，导致失败，于是拼上idx的话，可以有唯一性。链式需求可以很好解决。在图片超过9张那里，没有设置timeout：30，记得加入哟，，还有可以优化的地方。希望能帮到你。final code:">
+<meta name="twitter:image" content="http://s4.sinaimg.cn/mw690/003479W3gy70bAat4vpa3&690">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">多图上传，一个接着一个上传Reactivecocoa方法</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-03-17 16:49:49)<br><img src="http://s4.sinaimg.cn/mw690/003479W3gy70bAat4vpa3&amp;690" alt="图片1"><br><img src="http://s14.sinaimg.cn/mw690/003479W3gy70bzRX6572d&amp;690" alt="图片1"><br>这里使用RAC方法，发送多图上传的方法，目标是七牛，可以作为队列使用。图片会一个一个的有序上传。<br>username拼接上idx是为了防止图片上传速度过快，名字重名，导致失败，于是拼上idx的话，可以有唯一性。<br>链式需求可以很好解决。<br>在图片超过9张那里，没有设置timeout：30，记得加入哟，，还有可以优化的地方。<br>希望能帮到你。<br>final code:<br><img src="http://s2.sinaimg.cn/mw690/003479W3gy70bAp6g5X51&amp;690" alt="图片1"></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/近期生活回顾/" class="link f-fl">⟵近期生活回顾</a>
+    
+    
+      <a href="/2017/01/08/修改底部TabBar样式/" class="link f-fr">修改底部TabBar样式⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

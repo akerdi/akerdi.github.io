@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>iOS单元格分割线 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-04-28 15:41:01) 网上找的一个改表格的分割线方法，测试有用，记录一下了 void)viewDidLayoutSubviews{if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {[self.tableView setSeparatorInset:UIEdgeInsetsMak">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS单元格分割线">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/iOS单元格分割线/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-04-28 15:41:01) 网上找的一个改表格的分割线方法，测试有用，记录一下了 void)viewDidLayoutSubviews{if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {[self.tableView setSeparatorInset:UIEdgeInsetsMak">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS单元格分割线">
+<meta name="twitter:description" content="发表于(2016-04-28 15:41:01) 网上找的一个改表格的分割线方法，测试有用，记录一下了 void)viewDidLayoutSubviews{if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {[self.tableView setSeparatorInset:UIEdgeInsetsMak">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">iOS单元格分割线</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-04-28 15:41:01)</p>
+<p>网上找的一个改表格的分割线方法，测试有用，记录一下了</p>
+<p>void)viewDidLayoutSubviews<br>{<br>if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {<br>[self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];<br>}  </p>
+<p>if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {<br>[self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];<br>}<br>}  </p>
+<p>-(void)tableView:(UITableView <em>)tableView willDisplayCell:(UITableViewCell </em>)cell forRowAtIndexPath:(NSIndexPath *)indexPath<br>{<br>if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {<br>[cell setSeparatorInset:UIEdgeInsetsZero];<br>}  </p>
+<p>if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {<br>[cell setLayoutMargins:UIEdgeInsetsZero];<br>}<br>}  </p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/IOS图片加水印或文字/" class="link f-fl">⟵IOS图片加水印或文字</a>
+    
+    
+      <a href="/2017/01/08/近期生活回顾/" class="link f-fr">近期生活回顾⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

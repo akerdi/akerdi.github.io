@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-6-11lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记一次上线应用遇到的问题做更新服务器代码优化，上线的一次经历 表现：使用multy 解析data 文件，文件下来了，但是服务器总是没拿到。 前几个版本都是完全没问题的。我线下测试环境完全没问题，这个是最奇葩的。 然后伟哥在k8s那里切换可运行的包；我对比对比之前版本代码，没发现头绪，就想着去docker 容器内部搞搞。然后一直没头绪，然后脑残了一把：rm -rf  packages/ 本来我是想p">
+<meta name="keywords" content="脑残">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-6-11lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/06/11/2019-6-11lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="记一次上线应用遇到的问题做更新服务器代码优化，上线的一次经历 表现：使用multy 解析data 文件，文件下来了，但是服务器总是没拿到。 前几个版本都是完全没问题的。我线下测试环境完全没问题，这个是最奇葩的。 然后伟哥在k8s那里切换可运行的包；我对比对比之前版本代码，没发现头绪，就想着去docker 容器内部搞搞。然后一直没头绪，然后脑残了一把：rm -rf  packages/ 本来我是想p">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.373Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-6-11lesson">
+<meta name="twitter:description" content="记一次上线应用遇到的问题做更新服务器代码优化，上线的一次经历 表现：使用multy 解析data 文件，文件下来了，但是服务器总是没拿到。 前几个版本都是完全没问题的。我线下测试环境完全没问题，这个是最奇葩的。 然后伟哥在k8s那里切换可运行的包；我对比对比之前版本代码，没发现头绪，就想着去docker 容器内部搞搞。然后一直没头绪，然后脑残了一把：rm -rf  packages/ 本来我是想p">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-6-11lesson</h2>
+  <p class="sub">Jun 11, 2019</p>
+  <article class="content">
+    <h1 id="记一次上线应用遇到的问题"><a href="#记一次上线应用遇到的问题" class="headerlink" title="记一次上线应用遇到的问题"></a><strong>记一次上线应用遇到的问题</strong></h1><p>做更新服务器代码优化，上线的一次经历</p>
+<p>表现：使用multy 解析data 文件，文件下来了，但是服务器总是没拿到。</p>
+<p>前几个版本都是完全没问题的。我线下测试环境完全没问题，这个是最奇葩的。</p>
+<p>然后伟哥在k8s那里切换可运行的包；我对比对比之前版本代码，没发现头绪，就想着去docker 容器内部搞搞。然后一直没头绪，然后脑残了一把：rm -rf  packages/</p>
+<p>本来我是想packages/uploads/下的，因为packages 目录不熟悉，我跑到packages/ 这里来运行sh.</p>
+<p>运行完那一瞬间，你懂的，我突然又反应过来，我的天，之前填的测试数据全部没了。我擦咧。</p>
+<p>突然脑残的可以。</p>
+<p>更脑残的是，之前更新服务一直报上传上去的文件找不到，删了之后又可以。你说，这是不是让人更摸不到点了。</p>
+<p>然后伟哥找到两个版本不同差异，一个能使用，一个不行。然后就看了里面的代码不同点。</p>
+<p>最后发现我在拆分一个方法成为3个中间件时，第一个中间件取值有误，没发现。</p>
+<p>也就是我的代码是有问题的(js 就是这毛病)。但是我先下服务器是正常的、删了测试服务器/packages 下也正常了。</p>
+<p>郁结，郁结。</p>
+<h1 id="最近做公司功能时总是会出现bug感悟"><a href="#最近做公司功能时总是会出现bug感悟" class="headerlink" title="最近做公司功能时总是会出现bug感悟"></a><strong>最近做公司功能时总是会出现bug感悟</strong></h1><p>由于上周、最近有点忙，冲刺科目三、完成自己服务的基础设施、尚未完全适应公司业务、同时负责好多个端的前后端，等等，写完了功能，没有去好好测试，导致做的产品总是有这个那个小问题。</p>
+<p>这次做完后，不急着上传，在可能涉及到的功能区点点试试(还没适应单元测试),于是就这样还发现一些bug。</p>
+<p>有些原因是，修改bugs 改动了其他代码，导致波及到其他功能区，引用区。</p>
+<p>在没有进行完整的单元测试情况下，多点点还是有必要的，相信自己总是会出错的。</p>
+<p>接下来很重要的，就是多完成功能测试，毕竟面向的是客户(我这里还是没有测试人员的)，不然出了问题就小麻烦了，哈哈</p>
+<p>提几点代码上的建议：</p>
+<ol>
+<li><p>命名规范一定一定要统一，是驼峰就一定要保持，是下划线就一定要保持</p>
+</li>
+<li><p>命名逻辑一定要符合</p>
+</li>
+</ol>
+<h2 id="最近感触良多，工作生活体悟良多"><a href="#最近感触良多，工作生活体悟良多" class="headerlink" title="最近感触良多，工作生活体悟良多"></a><strong>最近感触良多，工作生活体悟良多</strong></h2><p>2019/6/3</p>
+<p>公司要更新以前的Chrome 拓展JS编辑器。我体验了从开发、初次打包。然后继续开发完成后，到最后完整build 的流程。</p>
+<p>最终使用Gulp 一次构建完毕应用。</p>
+<p>这次体验极佳，虽然中间很多次很多次的碰见南墙，但是没有回头路。</p>
+<p>本来听老大说要招一个人来做，不过觉得让我试试会更好，我当然义不容辞，好好给他整好来。</p>
+<p>当前使用ace 库制作用户输入简易脚本编辑器，完成JavaScript、Iced 输入代码，高亮、切换主题，然后点击运行得出结果。</p>
+<p>当前仍然继续维护。。。</p>
+<p>这几天似乎临近6.4.好多好多的伟皮恩 被干掉，我们公司三个公用的，全部报废。我手上的唯一一个挂了。然后不服气的我充值再买一个ip，想成为RMB 玩家，然后还是敌不过。两次被封，实属让我心力憔悴。第二次被封情景：我为了查资料，就开了一会，就我一个人用，用资料啊。查知识，学知识如果是犯法，那中国活该一万年都是发展中国家，把柄永远捏在美国手里。</p>
+<p>然后今天努力了一天，采用了别人牛逼的思路。让我的服务器死而复生。待我细细道来。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/06/12/2019-6-12kesan/" class="link f-fl">⟵2019-6-12kesan</a>
+    
+    
+      <a href="/2019/06/04/2019-9-6zatan/" class="link f-fr">2019-9-6zatan⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

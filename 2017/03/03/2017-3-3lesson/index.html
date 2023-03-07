@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2017/3/3lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这几天打算使用Bundle管理SVG文件，给项目加上Theme功能。SVG使用，使用的是SVGKit，使用Bundle需要稍微注意写法比如使用寻找Path，12345NSString *path = [[NSBundle mainBundle] pathForResource:@&amp;quot;AnimalTheme&amp;quot; ofType:@&amp;quot;bundle&amp;quot;];NSString">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017&#x2F;3&#x2F;3lesson">
+<meta property="og:url" content="https://akerdi.github.io/2017/03/03/2017-3-3lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="这几天打算使用Bundle管理SVG文件，给项目加上Theme功能。SVG使用，使用的是SVGKit，使用Bundle需要稍微注意写法比如使用寻找Path，12345NSString *path = [[NSBundle mainBundle] pathForResource:@&amp;quot;AnimalTheme&amp;quot; ofType:@&amp;quot;bundle&amp;quot;];NSString">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017&#x2F;3&#x2F;3lesson">
+<meta name="twitter:description" content="这几天打算使用Bundle管理SVG文件，给项目加上Theme功能。SVG使用，使用的是SVGKit，使用Bundle需要稍微注意写法比如使用寻找Path，12345NSString *path = [[NSBundle mainBundle] pathForResource:@&amp;quot;AnimalTheme&amp;quot; ofType:@&amp;quot;bundle&amp;quot;];NSString">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2017/3/3lesson</h2>
+  <p class="sub">Mar 3, 2017</p>
+  <article class="content">
+    <p>这几天打算使用Bundle管理SVG文件，给项目加上Theme功能。<br>SVG使用，使用的是SVGKit，使用Bundle需要稍微注意写法<br>比如使用寻找Path，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NSString *path = [[NSBundle mainBundle] pathForResource:@&quot;AnimalTheme&quot; ofType:@&quot;bundle&quot;];</span><br><span class="line">NSString *ciweiFilePath = [path stringByAppendingPathComponent:@&quot;刺猬.svg&quot;];</span><br><span class="line">SVGKImage *ciweiImage = [SVGKImage imageWithContentsOfFile:ciweiFilePath];</span><br><span class="line">ciweiImage.size = CGSizeMake(30, 30);</span><br><span class="line">ciweiImage.UIImage</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SVGKImage im = [SVGKImage imageNamed:&quot;myImage&quot;];</span><br><span class="line">CGSize originalSize = im.size; // this defaults to the SVG&apos;s internal size</span><br><span class="line">float half = 1.0 / 2.0f;</span><br><span class="line">im.size = CGSizeApplyAffineTransform( im.size, CGAffineTransformMakeScale( half, half ));</span><br><span class="line">SVGKImageView* iv = [[SVGKFastImageView alloc] initWithSVGKImage: im];</span><br><span class="line">[self.view addSubview: iv];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SVGKImage im = [SVGKImage imageNamed:&quot;myImage&quot;];</span><br><span class="line">im.scale = 0.5f; // NB: this will BE REJECTED if your SVG is non-infinite;</span><br><span class="line">SVGKImageView* iv = [[SVGKFastImageView alloc] initWithSVGKImage: im];</span><br><span class="line">[self.view addSubview: iv];</span><br></pre></td></tr></table></figure>
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/03/13/2017-3-13lesson/" class="link f-fl">⟵2017/3/13lesson</a>
+    
+    
+      <a href="/2017/03/02/2017-3-2lxlesson/" class="link f-fr">2017/3/2lxlesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2017/3/2lxlesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="强引用，tableview嵌套 今天写“仿写墨迹天气app”的时候把用到的tableview单独拿出来创建tableviewcontroller单独管理，本来是这样想的，但是在把tableview贴到首页上的时候出现tableview没有显示完全而嵌套在tableview上的小tableview滑动消失，点击小tableview整个tableview消失的问题，后来经过老公的一番审查之后发现问题出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017&#x2F;3&#x2F;2lxlesson">
+<meta property="og:url" content="https://akerdi.github.io/2017/03/02/2017-3-2lxlesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="强引用，tableview嵌套 今天写“仿写墨迹天气app”的时候把用到的tableview单独拿出来创建tableviewcontroller单独管理，本来是这样想的，但是在把tableview贴到首页上的时候出现tableview没有显示完全而嵌套在tableview上的小tableview滑动消失，点击小tableview整个tableview消失的问题，后来经过老公的一番审查之后发现问题出">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.367Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017&#x2F;3&#x2F;2lxlesson">
+<meta name="twitter:description" content="强引用，tableview嵌套 今天写“仿写墨迹天气app”的时候把用到的tableview单独拿出来创建tableviewcontroller单独管理，本来是这样想的，但是在把tableview贴到首页上的时候出现tableview没有显示完全而嵌套在tableview上的小tableview滑动消失，点击小tableview整个tableview消失的问题，后来经过老公的一番审查之后发现问题出">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2017/3/2lxlesson</h2>
+  <p class="sub">Mar 2, 2017</p>
+  <article class="content">
+    <h3 id="强引用，tableview嵌套"><a href="#强引用，tableview嵌套" class="headerlink" title="强引用，tableview嵌套"></a>强引用，tableview嵌套</h3><ul>
+<li>今天写“仿写墨迹天气app”的时候把用到的tableview单独拿出来创建tableviewcontroller单独管理，本来是这样想的，但是在把tableview贴到首页上的时候出现tableview没有显示完全而嵌套在tableview上的小tableview滑动消失，点击小tableview整个tableview消失的问题，后来经过老公的一番审查之后发现问题出在内存泄漏上，东西被提前释放掉了。具体是这样的，我要把tableviewcontroller上的tableview贴在首页上，但是LXHomeTableViewC *homeTVC = [[LXHomeTableViewC alloc]init];<br>self.a = homeTVC; 这里是强引用，拉住不能提前释放<br>homeTVC.view.frame = CGRectMake(0, 60, SelfSize.width, SelfSize.height-60);<br>[self.view addSubview:homeTVC.view];  这里我拉住了homeTVC。view，如果没有self.a = homeTVC;的话homeTVC就会被提前释放，载体释放了，那么载体上的东西就不可能有用了</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/03/03/2017-3-3lesson/" class="link f-fl">⟵2017/3/3lesson</a>
+    
+    
+      <a href="/2017/03/02/2017-3-2lesson/" class="link f-fr">2017/3/2lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

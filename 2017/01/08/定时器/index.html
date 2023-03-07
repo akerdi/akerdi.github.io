@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>定时器 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2015-11-25 10:26:26)今天在群里讨论一个问题这里程序已进入即开始走，而且，当第一次点击时，时间跳转60s走了30s，，减少一半。我判断为：在判断enable的时候，定时器就认为走了，把判断语句换了就可以了 于是程序如下：@weakify(self);RACSignal *timeSignal = [[[[[RACSignal interval:1.0f onSchedul">
+<meta name="keywords" content="RAC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="定时器">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/定时器/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2015-11-25 10:26:26)今天在群里讨论一个问题这里程序已进入即开始走，而且，当第一次点击时，时间跳转60s走了30s，，减少一半。我判断为：在判断enable的时候，定时器就认为走了，把判断语句换了就可以了 于是程序如下：@weakify(self);RACSignal *timeSignal = [[[[[RACSignal interval:1.0f onSchedul">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://s6.sinaimg.cn/mw690/003479W3gy6XgUW8NcVc5&690">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="定时器">
+<meta name="twitter:description" content="发表于(2015-11-25 10:26:26)今天在群里讨论一个问题这里程序已进入即开始走，而且，当第一次点击时，时间跳转60s走了30s，，减少一半。我判断为：在判断enable的时候，定时器就认为走了，把判断语句换了就可以了 于是程序如下：@weakify(self);RACSignal *timeSignal = [[[[[RACSignal interval:1.0f onSchedul">
+<meta name="twitter:image" content="http://s6.sinaimg.cn/mw690/003479W3gy6XgUW8NcVc5&690">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">定时器</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2015-11-25 10:26:26)<br>今天在群里讨论一个问题<br><img src="http://s6.sinaimg.cn/mw690/003479W3gy6XgUW8NcVc5&amp;690" alt="实战图片1" title="60秒定时器"><br>这里程序已进入即开始走，而且，当第一次点击时，时间跳转60s走了30s，，减少一半。我判断为：在判断enable的时候，定时器就认为走了，把判断语句换了就可以了</p>
+<h2 id="于是程序如下："><a href="#于是程序如下：" class="headerlink" title="于是程序如下："></a>于是程序如下：</h2><p><code>@weakify(self);</code><br><code>RACSignal *timeSignal = [[[[[RACSignal interval:1.0f onScheduler:[RACScheduler mainThreadScheduler]] take:60]startWith:@1] map:^id(NSDate *date) {
+    @strongify(self);
+    NSLog(@&quot;我被执行第%d次___%@&quot;,_number,date);
+    if (_number == 0) {
+        [self.button setTitle:@&quot;重新发送&quot; forState:UIControlStateNormal];
+        return @YES;
+    }
+    else{
+        [self.button setTitle:[NSString stringWithFormat:@&quot;%d&quot;, _number--] forState:UIControlStateDisabled];
+        return @NO;
+    }
+}] takeUntil:self.rac_willDeallocSignal];</code></p>
+<p><code>self.button.rac_command = [[RACCommand alloc]initWithEnabled:[self  enableSignal]
+signalBlock:^RACSignal *(id input) {
+    _number = 60;
+    return timeSignal;
+}];
+}</code></p>
+<p><code>-(RACSignal *)enableSignal{
+    return [[RACSignal createSignal:^RACDisposable *(id subscriber) {
+        return nil;
+    }] map:^id(id value) {
+        return @(self.number&gt;0);
+    }];
+}</code></p>
+<p>把enable换成固定signal，这样就不会失误了。<br>记，成功只给勤奋的人，我认为一个demo写的好，我对着写了一遍，不理解，没关系；第二遍重写，理解了里面思路；第三遍，学会了怎么用；第四遍，我思考着他的功能，稍微看了下，自己写。<br>我认为只有这样才会记进心里去。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/GET请求InvalidParameternotsatisfying/" class="link f-fl">⟵GET请求InvalidParameternotsatisfying</a>
+    
+    
+      <a href="/2017/01/08/ReactiveCocoa常用语法/" class="link f-fr">ReactiveCocoa常用语法⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

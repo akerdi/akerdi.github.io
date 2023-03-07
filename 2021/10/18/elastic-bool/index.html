@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>elastic_bool | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用bool检索目标: 要搜索ACCOUNT_ID 和 FRIEND_ID 互相调换的请求，并且至少满足一个 123456789101112131415161718&amp;#123;  query: &amp;#123;    bool: &amp;#123;      // 使用must可以声明这个必须走      must: [        bool: &amp;#123;          // 这个可以用于判别下面的">
+<meta name="keywords" content="es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elastic_bool">
+<meta property="og:url" content="https://akerdi.github.io/2021/10/18/elastic-bool/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="使用bool检索目标: 要搜索ACCOUNT_ID 和 FRIEND_ID 互相调换的请求，并且至少满足一个 123456789101112131415161718&amp;#123;  query: &amp;#123;    bool: &amp;#123;      // 使用must可以声明这个必须走      must: [        bool: &amp;#123;          // 这个可以用于判别下面的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.396Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="elastic_bool">
+<meta name="twitter:description" content="使用bool检索目标: 要搜索ACCOUNT_ID 和 FRIEND_ID 互相调换的请求，并且至少满足一个 123456789101112131415161718&amp;#123;  query: &amp;#123;    bool: &amp;#123;      // 使用must可以声明这个必须走      must: [        bool: &amp;#123;          // 这个可以用于判别下面的">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">elastic_bool</h2>
+  <p class="sub">Oct 18, 2021</p>
+  <article class="content">
+    <h1 id="使用bool检索"><a href="#使用bool检索" class="headerlink" title="使用bool检索"></a>使用bool检索</h1><p>目标: 要搜索ACCOUNT_ID 和 FRIEND_ID 互相调换的请求，并且至少满足一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  query: &#123;</span><br><span class="line">    bool: &#123;</span><br><span class="line">      // 使用must可以声明这个必须走</span><br><span class="line">      must: [</span><br><span class="line">        bool: &#123;</span><br><span class="line">          // 这个可以用于判别下面的判别仅走一个</span><br><span class="line">          should: [</span><br><span class="line">            // 内部的must 可以集合两个term(term 可以做出不匹配而绝对相等，否则使用match匹配)</span><br><span class="line">            &#123; bool: &#123; must: [&#123; term: &#123; ACCOUNT_ID: option.ACCOUNT_ID&#125;&#125;, &#123; term: &#123;FRIEND_ID: option.FRIEND_ID &#125; &#125;]&#125;&#125;,</span><br><span class="line">            &#123; bool: &#123; must: [&#123; term: &#123; ACCOUNT_ID: option.FRIEND_ID&#125;&#125;, &#123; term: &#123;FRIEND_ID: option.ACCOUNT_ID &#125; &#125;]&#125;&#125;</span><br><span class="line">          ],</span><br><span class="line">          minimum_should_match: 1 // 声明至少走一个</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/combining-filters.html" target="_blank" rel="noopener">参考1</a></p>
+<p><a href="https://stackoverflow.com/questions/40573981/multiple-should-queries-with-must-query" target="_blank" rel="noopener">参考2</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/11/08/20211106北京紧急项目/" class="link f-fl">⟵211106北京紧急项目</a>
+    
+    
+      <a href="/2021/10/07/2021107空闲随想/" class="link f-fr">20211007空闲随想⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

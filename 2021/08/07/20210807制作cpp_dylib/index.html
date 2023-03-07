@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210807制作cpp dylib | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="制作cpp dylibMac下的动态链接库格式是*.dylib，用xcode制作如下: Xcode -&amp;gt; Create a new Xcode project(Command + Shift + N) -&amp;gt; macOS -&amp;gt; Framework &amp;amp; Library -&amp;gt; Library  填写创建表单，注意Framework - None(Plain C/C++ L">
+<meta name="keywords" content="cpp dylib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210807制作cpp dylib">
+<meta property="og:url" content="https://akerdi.github.io/2021/08/07/20210807制作cpp_dylib/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="制作cpp dylibMac下的动态链接库格式是*.dylib，用xcode制作如下: Xcode -&amp;gt; Create a new Xcode project(Command + Shift + N) -&amp;gt; macOS -&amp;gt; Framework &amp;amp; Library -&amp;gt; Library  填写创建表单，注意Framework - None(Plain C/C++ L">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210807/cppdylib1.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210807/cppdylib2.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210807/cppdylib3.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210807/cppdylib4.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210807/cppdylib5.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210807制作cpp dylib">
+<meta name="twitter:description" content="制作cpp dylibMac下的动态链接库格式是*.dylib，用xcode制作如下: Xcode -&amp;gt; Create a new Xcode project(Command + Shift + N) -&amp;gt; macOS -&amp;gt; Framework &amp;amp; Library -&amp;gt; Library  填写创建表单，注意Framework - None(Plain C/C++ L">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/210807/cppdylib1.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210807制作cpp dylib</h2>
+  <p class="sub">Aug 7, 2021</p>
+  <article class="content">
+    <h1 id="制作cpp-dylib"><a href="#制作cpp-dylib" class="headerlink" title="制作cpp dylib"></a>制作cpp dylib</h1><p>Mac下的动态链接库格式是*.dylib，用xcode制作如下:</p>
+<p>Xcode -&gt; Create a new Xcode project(Command + Shift + N) -&gt; macOS -&gt; Framework &amp; Library -&gt; Library</p>
+<p><img src="/css/images/210807/cppdylib1.jpg" alt="cpp dylib"></p>
+<p>填写创建表单，注意Framework - None(Plain C/C++ Library) / type - Dynamic</p>
+<p><img src="/css/images/210807/cppdylib2.jpg" alt="cpp dylib2"></p>
+<p>新增文件demo.h &amp;&amp; demo.cpp, 新增内容如图:</p>
+<p><img src="/css/images/210807/cppdylib3.jpg" alt="cpp dylib3"></p>
+<p>此时点击左上角运行，则  Products - libdemo.dylib 变成实体，不是红色，表明生成了。</p>
+<p><img src="/css/images/210807/cppdylib4.jpg" alt="cpp dylib4"></p>
+<p>拷贝.h文件 至目标项目 /include/demo.h, 拷贝 .dylib 至目标项目 /lib/libdemo.dylib 中。</p>
+<p>测试代码如图:</p>
+<p><img src="/css/images/210807/cppdylib5.jpg" alt="cpp dylib5"></p>
+<p>c++ main.cpp -I./include -L./lib -ldemo -o test 是编译期间，会认不到运行时动态库，需要加上 导出./lib 告诉程序运行的库(<a href="https://stackoverflow.com/a/47225188/6677202" target="_blank" rel="noopener">https://stackoverflow.com/a/47225188/6677202</a>)</p>
+<p>-ldemo 指有多少个文件都要写出来，否则还是识别不到哪个文件是要被链接的；-I -L 是对应的文件夹。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/08/12/20210812初步练习redis/" class="link f-fl">⟵20210812初步练习redis</a>
+    
+    
+      <a href="/2021/08/05/20210805Mac安装Opengl库/" class="link f-fr">20210805Mac安装Opengl库⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

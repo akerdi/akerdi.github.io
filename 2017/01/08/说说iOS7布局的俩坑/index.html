@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>说说iOS7布局的俩坑 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2015-12-23 09:01:55) 首先，贴两段代码：  if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) { self.edgesForExtendedLayout = UIRectEdgeNone; } if ([self respondsToSelector:@selector(setAutomat">
+<meta name="keywords" content="ios7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说iOS7布局的俩坑">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/说说iOS7布局的俩坑/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2015-12-23 09:01:55) 首先，贴两段代码：  if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) { self.edgesForExtendedLayout = UIRectEdgeNone; } if ([self respondsToSelector:@selector(setAutomat">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="说说iOS7布局的俩坑">
+<meta name="twitter:description" content="发表于(2015-12-23 09:01:55) 首先，贴两段代码：  if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) { self.edgesForExtendedLayout = UIRectEdgeNone; } if ([self respondsToSelector:@selector(setAutomat">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">说说iOS7布局的俩坑</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2015-12-23 09:01:55)</p>
+<p>首先，贴两段代码：</p>
+<ol>
+<li><code>if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
+self.edgesForExtendedLayout = UIRectEdgeNone;
+}</code></li>
+<li><code>if ([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]) {
+self.automaticallyAdjustsScrollViewInsets = NO;
+}</code></li>
+</ol>
+<p>视图透明的时候，下面的view会往上顶就是第一个控制的（如果导航栏为透明的话，不透明则默认不顶上去）<br>第二个是更坑爹的，你在滑动tableView的时候，会发现uitableviewwrapperview（你用三维视图，可以看到贴在tableview上得一层膜，就是uitableviewwrapperview）在刚开始的时候正常，越滑，这玩意越短，到最后视图不如我们所想，就是第二个控制的，，反正我发现的时候烦死。<br>比较需要注意的是第二个，不管我用UITableViewController或者VC贴上TableView后，wrapperView都会有变动。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/iOSpop返回手势向右滑动/" class="link f-fl">⟵iOSpop返回手势向右滑动</a>
+    
+    
+      <a href="/2017/01/08/RACCommand的使用/" class="link f-fr">RACCommand的使用⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

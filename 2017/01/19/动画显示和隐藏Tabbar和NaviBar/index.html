@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>动画显示和隐藏Tabbar和NaviBar | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="‘//隐藏标签栏  (void)hiddenTheTabBar{if (![[NSUserDefaults standardUserDefaults] boolForKey:@”isHiddenTabBar”]) {for (UIView *v in [self.view subviews]) {if ([v isKindOfClass:[UITabBar class]]) {[UIView an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动画显示和隐藏Tabbar和NaviBar">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/19/动画显示和隐藏Tabbar和NaviBar/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="‘//隐藏标签栏  (void)hiddenTheTabBar{if (![[NSUserDefaults standardUserDefaults] boolForKey:@”isHiddenTabBar”]) {for (UIView *v in [self.view subviews]) {if ([v isKindOfClass:[UITabBar class]]) {[UIView an">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动画显示和隐藏Tabbar和NaviBar">
+<meta name="twitter:description" content="‘//隐藏标签栏  (void)hiddenTheTabBar{if (![[NSUserDefaults standardUserDefaults] boolForKey:@”isHiddenTabBar”]) {for (UIView *v in [self.view subviews]) {if ([v isKindOfClass:[UITabBar class]]) {[UIView an">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">动画显示和隐藏Tabbar和NaviBar</h2>
+  <p class="sub">Jan 19, 2017</p>
+  <article class="content">
+    <p>‘//隐藏标签栏</p>
+<ul>
+<li>(void)hiddenTheTabBar<br>{<br>if (![[NSUserDefaults standardUserDefaults] boolForKey:@”isHiddenTabBar”]) {<br>for (UIView *v in [self.view subviews]) {<br>if ([v isKindOfClass:[UITabBar class]]) {<br>[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(){<br>CGRect frame = v.frame;<br>frame.origin.y += 49.0f;<br>v.frame = frame;<br>} completion:nil];<br>} else {<br>[UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(){<br>CGRect frame = v.frame;<br>frame.size.height += 49.0f;<br>v.frame = frame;<br>} completion:nil];<br>}<br>}<br>[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@”isHiddenTabBar”];<br>}<br>}<br>//显示标签栏</li>
+<li>(void)showTheTabBar<br>{<br>if ([[NSUserDefaults standardUserDefaults] boolForKey:@”isHiddenTabBar”]) {<br>for (UIView *v in [self.view subviews]) {<br>if ([v isKindOfClass:[UITabBar class]]) {<br>[UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(){<br>CGRect frame = v.frame;<br>frame.origin.y -= 49.0f;<br>v.frame = frame;<br>} completion:nil];<br>} else {<br>[UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^(){<br>CGRect frame = v.frame;<br>frame.size.height -= 49.0f;<br>v.frame = frame;<br>} completion:nil];<br>}<br>}<br>[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@”isHiddenTabBar”];<br>}<br>}<br>‘<br>思路就是这样，别人那边看到的，就是找出来，然后拿着这玩意做动效，存着吧</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/23/读文章微信导航栏实现写了demo/" class="link f-fl">⟵读文章微信导航栏实现写了demo</a>
+    
+    
+      <a href="/2017/01/18/最近做项目要用到的库/" class="link f-fr">最近做项目要用到的库⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

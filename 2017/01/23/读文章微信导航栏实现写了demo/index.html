@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>读文章微信导航栏实现写了demo | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="看了这位大哥http://www.jobbole.com/members/3170539585/的文章，关于微信导航栏的实现。由于他没有给出代码实现，当时我没有设置barstyle，导致不好看，哈哈。这里给出完整代码`#import “SHNavigationVC.h” #import “UIColor+expanded.h”@interface SHNavigationVC ()@propert">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读文章微信导航栏实现写了demo">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/23/读文章微信导航栏实现写了demo/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="看了这位大哥http://www.jobbole.com/members/3170539585/的文章，关于微信导航栏的实现。由于他没有给出代码实现，当时我没有设置barstyle，导致不好看，哈哈。这里给出完整代码`#import “SHNavigationVC.h” #import “UIColor+expanded.h”@interface SHNavigationVC ()@propert">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读文章微信导航栏实现写了demo">
+<meta name="twitter:description" content="看了这位大哥http://www.jobbole.com/members/3170539585/的文章，关于微信导航栏的实现。由于他没有给出代码实现，当时我没有设置barstyle，导致不好看，哈哈。这里给出完整代码`#import “SHNavigationVC.h” #import “UIColor+expanded.h”@interface SHNavigationVC ()@propert">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">读文章微信导航栏实现写了demo</h2>
+  <p class="sub">Jan 23, 2017</p>
+  <article class="content">
+    <p>看了这位大哥<a href="http://www.jobbole.com/members/3170539585/的文章，关于微信导航栏的实现。" target="_blank" rel="noopener">http://www.jobbole.com/members/3170539585/的文章，关于微信导航栏的实现。</a><br>由于他没有给出代码实现，当时我没有设置barstyle，导致不好看，哈哈。<br>这里给出完整代码<br>`#import “SHNavigationVC.h”</p>
+<p>#import “UIColor+expanded.h”<br>@interface SHNavigationVC ()<br>@property (nonatomic, strong) UIView *blurBackView;<br>@end<br>@implementation SHNavigationVC</p>
+<ul>
+<li>(void)viewDidLoad {<br>[super viewDidLoad];<br>// Do any additional setup after loading the view.<br>UINavigationBar <em>navBar = self.navigationBar;<br>[navBar insertSubview:self.blurBackView atIndex:0];<br>}<br>-(UIView </em>)blurBackView{<br>if (!_blurBackView) {<br>_blurBackView = [UIView new];<br>_blurBackView.frame = CGRectMake(0, -20, KScreenSize.width, 64);<br>CAGradientLayer *gradientLayer = [[CAGradientLayer alloc]init];<br>gradientLayer.frame = CGRectMake(0, 0, KScreenSize.width, 64);<br>gradientLayer.colors = @[(<strong>bridge id)[UIColor colorWithHexString:@”0x040012” andAlpha:0.76].CGColor,(</strong>bridge id)[UIColor colorWithHexString:@”0x040012” andAlpha:0.28].CGColor];<br>gradientLayer.startPoint = CGPointMake(0, 0);<br>gradientLayer.endPoint = CGPointMake(0, 1.0);<br>[_blurBackView.layer addSublayer:gradientLayer];<br>_blurBackView.userInteractionEnabled = NO;<br>_blurBackView.alpha = 0.5;<br>}<br>return _blurBackView;<br>}`</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/23/微博API分析/" class="link f-fl">⟵微博API分析</a>
+    
+    
+      <a href="/2017/01/19/动画显示和隐藏Tabbar和NaviBar/" class="link f-fr">动画显示和隐藏Tabbar和NaviBar⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

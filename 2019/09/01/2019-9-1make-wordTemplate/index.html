@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-9-1make_wordTemplate | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Microsoft word 的document.xml 模板生成word-template.docx 过程需求：生成一个模板word-template.docx ，在nodejs 中匹配对应的模板code，最终生成需求.docx 工具：office word、code IDE。  首先在word 中修改好我们要的样式。在对应要修改模板文字 的地方，以____代替之。作用是等会生成最终模板的地方，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-9-1make_wordTemplate">
+<meta property="og:url" content="https://akerdi.github.io/2019/09/01/2019-9-1make-wordTemplate/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Microsoft word 的document.xml 模板生成word-template.docx 过程需求：生成一个模板word-template.docx ，在nodejs 中匹配对应的模板code，最终生成需求.docx 工具：office word、code IDE。  首先在word 中修改好我们要的样式。在对应要修改模板文字 的地方，以____代替之。作用是等会生成最终模板的地方，">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate1.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate2.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate3.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate4.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate5.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate6.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/generate_wordTemplate7.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-9-1make_wordTemplate">
+<meta name="twitter:description" content="Microsoft word 的document.xml 模板生成word-template.docx 过程需求：生成一个模板word-template.docx ，在nodejs 中匹配对应的模板code，最终生成需求.docx 工具：office word、code IDE。  首先在word 中修改好我们要的样式。在对应要修改模板文字 的地方，以____代替之。作用是等会生成最终模板的地方，">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/generate_wordTemplate1.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-9-1make_wordTemplate</h2>
+  <p class="sub">Sep 1, 2019</p>
+  <article class="content">
+    <h1 id="Microsoft-word-的document-xml-模板生成word-template-docx-过程"><a href="#Microsoft-word-的document-xml-模板生成word-template-docx-过程" class="headerlink" title="Microsoft word 的document.xml 模板生成word-template.docx 过程"></a><strong>Microsoft word 的document.xml 模板生成word-template.docx 过程</strong></h1><p>需求：生成一个模板word-template.docx ，在nodejs 中匹配对应的模板code，最终生成需求.docx</p>
+<p>工具：office word、code IDE。</p>
+<ol>
+<li>首先在word 中修改好我们要的样式。在对应要修改模板文字 的地方，以<code>____</code>代替之。作用是等会生成最终模板的地方，很容易找到。</li>
+</ol>
+<p><img src="/css/images/generate_wordTemplate1.jpg" alt="生成word.docx"></p>
+<ol start="2">
+<li><p>将word.docx 解压成文件夹template</p>
+<p> mac/linux$unzip -o word.docx -d template</p>
+<p> windows$”windows unzip 解决工具路径” -o “word.docx 路径” -d “template 路径”</p>
+</li>
+</ol>
+<p><img src="/css/images/generate_wordTemplate2.jpg" alt="生成word 的template 目录"></p>
+<ol start="3">
+<li>template 目录大致介绍</li>
+</ol>
+<p><img src="/css/images/generate_wordTemplate3.jpg" alt="template 目录"></p>
+<p>重要的目录在框中。</p>
+<pre><code>[Content_Types.xml] 是用来描述内部使用的格式说明。
+
+word/document.xml 核心文件，修改的描述就在这。
+
+word/_rels/document.xml.rels 是描述资源文件的relationShip
+
+word/media/ 用来放图片
+</code></pre><p><strong>接下来就是修改成我们的最终模板</strong></p>
+<ol start="4">
+<li>修改word/document.xml</li>
+</ol>
+<p>替换模板code 格式我们使用lodash.template —&gt; <strong><code>&lt;%= templateCode %&gt;</code></strong></p>
+<p><img src="/css/images/generate_wordTemplate4.jpg" alt="修改document.xml"></p>
+<p>如果是插入jpeg 图片(png/jpg 都可以), 我们可以如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">w:p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> <span class="attr">_.forEach</span>(<span class="attr">images</span>, <span class="attr">function</span>(<span class="attr">item</span>, <span class="attr">index</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">w:r</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">w:rPr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">w:color</span> <span class="attr">w:val</span>=<span class="string">"00FF00"</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">w:rPr</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">w:pict</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">v:shape</span> <span class="attr">id</span>=<span class="string">"_x0000_i1025&lt;%- index %&gt;"</span> <span class="attr">o:spt</span>=<span class="string">"75"</span> <span class="attr">type</span>=<span class="string">"#_x0000_t75"</span> <span class="attr">style</span>=<span class="string">"height:&lt;%- item.height %&gt;pt;width:&lt;%- item.width %&gt;pt;"</span> <span class="attr">filled</span>=<span class="string">"f"</span> <span class="attr">o:preferrelative</span>=<span class="string">"t"</span> <span class="attr">stroked</span>=<span class="string">"f"</span> <span class="attr">coordsize</span>=<span class="string">"21600, 21600"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">v:path</span>/&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">v:fill</span> <span class="attr">on</span>=<span class="string">"f"</span> <span class="attr">focussize</span>=<span class="string">"0,0"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">v:stroke</span> <span class="attr">on</span>=<span class="string">"f"</span> <span class="attr">joinstyle</span>=<span class="string">"miter"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">v:imagedata</span> <span class="attr">r:id</span>=<span class="string">"&lt;%- item.rid %&gt;"</span> <span class="attr">o:title</span>=<span class="string">""</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">o:lock</span> <span class="attr">v:ext</span>=<span class="string">"edit"</span> <span class="attr">aspectratio</span>=<span class="string">"f"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">w:10:wrap</span> <span class="attr">type</span>=<span class="string">"none"</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">w:10:anchorlock</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">v:shape</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">w:pict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">w:r</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">%</span> &#125;);%&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">w:p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样便可循环插入多张图片啦。</p>
+<ol start="5">
+<li>修改word/_rels/document.xml.rels</li>
+</ol>
+<p>这里是用来指定植入的资源(图片)关系。</p>
+<p>我们只需在原本存在<code>&lt;Relationships xmls=&quot;...xxx&quot;&gt;</code>一行下增加新增的rId 资源链接：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Relationships</span> <span class="attr">xmlns</span>=<span class="string">"http://schemas.openxmlformats.org/package/2006/relationships"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">_.forEach</span>(<span class="attr">images</span>, <span class="attr">function</span>(<span class="attr">item</span>, <span class="attr">index</span>) &#123; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Relationship</span> <span class="attr">Id</span>=<span class="string">"&lt;%- item.rid %&gt;"</span> <span class="attr">Type</span>=<span class="string">"http://schemas.openxmlformats.org/officeDocument/2006/relationships/image"</span> <span class="attr">Target</span>=<span class="string">"media/image&lt;%- index %&gt;.jpeg"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125;); %&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Relationship</span> <span class="attr">Id</span>=<span class="string">"rId8"</span> <span class="attr">...</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/css/images/generate_wordTemplate5.jpg" alt="document.xml.rels"></p>
+<p>同时找到这里最大的Id，如<code>Id=&quot;rId16&quot;</code>, 之后用到。</p>
+<ol start="6">
+<li>修改[Content_Types].xml 增加使用资源ext</li>
+</ol>
+<p>这里使用jpeg 图片后缀名，增加一行:<code>&lt;Default Extension=&quot;jpeg&quot; ContentType=&quot;image/jpeg&quot;/&gt;</code></p>
+<p><img src="/css/images/generate_wordTemplate6.jpg" alt="Content_Types"></p>
+<p>如果没有增加该行(或者上面提到的rId 填错)，出现问题特点是: WPS能正常打开；office word 提示<strong>无法打开Open XML xxx 因为内容存在问题或者文件名可能包含无效字符</strong> <strong>文件已损坏，无法打开。</strong></p>
+<p>点击了“确定”，接着又提示<strong>xxx.docx 中发现无法读取的内容。是否要恢复此文档的内容？如果您信任此文档的来源，请单击“是”</strong>，点了“是”之后又能正常浏览。</p>
+<ol start="6">
+<li>word/media 文件夹</li>
+</ol>
+<p>该文件夹是图片移进来后，<code>rId ++</code>。把图片信息保存到word/document.xml 的同时，将资源链接写进word/_rels/document.xml.rels</p>
+<ol start="7">
+<li>压缩 成word-template.docx 模板文件</li>
+</ol>
+<p><code>zip ../word-template.docx -r .</code></p>
+<p>将word 文件夹下的所有文件使用zip 压缩。名称指定为word-template.docx 模板即打包完毕。</p>
+<p><img src="/css/images/generate_wordTemplate7.jpg" alt="word-template.docx"></p>
+<p>至此word-template 模板生成完毕。</p>
+<blockquote>
+<p>!!!ATTENTION \<br>制作最好用Windows 操作系统。如果使用Mac OS 制作，一定要将制作好的文件拖到Windows 虚拟机查看是否多出文件, 如 <code>.DS_Store</code> 文件</p>
+</blockquote>
+<blockquote>
+<p>上述情况会导致WPS 能正常打开，微软的word 总是提示失败超级bug</p>
+</blockquote>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/09/02/2019-9-2lesson/" class="link f-fl">⟵2019-9-2lesson</a>
+    
+    
+      <a href="/2019/08/09/2019-8-9lesson/" class="link f-fr">2019-8-9lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

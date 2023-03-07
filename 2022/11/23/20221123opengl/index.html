@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20221123opengl | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="学习OpenGL学习OpenGL是我一直以来的想法，我喜欢游戏，使用游戏引擎能快速的出游戏。但是作为程序员，觉得从开头学好有助于理解，并且特别是其中的shader是什么，怎么写的，这个在游戏引擎中是没有说明的，所以我打算打好基础后，然后再使用游戏引擎快速的去开发。 开发游戏是为了赚钱，将自己的乐趣转化为现金让我能学到更多知识。我需要钱来支撑我的学习，比如linux的制作，烧录到硬件，这是一直以来让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20221123opengl">
+<meta property="og:url" content="https://akerdi.github.io/2022/11/23/20221123opengl/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="学习OpenGL学习OpenGL是我一直以来的想法，我喜欢游戏，使用游戏引擎能快速的出游戏。但是作为程序员，觉得从开头学好有助于理解，并且特别是其中的shader是什么，怎么写的，这个在游戏引擎中是没有说明的，所以我打算打好基础后，然后再使用游戏引擎快速的去开发。 开发游戏是为了赚钱，将自己的乐趣转化为现金让我能学到更多知识。我需要钱来支撑我的学习，比如linux的制作，烧录到硬件，这是一直以来让">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.390Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20221123opengl">
+<meta name="twitter:description" content="学习OpenGL学习OpenGL是我一直以来的想法，我喜欢游戏，使用游戏引擎能快速的出游戏。但是作为程序员，觉得从开头学好有助于理解，并且特别是其中的shader是什么，怎么写的，这个在游戏引擎中是没有说明的，所以我打算打好基础后，然后再使用游戏引擎快速的去开发。 开发游戏是为了赚钱，将自己的乐趣转化为现金让我能学到更多知识。我需要钱来支撑我的学习，比如linux的制作，烧录到硬件，这是一直以来让">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20221123opengl</h2>
+  <p class="sub">Nov 23, 2022</p>
+  <article class="content">
+    <h1 id="学习OpenGL"><a href="#学习OpenGL" class="headerlink" title="学习OpenGL"></a>学习OpenGL</h1><p>学习OpenGL是我一直以来的想法，我喜欢游戏，使用游戏引擎能快速的出游戏。但是作为程序员，觉得从开头学好有助于理解，并且特别是其中的shader是什么，怎么写的，这个在游戏引擎中是没有说明的，所以我打算打好基础后，然后再使用游戏引擎快速的去开发。</p>
+<p>开发游戏是为了赚钱，将自己的乐趣转化为现金让我能学到更多知识。我需要钱来支撑我的学习，比如linux的制作，烧录到硬件，这是一直以来让我觉得很酷的事。</p>
+<p>所以我特地花了一段时间狠狠静下心来学习，跟着<a href="https://learnopengl.com/" target="_blank" rel="noopener">教程</a>一步步学习完基础，仅学完基础。目前需要先出产游戏，所以暂时先不继续深学，之后遇到瓶颈时再回头，以下是我作为初学者的学习脚本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">学习环境:</span><br><span class="line"></span><br><span class="line">机器: Mac 10.13.6</span><br><span class="line">IDE: VSCode</span><br><span class="line">管理: CMake</span><br></pre></td></tr></table></figure>
+<p>目录结构:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/.vscode/</span><br><span class="line">/.vscode/launch.json // 实现启动项</span><br><span class="line">/.vscode/tasks.json // 实现任务</span><br><span class="line">/includes/</span><br><span class="line">/includes/glad/</span><br><span class="line">/includes/KHR/</span><br><span class="line">/lib/glew32s.lib //</span><br><span class="line">/lib/glfw3.lib //</span><br><span class="line">/src/glad.c         // glad文件</span><br><span class="line">/.gitignore         // git 忽略文件</span><br><span class="line">/CMakeLists.txt     // 编译文件</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/12/05/20221128salecar/" class="link f-fl">⟵20221128salecar</a>
+    
+    
+      <a href="/2022/11/20/20221121window-cmake/" class="link f-fr">20221121window_cmake⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

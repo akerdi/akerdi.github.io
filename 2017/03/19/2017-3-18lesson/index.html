@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2017/3/18lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2017/3/15CoreData的坑说不清，妈的首先是NSOrderSet和NSSet的区别对于One To One和One To Many 中午的时候看了下JavaScriptCore，对RN以前的对语言转换，混合工作有了一些了解。比如JSValue、JSVirtualMachine、JSContext、JSExport等作用。Native和JS语句调用交互过程、调用、传值，回传等工作过程等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017&#x2F;3&#x2F;18lesson">
+<meta property="og:url" content="https://akerdi.github.io/2017/03/19/2017-3-18lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="2017/3/15CoreData的坑说不清，妈的首先是NSOrderSet和NSSet的区别对于One To One和One To Many 中午的时候看了下JavaScriptCore，对RN以前的对语言转换，混合工作有了一些了解。比如JSValue、JSVirtualMachine、JSContext、JSExport等作用。Native和JS语句调用交互过程、调用、传值，回传等工作过程等。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18.png">
+<meta property="og:image" content="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:getSave.png">
+<meta property="og:image" content="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:mine:getFunc.png">
+<meta property="og:image" content="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:mine:save.png">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017&#x2F;3&#x2F;18lesson">
+<meta name="twitter:description" content="2017/3/15CoreData的坑说不清，妈的首先是NSOrderSet和NSSet的区别对于One To One和One To Many 中午的时候看了下JavaScriptCore，对RN以前的对语言转换，混合工作有了一些了解。比如JSValue、JSVirtualMachine、JSContext、JSExport等作用。Native和JS语句调用交互过程、调用、传值，回传等工作过程等。">
+<meta name="twitter:image" content="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2017/3/18lesson</h2>
+  <p class="sub">Mar 19, 2017</p>
+  <article class="content">
+    <p>2017/3/15<br>CoreData的坑<br>说不清，妈的<br>首先是NSOrderSet和NSSet的区别<br>对于One To One和One To Many</p>
+<p>中午的时候看了下JavaScriptCore，对RN以前的对语言转换，混合工作有了一些了解。<br>比如JSValue、JSVirtualMachine、JSContext、JSExport等作用。<br>Native和JS语句调用交互过程、调用、传值，回传等工作过程等。<br>看的地址<a href="https://my.oschina.net/u/2340880/blog/856321" target="_blank" rel="noopener">JSCrotCore博客</a><br>有点意思，关键是能做出的效果很令我感叹。</p>
+<p>有空的时候测试了下另外两个东西：FBNotification、ZipArchive</p>
+<ol>
+<li>ZipArChive比较适用于内容稍微大点的内容物，不然小体积下，似乎压缩效果没有很大差异</li>
+<li>FBNotification这个有个很厉害的地方，弹出的动作、画面都是可控的，屌爆了，非常喜欢。我对于本地发送localNotification发送没去尝试过，有这个轮子，还是不去整那些东西。</li>
+</ol>
+<p>今天给xcode加一个插件，<a href="https://blog.cnbluebox.com/blog/2015/03/05/chisel/" target="_blank" rel="noopener">Chisel</a><br>但是发生了Homebrew-&gt;<br><code>Error: Running Homebrew as root is extremely dangerous and no longer supported.
+As Homebrew does not drop privileges on installation you would be giving all
+build scripts full access to your system.</code><br>这个没想到要怎么操作，好吧，加个<strong>sudo</strong>估计会好吧，没想到还是不行。<br>百度查了下找到这个网址：<a href="https://segmentfault.com/q/1010000007575129?_ea=1389173" target="_blank" rel="noopener">https://segmentfault.com/q/1010000007575129?_ea=1389173</a></p>
+<p>terminal 里面</p>
+<p>sudo chown -R $(whoami) /usr/local<br>把/use/local的owner換成自己，就有write權限了</p>
+<p>whoami就是一個命令，會echo當前登錄用戶的名字。當然你知道自己的用戶名，比如jack,就直接</p>
+<p>sudo chown -R jack /usr/local<br>也可以</p>
+<p>修改過權限之後，就直接跑</p>
+<p>brew install node<br>不需要再用sudo，因為當前用戶已經有權限寫入/usr/local了或者你用</p>
+<p>ls -ld /usr/local<br>確認一下這個目錄的owner是否已改到自己</p>
+<p>Chisel好东西好东西，给力</p>
+<p>来工作的这么一段时间，接触SourceTree，确实感觉很是强大。版本回滚，合并，文件差异等都是很实用。今天碰到，将一个Branch合进我的版本，然后，我有一个文件和xib都被遗失了。搞了很久，版本我也找不到是哪一个，最后我点击右上角的文件差异化对比，然后将文件给拷贝出来，要不是这一个操作，我估计以后我在合版本，我一定不会再相信电脑了。</p>
+<p>今天很好奇的一个地方：Curl<br>还没看清Curl的操作方式，我先去看了篇<a href="http://www.jianshu.com/p/23cccb3a90b1文章读一读REST" target="_blank" rel="noopener">http://www.jianshu.com/p/23cccb3a90b1文章读一读REST</a> API的架构设计。<br>前面品味不出什么思想，一直到作者的一些感想上面，有点理解REST API设计思路。</p>
+<ol>
+<li>API请求中应该加入API版本号，比如在URL中加入版本号：<a href="https://api.example.com/v1/，这样API升级就可以将api版本也升级了。" target="_blank" rel="noopener">https://api.example.com/v1/，这样API升级就可以将api版本也升级了。</a></li>
+<li>API返回的数据量问题。数据量大的话，估计是得在某些页面数据很大，或者文件传输等，不过视频、图片等估计不能在此列了。</li>
+<li>性能方面我也是赞同的，不过我是前段方面，那么不能做的事，就是不能设计出一些使用猥琐方式暂时完成的功能和逻辑，尽量避免这种错误。</li>
+<li>安全性和用户认证。这一块对于前段来说也是相当重要的。这里其就推荐使用Keychain的方式还有第三方Access Key之类尽可能使其为在启动的时候动态请求。估计这块得用HTTPS加密，然后每几天去更换才能处理好吧。</li>
+</ol>
+<p>OK，想到这里，还是没想明白Curl怎么使用，改天有机会用到的时候才会懂吧。</p>
+<p>### 缓存策略<br>今天刚好做到公司要求的一个问题：缓存策略。<br>要求是将其之前有做的缓存方案，改成带有时间判别的方案，那么如果时间线以内，便不让其再次请求；如果用户手动刷新的话，那就不用去考虑了。</p>
+<p>我自己倒是似懂非懂，直接在其基础上，变换成比较麻烦的方案：<br><img src="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18.png" alt="未更改保存方案"><br><img src="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:getSave.png" alt="未更改获取、外部保存方案"><br>在这个基础上，需要更简易处理，稳定。<br>我觉得要增加一个date，那就说保存的Array外面再包一层Diction吧，增加一个字段：Date<br>诺，就变成了这个不理想的样子：<br><img src="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:mine:getFunc.png" alt="更改保存方案"><br><img src="http://7xjcms.com1.z0.glb.clouddn.com/2017:3:18:mine:save.png" alt="更改保存方案"><br>这里的区别主要就是这种改动范围很大，而且把原有的全都换了一遍。虽说我的做法也能满足需求，但姜确实是老的辣，没能更好的解决这个问题。只能说，他们之前把方案讨论好了，我突然插进来的，搞的时候还是迷迷糊糊的，肯定没把所有方案走一遍，没找到最好的，嘿嘿。<br>这里处理是给保存时的方法替换一下，变成传入参数增加一个指针，返回的时候就靠着这个保存了文件本身的信息，保存信息等，作为判别当前时长是否超过1小时。<br>这个方案确实不错。</p>
+<p>记录一个犯的错误。<br>使用Masonry和自动计算行高的Third Part，我将UI贴在了TableViewCell上，而不是TableViewCellWraperView上—&gt;[self addSubview:xx];始终出现控件不如我所想，我觉得不会呀，不可能错呀。<br>过了2天，我突然想起来，TableViewCell是没有自动布局能力的，要写成—&gt;[self.contentView addSubview:xx];</p>
+<p>周六中午得时候自己写了个自我感觉非常良好的主题管理器，基本功能都能达到啦，哈哈，那一刻非常开心。非常开森。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/04/11/2017-4-11Lesson/" class="link f-fl">⟵2017/4/11Lesson</a>
+    
+    
+      <a href="/2017/03/13/2017-3-13lesson/" class="link f-fr">2017/3/13lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

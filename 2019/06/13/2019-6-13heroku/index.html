@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-6-13heroku | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="服务器不放vps换个免费地方放6.1 第一次遇到GFW，很多计划都得往后搁置，不过遇到了就是好事。 我找了AWS，注册送12个月免费服务。扣了我1美金后，看了别的文章说容易一点错就扣费。说申诉还是会退回，不过这就让我觉得不可靠。果断弃坑。找到了我以前使用的heroku, 还是一样的免费，那我用cdn 中转，是不是能解决被限速严重的问题？说干就干，毕竟6.7 高考的人拼命，我也要拼命努力啊。 我使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-6-13heroku">
+<meta property="og:url" content="https://akerdi.github.io/2019/06/13/2019-6-13heroku/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="服务器不放vps换个免费地方放6.1 第一次遇到GFW，很多计划都得往后搁置，不过遇到了就是好事。 我找了AWS，注册送12个月免费服务。扣了我1美金后，看了别的文章说容易一点错就扣费。说申诉还是会退回，不过这就让我觉得不可靠。果断弃坑。找到了我以前使用的heroku, 还是一样的免费，那我用cdn 中转，是不是能解决被限速严重的问题？说干就干，毕竟6.7 高考的人拼命，我也要拼命努力啊。 我使用">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-6-13heroku">
+<meta name="twitter:description" content="服务器不放vps换个免费地方放6.1 第一次遇到GFW，很多计划都得往后搁置，不过遇到了就是好事。 我找了AWS，注册送12个月免费服务。扣了我1美金后，看了别的文章说容易一点错就扣费。说申诉还是会退回，不过这就让我觉得不可靠。果断弃坑。找到了我以前使用的heroku, 还是一样的免费，那我用cdn 中转，是不是能解决被限速严重的问题？说干就干，毕竟6.7 高考的人拼命，我也要拼命努力啊。 我使用">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-6-13heroku</h2>
+  <p class="sub">Jun 13, 2019</p>
+  <article class="content">
+    <h2 id="服务器不放vps换个免费地方放"><a href="#服务器不放vps换个免费地方放" class="headerlink" title="服务器不放vps换个免费地方放"></a><strong>服务器不放vps换个免费地方放</strong></h2><p>6.1 第一次遇到GFW，很多计划都得往后搁置，不过遇到了就是好事。</p>
+<p>我找了AWS，注册送12个月免费服务。扣了我1美金后，看了别的文章说容易一点错就扣费。说申诉还是会退回，不过这就让我觉得不可靠。果断弃坑。找到了我以前使用的heroku, 还是一样的免费，那我用cdn 中转，是不是能解决被限速严重的问题？说干就干，毕竟6.7 高考的人拼命，我也要拼命努力啊。</p>
+<p>我使用的是nodejs docker。代码上修改配置文件</p>
+<p>package.json<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    scripts: &#123;</span><br><span class="line">        start: 'NODE_ENV=production node app.js'</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同时app.js 的app.listen port。该port 使用process.env.PORT(heroku 提供了该port)</p>
+<p>下载heroku cli<br><code>sudo npm install -g heroku</code></p>
+<p>heroku 登录<br><code>heroku login</code></p>
+<p>heroku container 登录<br><code>heroku container login</code></p>
+<p>heroku container push<br><code>heroku container:push web --app ahuang-diary</code> (ahuang-diary 是我的项目名)</p>
+<p>heroku container release 发布<br><code>heroku container:release web --app ahuang-diary</code></p>
+<p>代码发布后，可以翻墙测试下是否通畅.</p>
+<p>可以使用右上角功能键: <strong>Open APP</strong> <strong>More</strong></p>
+<p>More 下面有view logs。这个估计是比较有用的。</p>
+<p>此时采用CDN 转发稍微加速heroku(感觉速度还是不怎么快，同时使用free 免费heroku，升级hobby 花钱才能使用https)。</p>
+<p>使用自定义域名，需要先账号填写信用卡。</p>
+<p>dashboard.heroku.com/apps/ahuang-diary 面板下Settings - Domains and certificates 增加<a href="http://diary.boqi.ml" target="_blank" rel="noopener">http://diary.boqi.ml</a></p>
+<p>下方会生成DNS Target</p>
+<p>DNS Target 放到CloudFlare 的CNAME 值里面，key 就是diary.boqi.ml 橙云点亮，同时Crypto 置为<strong>OFF</strong></p>
+<p>这样就成功完成了今天要做的事情了</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/06/13/2019-6-13awaitcall/" class="link f-fl">⟵2019-6-13awaitcall</a>
+    
+    
+      <a href="/2019/06/13/2019-6-13lesson/" class="link f-fr">2019-6-13lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

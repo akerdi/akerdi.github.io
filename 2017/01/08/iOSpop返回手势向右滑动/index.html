@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>iOSpop返回手势向右滑动 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="根据这篇文章http://www.jianshu.com/p/349636eb3fca 这是一篇简书的技术文章和一篇优化的文章：http://blog.csdn.net/chenyong05314/article/details/40344763。读懂几个信息：  如果你重新定义返回按钮，这个按钮变为自定义的leftBarButtonItem的时候，iOS7之后的pop手势交互就失效。 如果需要重">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOSpop返回手势向右滑动">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/iOSpop返回手势向右滑动/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="根据这篇文章http://www.jianshu.com/p/349636eb3fca 这是一篇简书的技术文章和一篇优化的文章：http://blog.csdn.net/chenyong05314/article/details/40344763。读懂几个信息：  如果你重新定义返回按钮，这个按钮变为自定义的leftBarButtonItem的时候，iOS7之后的pop手势交互就失效。 如果需要重">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOSpop返回手势向右滑动">
+<meta name="twitter:description" content="根据这篇文章http://www.jianshu.com/p/349636eb3fca 这是一篇简书的技术文章和一篇优化的文章：http://blog.csdn.net/chenyong05314/article/details/40344763。读懂几个信息：  如果你重新定义返回按钮，这个按钮变为自定义的leftBarButtonItem的时候，iOS7之后的pop手势交互就失效。 如果需要重">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">iOSpop返回手势向右滑动</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>根据这篇文章<a href="http://www.jianshu.com/p/349636eb3fca" target="_blank" rel="noopener">http://www.jianshu.com/p/349636eb3fca</a> 这是一篇简书的技术文章和一篇优化的文章：<a href="http://blog.csdn.net/chenyong05314/article/details/40344763。" target="_blank" rel="noopener">http://blog.csdn.net/chenyong05314/article/details/40344763。</a><br>读懂几个信息：</p>
+<ol>
+<li>如果你重新定义返回按钮，这个按钮变为自定义的leftBarButtonItem的时候，iOS7之后的pop手势交互就失效。</li>
+<li>如果需要重新启用，你可以用自定义的导航栏，更改两个东西或者新添几个地方：<br>1）：<code>@interface CBNavigationController : UINavigationController &lt;UINavigationControllerDelegate,
+UIGestureRecognizerDelegate&gt;</code><br>在类别中声明需要接收两个协议<br>2）：<br>`-(void)viewDidLoad<br>{<br> __weak CBNavigationController *weakSelf = self;<br> if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])<br> {<pre><code>self.interactivePopGestureRecognizer.delegate = weakSelf;
+self.delegate = weakSelf;
+</code></pre> }<br>}<code>然后还有两个协议：
+3）：</code>-(void)pushViewController:(UIViewController <em>)viewController animated:(BOOL)animated{<br> if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {<br> self.interactivePopGestureRecognizer.enabled = NO;<br> }<br> [super pushViewController:viewController animated:animated];<br>}<code></code>-(void)navigationController:(UINavigationController </em>)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{<br> if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {<pre><code>if ([navigationController.viewControllers count]==1) {
+    navigationController.interactivePopGestureRecognizer.enabled = NO;
+}else{
+    navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+</code></pre> }<br>}`<br>这样你就可以愉快的使用返回手势啦</li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/React-native自学之路/" class="link f-fl">⟵React-native自学之路</a>
+    
+    
+      <a href="/2017/01/08/说说iOS7布局的俩坑/" class="link f-fr">说说iOS7布局的俩坑⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

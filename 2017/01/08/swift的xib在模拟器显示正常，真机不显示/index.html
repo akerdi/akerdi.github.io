@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>swift的xib在模拟器显示正常，真机不显示 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-06-13 11:34:52) 这个完美解决了swift会不加载xib的问题~~xib都OK，模拟器可以显示，但是真机却没有显示的解决方案，原因就是swift不默认加载xib，强制让他加上就好了http://my.oschina.net/227/blog/470553这个是转帖嘿嘿，谢谢大哥啦 import UIKitclass FormController: UIViewCon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift的xib在模拟器显示正常，真机不显示">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/swift的xib在模拟器显示正常，真机不显示/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-06-13 11:34:52) 这个完美解决了swift会不加载xib的问题~~xib都OK，模拟器可以显示，但是真机却没有显示的解决方案，原因就是swift不默认加载xib，强制让他加上就好了http://my.oschina.net/227/blog/470553这个是转帖嘿嘿，谢谢大哥啦 import UIKitclass FormController: UIViewCon">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift的xib在模拟器显示正常，真机不显示">
+<meta name="twitter:description" content="发表于(2016-06-13 11:34:52) 这个完美解决了swift会不加载xib的问题~~xib都OK，模拟器可以显示，但是真机却没有显示的解决方案，原因就是swift不默认加载xib，强制让他加上就好了http://my.oschina.net/227/blog/470553这个是转帖嘿嘿，谢谢大哥啦 import UIKitclass FormController: UIViewCon">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">swift的xib在模拟器显示正常，真机不显示</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-06-13 11:34:52)</p>
+<p>这个完美解决了swift会不加载xib的问题~~xib都OK，模拟器可以显示，但是真机却没有显示的解决方案，原因就是swift不默认加载xib，强制让他加上就好了<br><a href="http://my.oschina.net/227/blog/470553" target="_blank" rel="noopener">http://my.oschina.net/227/blog/470553</a><br>这个是转帖嘿嘿，谢谢大哥啦</p>
+<p>import UIKit<br>class FormController: UIViewController {</p>
+<p>override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {<br>super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)<br>//println(nibName);    }<br>convenience init() {<br>var nibNameOrNil = String?(“FormController”)</p>
+<p>//        //考虑到xib文件可能不存在或被删，故加入判断//        if NSBundle.mainBundle().pathForResource(nibNameOrNil, ofType: “xib”) == nil{   nibNameOrNil = nil}<br>self.init(nibName: nibNameOrNil, bundle: nil)<br>}<br>required init(coder aDecoder: NSCoder) {<br>fatalError(“init(coder:) has not been implemented”)<br>}</p>
+<p>override func viewDidLoad() {</p>
+<p>}<br>override func didReceiveMemoryWarning() {<br>super.didReceiveMemoryWarning()<br>// Dispose of any resources that can be recreated.    }</p>
+<p>}</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/昨天尝试了rsa加密的问题/" class="link f-fl">⟵昨天尝试了rsa加密的问题</a>
+    
+    
+      <a href="/2017/01/08/collectionView的minimumLineSpacing内部空隙默认不为空/" class="link f-fr">collectionView的minimumLineSpacing内部空隙默认不为空⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

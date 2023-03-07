@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>使用GPUImage一些坑 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先理解了安装，作者推荐动态库安装，好处就是特么的，你看到的source都是输入源，filters都是滤镜过程，output就是出口啦 GPUImageMovie能接受1）asset、2）AVPlayItem、3）URL路径，，，如果你有特殊要求，可以使用GPUImageMovieComposition这个类，允许你输入AVFoundation的多音频输入、画质动作、剪切之后的AVMutable">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GPUImage一些坑">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/10/使用GPUImage一些坑/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="首先理解了安装，作者推荐动态库安装，好处就是特么的，你看到的source都是输入源，filters都是滤镜过程，output就是出口啦 GPUImageMovie能接受1）asset、2）AVPlayItem、3）URL路径，，，如果你有特殊要求，可以使用GPUImageMovieComposition这个类，允许你输入AVFoundation的多音频输入、画质动作、剪切之后的AVMutable">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3767775-79332ec074f7938e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用GPUImage一些坑">
+<meta name="twitter:description" content="首先理解了安装，作者推荐动态库安装，好处就是特么的，你看到的source都是输入源，filters都是滤镜过程，output就是出口啦 GPUImageMovie能接受1）asset、2）AVPlayItem、3）URL路径，，，如果你有特殊要求，可以使用GPUImageMovieComposition这个类，允许你输入AVFoundation的多音频输入、画质动作、剪切之后的AVMutable">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3767775-79332ec074f7938e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">使用GPUImage一些坑</h2>
+  <p class="sub">Jan 10, 2017</p>
+  <article class="content">
+    <ol>
+<li>首先理解了安装，作者推荐动态库安装，好处就是特么的，你看到的source都是输入源，filters都是滤镜过程，output就是出口啦</li>
+<li>GPUImageMovie能接受<br>1）asset、2）AVPlayItem、3）URL路径，，，如果你有特殊要求，可以使用GPUImageMovieComposition这个类，允许你输入AVFoundation的多音频输入、画质动作、剪切之后的AVMutableComposition，我就用的这个</li>
+<li>GPUImageMovie没有音频播放，美拍不知道怎么整的，估计我觉得就是使用另外一些人提供的思路，对源码侵入加入播放器<br>可以参考这个：1）：<a href="http://blog.csdn.net/personsky/article/details/52992919" target="_blank" rel="noopener">http://blog.csdn.net/personsky/article/details/52992919</a><br>2）：<a href="https://gist.github.com/anonymous/5112961" target="_blank" rel="noopener">https://gist.github.com/anonymous/5112961</a><br>毕竟音频播放就是个形式，，要不然你有没有美拍的源码，对了美拍还真就是用GPUImage，用的真是6啊，，偶像<br>3)：如果你没有用AVMutableComposition修改视频orientation，其滤镜里面也有能修改方向的方法setInputRotation<br>用法如：[sepiaFilter setInputRotation:kGPUImageRotateRight atIndex:0];</li>
+<li>检查滤镜过程使用：filter setFrameProcessingCompletionBlock:^(GPUImageOutput *output,CMTime frameTime)<br>比如你可以在GPUImageElement里面修改这个</li>
+<li>注意检查输入滤镜的pipeline过程有没有问题<br><a href="http://blog.csdn.net/u1031/article/details/48712163" target="_blank" rel="noopener">http://blog.csdn.net/u1031/article/details/48712163</a><br>这个大哥的几张图挺好的，看了之后对addTarget有更多的理解</li>
+<li>多视频输入我这还好，没有什么问题，多语音的话，你就考虑使用GPUImageMovieComposition的audiomix，但是没法控制播放了似乎，</li>
+<li>NSString*pathToMovie = [self movieSavedPath];<br>unlink([pathToMovieUTF8String]);// If a file already exists, AVAssetWriter won’t let you record new frames, so delete the old movie<br>可以使用快捷unlink视频，我特么不知道，仍然在使用filemanager，low逼格</li>
+<li>附一个滤镜表在我国—&gt;China🇨🇳境内的名字翻译地址<br><a href="http://blog.csdn.net/qq_27074387/article/details/52221938" target="_blank" rel="noopener">http://blog.csdn.net/qq_27074387/article/details/52221938</a></li>
+<li>在多视频输入里面，将self.movieFile.playAtActualSpeed=YES;<br>playAtActualSpeed都写上，如果视频不同步，有一个先完成了，则会有可能10s视频变成了4s，有时前一段视频播放正常，后一段就视频画面不动了。</li>
+<li>forceProcessingAtSize：CGSize<br>给其定义大小</li>
+<li>GPUImage  pipeline<br>1）、创建图片处理类GPUImagePicture把图片传进去stillImage<br>GPUImagePicture <em>staticPicture = [[GPUImagePicture alloc] initWithImage:stillImage smoothlyScaleOutput:YES];<br>2）、把多个滤镜对象放到数组中<br>NSMutableArray </em>arrayTemp=[NSMutableArray array];<br>[arrayTempaddObject:RGBFilter];<br>3）、创建GPUImageFilterPipeline对象 初始化使用<br>initWithOrderedFilters:(NSArray<em>) filters input:(GPUImageOutput</em>)input output:(id )output;<br>这个方法；这个方法需要三个参数：<br>filters：多个滤镜的数组<br>input：被渲染的图片（步骤1 的staticPicture 对象）<br>output：渲染后的图片的容器（类型是view）<br>GPUImageFilterPipeline <em> filterPipeline = [[GPUImageFilterPipeline alloc] initWithOrderedFilters:arrayTempinput:staticPictureoutput:output];<br>4）、渲染图片 使用processImage（此方法是GPUImagePicture类下的）和useNextFrameForImageCapture(此方法是GPUImageOutput下也就是单个滤镜)；<br>[staticPicture processImage];<br>[filteruseNextFrameForImageCapture];//这个filter 可以是RGBFiltertoonFilter等<br>5）、获取图片 使用currentFilteredFrame（此方法是GPUImageFilterPipeline类下的）；<br>UIImage </em>img = [pipeline currentFilteredFrame];<br>6）、对于使用GPUImageUIElement没有给contentView设置rect则会出现：<br>: CGContextTranslateCTM: invalid context 0x0. If you want to see the backtrace, please set CG_CONTEXT_SHOW_BACKTRACE environmental variable.<br>*** Assertion failure in -[GPUImageFramebuffer generateFramebuffer], address/Submodules/framework/Source/GPUImageFramebuffer.m:156<br>同时breakpoint跳到<br><img src="http://upload-images.jianshu.io/upload_images/3767775-79332ec074f7938e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="breakpoint"></li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/10/xcode碰到-lcrt1-3-1-o/" class="link f-fl">⟵xcode碰到-lcrt1.3.1.o</a>
+    
+    
+      <a href="/2017/01/10/debug断点不进去且无效/" class="link f-fr">debug断点不进去且无效⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210805Mac安装Opengl库 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Mac 安装Opengl库之前想着搞下编译原理，于是过了下BNF/AST，但是发现那篇文章对于初学cpp不友好，更重要，由于很多库还得下载，不晓得什么库缺失或者include路径不对，无法运行，遂暂时放弃一捏捏。 跟着下篇文章的也是入门cpp+opengl游戏，研发机器装好opengl环境，就成功运行，这就对了嘛。 昨天给研发的机器和家里的机器装上两遍glfw、glew、glad等，踩的小坑记下。">
+<meta name="keywords" content="mac_opengl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210805Mac安装Opengl库">
+<meta property="og:url" content="https://akerdi.github.io/2021/08/05/20210805Mac安装Opengl库/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Mac 安装Opengl库之前想着搞下编译原理，于是过了下BNF/AST，但是发现那篇文章对于初学cpp不友好，更重要，由于很多库还得下载，不晓得什么库缺失或者include路径不对，无法运行，遂暂时放弃一捏捏。 跟着下篇文章的也是入门cpp+opengl游戏，研发机器装好opengl环境，就成功运行，这就对了嘛。 昨天给研发的机器和家里的机器装上两遍glfw、glew、glad等，踩的小坑记下。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/installglad1.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/installglad2.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode1.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode2.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode3.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode4.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode5.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210805/xcode6.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210805Mac安装Opengl库">
+<meta name="twitter:description" content="Mac 安装Opengl库之前想着搞下编译原理，于是过了下BNF/AST，但是发现那篇文章对于初学cpp不友好，更重要，由于很多库还得下载，不晓得什么库缺失或者include路径不对，无法运行，遂暂时放弃一捏捏。 跟着下篇文章的也是入门cpp+opengl游戏，研发机器装好opengl环境，就成功运行，这就对了嘛。 昨天给研发的机器和家里的机器装上两遍glfw、glew、glad等，踩的小坑记下。">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/210805/installglad1.jpg">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210805Mac安装Opengl库</h2>
+  <p class="sub">Aug 5, 2021</p>
+  <article class="content">
+    <h1 id="Mac-安装Opengl库"><a href="#Mac-安装Opengl库" class="headerlink" title="Mac 安装Opengl库"></a>Mac 安装Opengl库</h1><p>之前想着搞下<code>编译原理</code>，于是过了下<code>BNF</code>/<code>AST</code>，但是发现那篇文章对于初学cpp不友好，更重要，由于很多库还得下载，不晓得什么库缺失或者include路径不对，无法运行，遂暂时放弃一捏捏。</p>
+<p>跟着下篇文章的也是入门cpp+opengl游戏，研发机器装好opengl环境，就成功运行，这就对了嘛。</p>
+<p>昨天给研发的机器和家里的机器装上两遍glfw、glew、glad等，踩的小坑记下。</p>
+<p>用brew安装都成功，用cmake安装，依然无法include，故本记录推荐brew 安装。</p>
+<p>环境: 10.13.6黑苹果，都有独显。</p>
+<ol>
+<li>brew报<code>No formulae found in taps</code>错误，方法是重新安装brew解决该问题:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd /usr/local/Homebrew/Library/Taps/homebrew/</span><br><span class="line">$ rm -rf homebrew-core</span><br><span class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>brew 安装glfw/glew 时报: <code>Missing dependencies for SOCKS support</code>错误，解决该问题:</p>
+<p> unset all_proxy &amp;&amp; unset ALL_PROXY</p>
+</li>
+</ol>
+<h2 id="安装各库"><a href="#安装各库" class="headerlink" title="安装各库"></a>安装各库</h2><ol>
+<li>安装glew/glfw3</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ brew install glew</span><br><span class="line">$ brew install glfw3</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>glad安装:</li>
+</ol>
+<p><a href="https://glad.dav1d.de/" target="_blank" rel="noopener">glad在线安装</a>, Language选择C/C++, Specification选择OpenGL，API选择gl - Version4.5(&gt;Version 3.3)，Profile选择Core</p>
+<p><img src="/css/images/210805/installglad1.jpg" alt></p>
+<p>左下角Options 勾选Generate a loader，然后右下角按钮[GENERATE]生成，然后下载新加载的页面的glad.zip.</p>
+<p><img src="/css/images/210805/installglad2.jpg" alt></p>
+<ol start="3">
+<li><p>将解压glad.zip 中include 内的 KHR|glad 两个文件夹复制到 /usr/local/include 中.</p>
+</li>
+<li><p>新建Xcode C++的Command Line Tool项目，<code>command + ,</code> 进入设置页面，选择Locations - Custom Paths，添加如下图:</p>
+</li>
+</ol>
+<p><img src="/css/images/210805/xcode1.jpg" alt></p>
+<ol start="5">
+<li>修改Header search Paths 和 Library Search Paths</li>
+</ol>
+<p>learnopgl - TARGETS - Build Settings</p>
+<p><img src="/css/images/210805/xcode2.jpg" alt></p>
+<p><img src="/css/images/210805/xcode3.jpg" alt></p>
+<ol start="6">
+<li>修改Xcode项目的Build Phases - Link Binary With Libraries</li>
+</ol>
+<p><img src="/css/images/210805/xcode4.jpg" alt></p>
+<p><a href="https://www.jianshu.com/p/eedc41051bd9" target="_blank" rel="noopener">参考</a></p>
+<ol start="7">
+<li>添加glad.zip 解压后的src/glad.c 至learnopgl项目下:</li>
+</ol>
+<p><img src="/css/images/210805/xcode5.jpg" alt></p>
+<h2 id="测试是否正常执行"><a href="#测试是否正常执行" class="headerlink" title="测试是否正常执行"></a>测试是否正常执行</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://github.com/JoeyDeVries/LearnOpenGL</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;glad/glad.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;GLFW/glfw3.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span></span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_WIDTH = <span class="number">800</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> SCR_HEIGHT = <span class="number">600</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  glfwInit();</span><br><span class="line">  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, <span class="number">3</span>);</span><br><span class="line">  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, <span class="number">3</span>);</span><br><span class="line">  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __APPLE__</span></span><br><span class="line">  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, <span class="string">"LearnOpenGL"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="keyword">if</span> (window == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to create GLFW window"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    glfwTerminate();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  glfwMakeContextCurrent(window);</span><br><span class="line">  glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);</span><br><span class="line">  <span class="keyword">if</span> (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) &#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to initialize GLAD"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (!glfwWindowShouldClose(window)) &#123;</span><br><span class="line">    processInput(window);</span><br><span class="line">    glfwSwapBuffers(window);</span><br><span class="line">    glfwPollEvents();</span><br><span class="line">  &#125;</span><br><span class="line">  glfwTerminate();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(GLFWwindow *window)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)</span><br><span class="line">    glfwSetWindowShouldClose(window, <span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">framebuffer_size_callback</span><span class="params">(GLFWwindow* window, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123;</span><br><span class="line">  glViewport(<span class="number">0</span>, <span class="number">0</span>, width, height);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>出现大黑框就正确了:</p>
+<p><img src="/css/images/210805/xcode6.jpg" alt></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/08/07/20210807制作cpp_dylib/" class="link f-fl">⟵20210807制作cpp dylib</a>
+    
+    
+      <a href="/2021/07/31/20210731编译原理准备/" class="link f-fr">20210731编译原理准备⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

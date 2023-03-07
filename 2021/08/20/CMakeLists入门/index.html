@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>CMakeLists入门 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="cmake入门我的学习背景: 使用xcode开发OpenGL，在链完教程中的路径之后，项目可以学习起来了，但是链接过程不知道原因。之前的学习刚好有打包动态、静态库，链接过程清晰。但是这会却不明了。 打算自己做cmake链接，以下是做记录: 当前环境: brew 安装glew、glfw，需要使用CMake进行库的链接。 直接开始代码上的讲解: 链接库制作12345678# 将当前所有文件名列为数组保">
+<meta name="keywords" content="cmake, cmakelists">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CMakeLists入门">
+<meta property="og:url" content="https://akerdi.github.io/2021/08/20/CMakeLists入门/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="cmake入门我的学习背景: 使用xcode开发OpenGL，在链完教程中的路径之后，项目可以学习起来了，但是链接过程不知道原因。之前的学习刚好有打包动态、静态库，链接过程清晰。但是这会却不明了。 打算自己做cmake链接，以下是做记录: 当前环境: brew 安装glew、glfw，需要使用CMake进行库的链接。 直接开始代码上的讲解: 链接库制作12345678# 将当前所有文件名列为数组保">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CMakeLists入门">
+<meta name="twitter:description" content="cmake入门我的学习背景: 使用xcode开发OpenGL，在链完教程中的路径之后，项目可以学习起来了，但是链接过程不知道原因。之前的学习刚好有打包动态、静态库，链接过程清晰。但是这会却不明了。 打算自己做cmake链接，以下是做记录: 当前环境: brew 安装glew、glfw，需要使用CMake进行库的链接。 直接开始代码上的讲解: 链接库制作12345678# 将当前所有文件名列为数组保">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">CMakeLists入门</h2>
+  <p class="sub">Aug 20, 2021</p>
+  <article class="content">
+    <h1 id="cmake入门"><a href="#cmake入门" class="headerlink" title="cmake入门"></a>cmake入门</h1><p>我的学习背景: 使用xcode开发OpenGL，在链完教程中的路径之后，项目可以学习起来了，但是链接过程不知道原因。<br>之前的学习刚好有打包动态、静态库，链接过程清晰。但是这会却不明了。</p>
+<p>打算自己做cmake链接，以下是做记录:</p>
+<p>当前环境:</p>
+<p>brew 安装glew、glfw，需要使用CMake进行库的链接。</p>
+<p>直接开始代码上的讲解:</p>
+<h2 id="链接库制作"><a href="#链接库制作" class="headerlink" title="链接库制作"></a>链接库制作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 将当前所有文件名列为数组保存</span><br><span class="line">aux_source_directory(. DIR_LIB_SRCS)</span><br><span class="line"># 指明制作library</span><br><span class="line">add_library(MathFunctions $&#123;DIR_LIB_SRCS&#125;)</span><br><span class="line"># 当执行make install时，执行下面操作</span><br><span class="line"># 保存头文件至includes；保存lib文件至 /usr/local/lib</span><br><span class="line">install(TARGETS MathFunctions DESTINATIONS lib)</span><br><span class="line">install(FILES MathFunctions DESTINATIONS includes)</span><br></pre></td></tr></table></figure>
+<h2 id="主库制作"><a href="#主库制作" class="headerlink" title="主库制作"></a>主库制作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"># CMake最低版本要求</span><br><span class="line">cmake_minimum_required(VERSION 2.8)</span><br><span class="line"># 项目信息</span><br><span class="line">project(Learngl)</span><br><span class="line"># 设置环境变量 set(key value)</span><br><span class="line">set(Learngl_VERSION_MAJOR 1)</span><br><span class="line">set(Learngl_VERSION_MINOR 0)</span><br><span class="line"># 查看是否有有环境变量，否则初始设置为ON</span><br><span class="line">option(USE_MUMATH &quot;use provided math implementation&quot; ON)</span><br><span class="line"># 将当前所有环境变量等进行configfile，将config.h.in 转为config.h</span><br><span class="line"># $&#123;PROJECT_SOURCE_DIR&#125; 指项目中源文件</span><br><span class="line"># $&#123;PROJECT_BINARY_DIR&#125; 指项目中目标生成文件</span><br><span class="line">configure_file(</span><br><span class="line">  &quot;$&#123;PROJECT_SOURCE_DIR&#125;/config.h.in&quot;</span><br><span class="line">  &quot;$&#123;PROJECT_BINARY_DIR&#125;/config.h&quot;</span><br><span class="line">)</span><br><span class="line">if (NOT HAVE_POW)</span><br><span class="line">  # 引入头文件搜索路径</span><br><span class="line">  include_directories(&quot;$&#123;PROJECT_SOURCE_DIR&#125;/math&quot;)</span><br><span class="line">  # 加入该子模块，显示执行子模块CMakeLists.txt</span><br><span class="line">  add_subdirectory(math)</span><br><span class="line">  set(EXTRA_LIBS $&#123;EXTRA_LIBS&#125; MathFunctions)</span><br><span class="line">endif (NOT HAVE_POW)</span><br><span class="line"></span><br><span class="line"># 将当前所有项目文件(.* 文件) 转入</span><br><span class="line">aux_source_directory(. DIR_SRCS)</span><br><span class="line"># 生成执行文件Learngl，文件为$&#123;DIR_SRCS&#125;内容</span><br><span class="line">add_executable(Learngl $&#123;DIR_SRCS&#125;)</span><br><span class="line">target_link_libraries(Learngl $&#123;EXTRA_LIBS&#125;)</span><br><span class="line"># 导入glfw lib</span><br><span class="line"># 链接lib路径</span><br><span class="line">link_directories(&quot;/usr/local/Cellar/glfw/3.3.4/lib&quot;)</span><br><span class="line"># 使用lib/libglfw.[dylib|a]文件</span><br><span class="line">target_link_libraries(Learngl glfw)</span><br><span class="line"></span><br><span class="line"># 生成macro，macro($&#123;名称&#125; $&#123;参数1&#125; $&#123;参数2&#125; $&#123;参数3&#125;)</span><br><span class="line">macro (do_test arg1 arg2 result)</span><br><span class="line">  # add_test 是执行测试用例，make test执行</span><br><span class="line">  add_test(test_$&#123;arg1&#125;_$&#123;arg2&#125; Learngl $&#123;arg1&#125; $&#123;arg2&#125;)</span><br><span class="line">  # 设置单元测试用例的判别，使用正则来判断是否符合相应数据</span><br><span class="line">  set_tests_properties(test_$&#123;arg1&#125;_$&#123;arg2&#125; PROPERTIES PASS_REGULAR_EXPRESSION $&#123;result&#125;)</span><br><span class="line">endmacro (do_test)</span><br><span class="line"></span><br><span class="line"># 测试执行单元测试用例(也可以直接add_test 使用)</span><br><span class="line">do_test(5 2 &quot;is 25&quot;)</span><br><span class="line">do_test(10 5 &quot;is 100000&quot;)</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.cnblogs.com/ybqjymy/p/13409050.html" target="_blank" rel="noopener">参考</a><br><a href="https://github.com/wzpan/cmake-demo" target="_blank" rel="noopener">示例demo</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/09/03/interviewRequired/" class="link f-fl">⟵interviewRequired</a>
+    
+    
+      <a href="/2021/08/12/20210812初步练习redis/" class="link f-fr">20210812初步练习redis⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20220111c_debug | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Windows c debug使用 windows vscode 进行c debug: 下载C/C++ 插件, 首先先生成执行文件: gcc main.c add.c -ledit -g -o add 此时会生成add.exe 文件。 然后项目根目录生成.vscode - launch.json, 内容为: 123456789101112131415161718192021222324&amp;#123;">
+<meta name="keywords" content="c_debug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20220111c_debug">
+<meta property="og:url" content="https://akerdi.github.io/2022/01/11/20220111c-debug/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Windows c debug使用 windows vscode 进行c debug: 下载C/C++ 插件, 首先先生成执行文件: gcc main.c add.c -ledit -g -o add 此时会生成add.exe 文件。 然后项目根目录生成.vscode - launch.json, 内容为: 123456789101112131415161718192021222324&amp;#123;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20220111c_debug">
+<meta name="twitter:description" content="Windows c debug使用 windows vscode 进行c debug: 下载C/C++ 插件, 首先先生成执行文件: gcc main.c add.c -ledit -g -o add 此时会生成add.exe 文件。 然后项目根目录生成.vscode - launch.json, 内容为: 123456789101112131415161718192021222324&amp;#123;">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20220111c_debug</h2>
+  <p class="sub">Jan 11, 2022</p>
+  <article class="content">
+    <h1 id="Windows-c-debug"><a href="#Windows-c-debug" class="headerlink" title="Windows c debug"></a>Windows c debug</h1><p>使用 windows vscode 进行c debug:</p>
+<p>下载<code>C/C++</code> 插件, 首先先生成执行文件: <code>gcc main.c add.c -ledit -g -o add</code></p>
+<p>此时会生成add.exe 文件。</p>
+<p>然后项目根目录生成.vscode - launch.json, 内容为:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"(gdb) Attach"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: [],</span><br><span class="line">      <span class="attr">"stopAtEntry"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;fileDirname&#125;/add"</span>,</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;fileDirname&#125;"</span>,</span><br><span class="line">      <span class="attr">"environment"</span>: [],</span><br><span class="line">      <span class="attr">"externalConsole"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"MIMode"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">      <span class="attr">"setupCommands"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"description"</span>: <span class="string">"为gdb启用整齐打印"</span>,</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">          <span class="attr">"ignoreFailres"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>按F5 即可启动。</p>
+<p>当前办法是每次构建需要自己先执行下生成命令，然后按F5. 之后优化。</p>
+<h1 id="Mac-c-debug"><a href="#Mac-c-debug" class="headerlink" title="Mac c debug"></a>Mac c debug</h1><p>操作如同上面, 不过可以增加一个Task简约操作:</p>
+<p>tasks.json<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"tasks"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"cppbuild"</span>,</span><br><span class="line">      <span class="attr">"label"</span>: <span class="string">"C/C++: gcc 生成活动文件"</span>,</span><br><span class="line">      <span class="attr">"command"</span>: <span class="string">"/usr/bin/gcc"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: [<span class="string">"-g"</span>, <span class="string">"$&#123;file&#125;"</span>, <span class="string">"mpc.c"</span>, <span class="string">"-ledit"</span>, <span class="string">"-o"</span>, <span class="string">"$&#123;fileDirname&#125;/ss"</span>],</span><br><span class="line">      <span class="attr">"options"</span>: &#123;</span><br><span class="line">        <span class="attr">"cwd"</span>: <span class="string">"$&#123;fileDirname&#125;"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"problemMatcher"</span>: [</span><br><span class="line">        <span class="string">"$gcc"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"group"</span>: <span class="string">"build"</span>,</span><br><span class="line">      <span class="attr">"detail"</span>: <span class="string">"编译器: /usr/bin/gcc"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>此时 Shift+Command+p 点击 <code>Tasks: Run Task</code>. 这样会生成如手工生成的文件: <code>gcc mpc.c ss.c -g -ledit -o ss</code></p>
+<p>然后附以launch.json:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"(lldb) Attach"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: [],</span><br><span class="line">      <span class="attr">"stopAtEntry"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;fileDirname&#125;/ss"</span>,</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;fileDirname&#125;"</span>,</span><br><span class="line">      <span class="attr">"environment"</span>: [],</span><br><span class="line">      <span class="attr">"externalConsole"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"MIMode"</span>: <span class="string">"lldb"</span>,</span><br><span class="line">      <span class="attr">"setupCommands"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"description"</span>: <span class="string">"为gdb启用整起打印"</span>,</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">          <span class="attr">"ignoreFailres"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上mac就能初步享受断点开发了。操作繁琐一些，先使用再看看。</p>
+<blockquote>
+<p>更新vscode 的cpp插件出现<code>Unable to start debugging. LLDB exited unexpectedly with exit code 134 (0x86).</code>报错。原始是cpp插件不是正式版，点击切换为正式发行版即正常。</p>
+</blockquote>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/01/12/20220112lispy/" class="link f-fl">⟵20220112lispy</a>
+    
+    
+      <a href="/2022/01/11/20220111recent/" class="link f-fr">20220111recent⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

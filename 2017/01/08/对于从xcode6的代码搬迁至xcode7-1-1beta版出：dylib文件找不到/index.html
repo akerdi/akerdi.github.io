@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>对于从xcode6的代码搬迁至xcode7.1.1beta版出：dylib文件找不到 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2015-12-07 10:44:04)这个问题是xcode7.1.1beta版本的版本，我从网上阅历几篇文章，得出两种解决方法； 首先这个问题，是因为xcode6有dylib的苹果的库文件，但是xcode7之后全部换成了.tbd的库文件，也就是说，在/Applications/Xcode7.1.app/Contents/Developer/Platforms/iPhoneOS.platf">
+<meta name="keywords" content="ios it dylib(nosuchfileordirectory)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对于从xcode6的代码搬迁至xcode7.1.1beta版出：dylib文件找不到">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/对于从xcode6的代码搬迁至xcode7-1-1beta版出：dylib文件找不到/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2015-12-07 10:44:04)这个问题是xcode7.1.1beta版本的版本，我从网上阅历几篇文章，得出两种解决方法； 首先这个问题，是因为xcode6有dylib的苹果的库文件，但是xcode7之后全部换成了.tbd的库文件，也就是说，在/Applications/Xcode7.1.app/Contents/Developer/Platforms/iPhoneOS.platf">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://s11.sinaimg.cn/mw690/003479W3gy6XA5QBko21a&690">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对于从xcode6的代码搬迁至xcode7.1.1beta版出：dylib文件找不到">
+<meta name="twitter:description" content="发表于(2015-12-07 10:44:04)这个问题是xcode7.1.1beta版本的版本，我从网上阅历几篇文章，得出两种解决方法； 首先这个问题，是因为xcode6有dylib的苹果的库文件，但是xcode7之后全部换成了.tbd的库文件，也就是说，在/Applications/Xcode7.1.app/Contents/Developer/Platforms/iPhoneOS.platf">
+<meta name="twitter:image" content="http://s11.sinaimg.cn/mw690/003479W3gy6XA5QBko21a&690">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">对于从xcode6的代码搬迁至xcode7.1.1beta版出：dylib文件找不到</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2015-12-07 10:44:04)<br>这个问题是xcode7.1.1beta版本的版本，我从网上阅历几篇文章，得出两种解决方法；<br><img src="http://s11.sinaimg.cn/mw690/003479W3gy6XA5QBko21a&amp;690" alt="Build出错图"></p>
+<p>首先这个问题，是因为xcode6有dylib的苹果的库文件，但是xcode7之后全部换成了.tbd的库文件，也就是说，在/Applications/Xcode7.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/目录下去找xcode 库文件储存地址没有找到要用到的.dylib    xcode 6的后缀名file，所以就报错。<br>我根据stack flow的解释（<a href="http://stackoverflow.com/questions/32734097/xcode7-ios9-about-libz-tbd-is-not-an-object-file-not-allowed-in-a-library、https://forums.developer.apple.com/thread/4572），得出两种，一种就如他们说的那般，很麻烦，，到settings/Other" target="_blank" rel="noopener">http://stackoverflow.com/questions/32734097/xcode7-ios9-about-libz-tbd-is-not-an-object-file-not-allowed-in-a-library、https://forums.developer.apple.com/thread/4572），得出两种，一种就如他们说的那般，很麻烦，，到settings/Other</a> link flag 更改相应的取名（听不懂）<br>第二种方法：<br>第一种方法给人直接想到的是，我这工程到哪里都是可以被别人用的，这也是为外国人推崇，不用说我把工程递交给其他人之后还需要处理什么。于是第二种方法较为简单！！<br>你只需要将dylib文件置放于/Applications/Xcode7.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/目录下，xcode说找不到，，那我就去xcode6去移植dylib文件过来即可（目录相同），这个问题同样可以解决。<br>下面为压缩包6.4xcode<br><a href="https://github.com/shaohung001/xcode6-xcode7-" target="_blank" rel="noopener">dylib压缩包xcode6.4下载地址</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/这一段时间的工作安排/" class="link f-fl">⟵这一段时间的工作安排</a>
+    
+    
+      <a href="/2017/01/08/BitBucket和MAC版的sourcetree初次使用/" class="link f-fr">BitBucket和MAC版的sourcetree初次使用⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

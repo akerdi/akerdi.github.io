@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018-12-24lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="购买了一个服务器，折腾了一天给相关环境整理了下。123OS: centos 6 x86_64 # docker 一定要64位服务器采用docker + koa + mongodb前端采用Next.js + mobx + antd 组合 服务器配置由于docker 在centos6 下只能采用1.7.1 版本，导致docker-compose 只能采用1.5.2 版本。 环境要求：python2.7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-12-24lesson">
+<meta property="og:url" content="https://akerdi.github.io/2018/12/24/2018-12-24lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="购买了一个服务器，折腾了一天给相关环境整理了下。123OS: centos 6 x86_64 # docker 一定要64位服务器采用docker + koa + mongodb前端采用Next.js + mobx + antd 组合 服务器配置由于docker 在centos6 下只能采用1.7.1 版本，导致docker-compose 只能采用1.5.2 版本。 环境要求：python2.7">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-12-24lesson">
+<meta name="twitter:description" content="购买了一个服务器，折腾了一天给相关环境整理了下。123OS: centos 6 x86_64 # docker 一定要64位服务器采用docker + koa + mongodb前端采用Next.js + mobx + antd 组合 服务器配置由于docker 在centos6 下只能采用1.7.1 版本，导致docker-compose 只能采用1.5.2 版本。 环境要求：python2.7">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018-12-24lesson</h2>
+  <p class="sub">Dec 24, 2018</p>
+  <article class="content">
+    <h1 id="购买了一个服务器，折腾了一天给相关环境整理了下。"><a href="#购买了一个服务器，折腾了一天给相关环境整理了下。" class="headerlink" title="购买了一个服务器，折腾了一天给相关环境整理了下。"></a>购买了一个服务器，折腾了一天给相关环境整理了下。</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OS: centos 6 x86_64 # docker 一定要64位</span><br><span class="line">服务器采用docker + koa + mongodb</span><br><span class="line">前端采用Next.js + mobx + antd 组合</span><br></pre></td></tr></table></figure>
+<h1 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h1><p>由于docker 在centos6 下只能采用1.7.1 版本，导致docker-compose 只能采用1.5.2 版本。</p>
+<p>环境要求：python2.7.12;.yml file version为1</p>
+<p><a href="CentOS6.x 安装 Docker 和 Docker Compose">参考博文</a></p>
+<p>服务器Dockerfile:</p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">8.12</span>.<span class="number">0</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span> /server</span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span> . /server</span><br><span class="line"><span class="keyword">RUN</span> npm install</span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">9527</span></span><br><span class="line"><span class="keyword">CMD</span> ["yarn", "start"]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mongo:</span><br><span class="line">  image: &quot;mongo:3.6.9-stretch&quot;</span><br><span class="line">  volumes:</span><br><span class="line">    - ./data:/data/db</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;27017:27017&quot;</span><br><span class="line">web:</span><br><span class="line">  build: .</span><br><span class="line">  command: npm start</span><br><span class="line">  volumes:</span><br><span class="line">    - ./dist:/server/dist</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;9527:9527&quot; #我就想用这个端口</span><br><span class="line">  links:</span><br><span class="line">    - mongo</span><br></pre></td></tr></table></figure>
+<p>package.json/script:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "watch": "tsc -w -p ./src",</span><br><span class="line">    "debug": "nodemon --watch ./dist --inspect=0.0.0.0:9222 --nolazy ./dist/www.js",</span><br><span class="line">    "docker-debug": "docker-compose up",</span><br><span class="line">    "start": "node ./dist/www.js",</span><br><span class="line">    "mocha-test": "mocha -t 8000 --recursive "</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>运行docker 出现<code>iptables failed - No chain/target/match by that name</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t filter -N DOCKER</span><br><span class="line">service docker restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mongodb 总是连不上</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. docker-compose.yml 的links 不能缺少</span><br><span class="line">2. mongoose.connect(db_url) 的db_url 确认是docker-compose 的image 名。如我的&quot;mongo&quot;</span><br><span class="line">3. 失败重连</span><br><span class="line">const connectWithRetry = () =&gt; &#123;</span><br><span class="line">    console.log(&quot;MongoDB connection with retry&quot;);</span><br><span class="line">    mongoose.connect(db_url, options).then(() =&gt; &#123;</span><br><span class="line">        console.log(&quot;MongoDB is connected&quot;);</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        console.log(&quot;MongoDB connection unsuccessful, retry after 5 seconds.&quot;);</span><br><span class="line">        setTimeout(() =&gt; connectWithRetry(), 5000)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">connectWithRetry();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>服务器在vscode debug</li>
+</ul>
+<p>参考vscode 原文<a href="https://github.com/Microsoft/vscode-recipes/tree/master/Docker-TypeScript" target="_blank" rel="noopener">我是原文</a></p>
+<h1 id="Nextjs-配置"><a href="#Nextjs-配置" class="headerlink" title="Nextjs 配置"></a>Nextjs 配置</h1><p>接下来是nextjs 推送记录</p>
+<ol>
+<li>nextjs 编译环境有要求：RAM 1G</li>
+</ol>
+<p>我服务器就1G，不然编译的时候会报”code 137”,提示内存不足，同时导致服务器mongodb 一直弹提示<code>centos mongodb [ftdc] serverStatus was very slow: { after basic: 163, after asserts:</code>。</p>
+<p>解决办法是采用开发机器<code>yarn build</code> 后，将<strong>.next</strong> 文件夹git commit ，然后同步过来。</p>
+<ol start="2">
+<li>nextjs 使用pm2 start:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#https://github.com/zeit/next.js/issues/109</span><br><span class="line"># for development</span><br><span class="line">pm2 start npm --name &quot;next&quot; -- run dev</span><br><span class="line"></span><br><span class="line"># for production</span><br><span class="line">npm run build</span><br><span class="line">pm2 start npm --name &quot;next&quot; -- start</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>nextjs 需要在域名根目录运行， 否则出现static 静态路由找不到。其他route 也会找不到的情况。</li>
+</ol>
+<p>nginx 配置如:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">    <span class="attribute">server_name</span> www.lsgood.top lsgood.top;</span><br><span class="line">    <span class="attribute">root</span> /var/www;</span><br><span class="line">    <span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    <span class="attribute">location</span> ~^/facicon\.ico$ &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:9005;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">'upgrade'</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="attribute">location</span> /japeneeza/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://127.0.0.1:9527/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>nextjs 没有storage；同时 server side 获取不到cookie</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yarn add js-cookie cookieParser</span><br><span class="line"></span><br><span class="line">cookie <span class="keyword">set</span> <span class="keyword">get</span> cookie (自行参考cookie 保存token)</span><br><span class="line">eg: jsCookie.<span class="keyword">set</span>("token", $&#123;token&#125;)</span><br><span class="line"></span><br><span class="line">server.js(express)</span><br><span class="line"><span class="keyword">const</span> cookieParser = <span class="built_in">require</span>(<span class="string">"cookieParser"</span>)</span><br><span class="line">server.use(cookieParser())</span><br><span class="line"></span><br><span class="line">然后在pages 里的pageClass.getInitialProps = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">&#123;ctx&#125;</span>) =&gt; </span>&#123;</span><br><span class="line">    cosnt &#123; req &#125; = ctx;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"token:"</span>, req.cookies.token)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="让你知道技术的力量"><a href="#让你知道技术的力量" class="headerlink" title="让你知道技术的力量"></a>让你知道技术的力量</h1><p>A: 什么？不相信我的能力？<br>A(咆哮): 我要让你们知道 the ability of super technology!!!</p>
+<p>门外, 砰砰砰: 开门，查水表.</p>
+<p>A: 大家快点收拾东西，藏起来，丢到窗外，快点快点。。。</p>
+<p><a href="本来想做一个视频网站，想想还要各种“证”，到时先做小的视频网站，，然后转成会员卖套图吧。国内什么都做不了，什么都不能做，国家要各种屁民听话。我觉得公务员们不认为自己是中国人，他们认为自己是体制人，是平民的上司。他们凭什么呀？都是我们纳税人养着的服务人员，怎么就有这么多的特权？纳税的意义在哪里？好好活着吧。"></a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/01/01/2018-12-31lesson/" class="link f-fl">⟵2018-12-31lesson</a>
+    
+    
+      <a href="/2018/12/09/2018-12-9lesson/" class="link f-fr">2018-12-9lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

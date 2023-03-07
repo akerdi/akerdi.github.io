@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>谈谈对swift的看法 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-05-29 22:24:22) swift出来挺久的了，我一直在升级OC的技能，基本基础都OK。最近要开始一个新的项目，我就在思考，如果不写swift会带来的后果，这是考量我该不该使用新的语言，毕竟我之前从来没看。  我感觉，预计今年十月份开始，swift将会大行其道。你不会可能都说不过去了，毕竟就如一些技能“ASI”的过气、“MRC”也过气等等；这都是知名的，都是我之前的时代，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈对swift的看法">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/谈谈对swift的看法/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-05-29 22:24:22) swift出来挺久的了，我一直在升级OC的技能，基本基础都OK。最近要开始一个新的项目，我就在思考，如果不写swift会带来的后果，这是考量我该不该使用新的语言，毕竟我之前从来没看。  我感觉，预计今年十月份开始，swift将会大行其道。你不会可能都说不过去了，毕竟就如一些技能“ASI”的过气、“MRC”也过气等等；这都是知名的，都是我之前的时代，">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈谈对swift的看法">
+<meta name="twitter:description" content="发表于(2016-05-29 22:24:22) swift出来挺久的了，我一直在升级OC的技能，基本基础都OK。最近要开始一个新的项目，我就在思考，如果不写swift会带来的后果，这是考量我该不该使用新的语言，毕竟我之前从来没看。  我感觉，预计今年十月份开始，swift将会大行其道。你不会可能都说不过去了，毕竟就如一些技能“ASI”的过气、“MRC”也过气等等；这都是知名的，都是我之前的时代，">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">谈谈对swift的看法</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-05-29 22:24:22)</p>
+<p>swift出来挺久的了，我一直在升级OC的技能，基本基础都OK。<br>最近要开始一个新的项目，我就在思考，如果不写swift会带来的后果，这是考量我该不该使用新的语言，毕竟我之前从来没看。</p>
+<ol>
+<li>我感觉，预计今年十月份开始，swift将会大行其道。你不会可能都说不过去了，毕竟就如一些技能“ASI”的过气、“MRC”也过气等等；这都是知名的，都是我之前的时代，我也在改变，那就毋庸置疑了，应该改变。</li>
+<li>我个人觉得，目前程序员不就是一直在学新的东西么，不就是一个语言么，没啥难度，用法不会，查不查就可以，毕竟和OC很相近的。</li>
+<li>之前我用的库也都能用，而且swift语言其实是基于OC的库，OC多稳定，swift只是一个编译程序的过程用的工具</li>
+<li>我当时花了两天，边打游戏边看github一个“30天30 swift demo”，基本也能掌握。</li>
+<li>怕个鸟，就是从ReactiveCocoa转到RxSwift比较麻烦<br>这里贴一个大哥的“简书”地址—-&gt;<a href="http://www.jianshu.com/p/7e286fbbc3d7，我当时学ReactiveCocoa的时候，其实也是比较值的变化，慢慢学，看了一会其实跟OC的响应式编程相近。项目中用到，多用几次就会了。" target="_blank" rel="noopener">http://www.jianshu.com/p/7e286fbbc3d7，我当时学ReactiveCocoa的时候，其实也是比较值的变化，慢慢学，看了一会其实跟OC的响应式编程相近。项目中用到，多用几次就会了。</a><br>其实后期我越来越感觉到，其实语言这东西，就是一个工具，就是一个工具，你写的东西，在相应的编译器才识别，也就是一个描述性文档，想要学的深，只能慢慢来，现在的范围广这一步我走的还行，多用多接触一些东西，慢慢的也要试试走更底层一些东西啦，，人生不停下就好，，，我还想当管理，我还想多学点，我还想户外运动，我还想业余活动，，，你慢慢想吧，，，，，，，，，</li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/xcode一直不会更新的新下载的证书/" class="link f-fl">⟵xcode一直不会更新的新下载的证书</a>
+    
+    
+      <a href="/2017/01/08/IOS图片加水印或文字/" class="link f-fr">IOS图片加水印或文字⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

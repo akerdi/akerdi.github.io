@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>React-native自学之路 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="发表于(2016-01-26 12:12:40)首先先去React-native官网看看。网上一堆的文章；这里推荐两篇文章1：https://github.com/ele828/react-native-guide；https://github.com/vczero/react-native-lesson大爱第二个，宇宙无敌超级详细；谢谢作者。接下来说几点我觉得我踩得坑：1、react-nativ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-native自学之路">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/08/React-native自学之路/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="发表于(2016-01-26 12:12:40)首先先去React-native官网看看。网上一堆的文章；这里推荐两篇文章1：https://github.com/ele828/react-native-guide；https://github.com/vczero/react-native-lesson大爱第二个，宇宙无敌超级详细；谢谢作者。接下来说几点我觉得我踩得坑：1、react-nativ">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React-native自学之路">
+<meta name="twitter:description" content="发表于(2016-01-26 12:12:40)首先先去React-native官网看看。网上一堆的文章；这里推荐两篇文章1：https://github.com/ele828/react-native-guide；https://github.com/vczero/react-native-lesson大爱第二个，宇宙无敌超级详细；谢谢作者。接下来说几点我觉得我踩得坑：1、react-nativ">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">React-native自学之路</h2>
+  <p class="sub">Jan 8, 2017</p>
+  <article class="content">
+    <p>发表于(2016-01-26 12:12:40)<br>首先先去React-native官网看看。网上一堆的文章；这里推荐两篇文章1：<a href="https://github.com/ele828/react-native-guide；https://github.com/vczero/react-native-lesson大爱第二个，宇宙无敌超级详细；谢谢作者。" target="_blank" rel="noopener">https://github.com/ele828/react-native-guide；https://github.com/vczero/react-native-lesson大爱第二个，宇宙无敌超级详细；谢谢作者。</a><br>接下来说几点我觉得我踩得坑：<br>1、react-native的Exmaple里面的运行不了，他的URL错了，用下面的注释掉的那个，多试几次就可以了。<br>2：忍住性子把第二个大神给的demo全部写几遍，，当然，我现在才写到第二个，共勉励之啦。<br>3、不要用atom，特别不要用atom的那个FaceBook的那个插件，卡成娘了。我现在用sublime，老是弹出来让我去purchase，特么没钱。他喵的。<br>4、sublime没有提示，去这个网址<a href="https://packagecontrol.io/installation#st2，官网里下package" target="_blank" rel="noopener">https://packagecontrol.io/installation#st2，官网里下package</a> control</p>
+<p>安装插件：<br>使用Package Control组件安装,先安装此组件<br>按Ctrl+`调出console，粘贴以下代码到底部命令行并回车：<br>import urllib.request,os,hashlib; h = ‘eb2297e1a458f27d836c04bb0cbaf282’ +<br>‘d0e7a3098092775ccb37ca9d6b2e4b7d’; pf = ‘Package Control.sublime-package’; ipp = sublime.installed_packages_path();<br>urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( ‘<a href="http://packagecontrol.io/&#39;" target="_blank" rel="noopener">http://packagecontrol.io/&#39;</a> + pf.replace(‘ ‘, ‘ ‘)).read(); dh =<br>hashlib.sha256(by).hexdigest(); print(‘Error validating download (got %s instead of %s), please try manual install’ % (dh, h)) if dh != h else open(os.path.join( ipp, pf), ‘wb’ ).write(by)<br>重启Sublime Text 3，如果在Perferences-&gt;package settings中看到package control这一项，则安装成功。<br>用Package Control安装插件的方法<br>按下Ctrl+Shift+P调出命令面板，输入install 调出 Install Package 选项并回车，然后在列表中选中要安装的插件。</p>
+<p>5、重点说下，snippet是代码片段，就是提示你用的，一步一步试试。不要放弃，走多了的，我相信花时间投资React-native肯定会有回报的。未来肯定很明亮。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/08/React-native经历/" class="link f-fl">⟵React-native经历</a>
+    
+    
+      <a href="/2017/01/08/iOSpop返回手势向右滑动/" class="link f-fr">iOSpop返回手势向右滑动⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

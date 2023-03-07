@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018-11-9lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上线React+Mobx+Antd + build + Nginx 经历首先非常开心，自己找遍解决方案，终于来到终点：http://lsgood.top 我的第一个网页。该网页由爬虫爬了一个二次元图片的网站，然后一个Typescript koa 后台提供数据，再由Reactjs 网页展现。 首先遇到的第一个大山：centos 装mongodb  先使用yum 安装mongodb，然后一直报”no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-11-9lesson">
+<meta property="og:url" content="https://akerdi.github.io/2018/11/09/2018-11-9lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="上线React+Mobx+Antd + build + Nginx 经历首先非常开心，自己找遍解决方案，终于来到终点：http://lsgood.top 我的第一个网页。该网页由爬虫爬了一个二次元图片的网站，然后一个Typescript koa 后台提供数据，再由Reactjs 网页展现。 首先遇到的第一个大山：centos 装mongodb  先使用yum 安装mongodb，然后一直报”no">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-11-9lesson">
+<meta name="twitter:description" content="上线React+Mobx+Antd + build + Nginx 经历首先非常开心，自己找遍解决方案，终于来到终点：http://lsgood.top 我的第一个网页。该网页由爬虫爬了一个二次元图片的网站，然后一个Typescript koa 后台提供数据，再由Reactjs 网页展现。 首先遇到的第一个大山：centos 装mongodb  先使用yum 安装mongodb，然后一直报”no">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018-11-9lesson</h2>
+  <p class="sub">Nov 9, 2018</p>
+  <article class="content">
+    <h1 id="上线React-Mobx-Antd-build-Nginx-经历"><a href="#上线React-Mobx-Antd-build-Nginx-经历" class="headerlink" title="上线React+Mobx+Antd + build + Nginx 经历"></a>上线React+Mobx+Antd + build + Nginx 经历</h1><p>首先非常开心，自己找遍解决方案，终于来到终点：<a href="http://lsgood.top" target="_blank" rel="noopener">http://lsgood.top</a> 我的第一个网页。<br>该网页由爬虫爬了一个二次元图片的网站，然后一个Typescript koa 后台提供数据，再由Reactjs 网页展现。</p>
+<p>首先遇到的第一个大山：centos 装mongodb </p>
+<p>先使用yum 安装mongodb，然后一直报”no package is avialable. nothing to do”, 我是mongodb 官网教程，建了一个.repo 来整的，然后又学会去redhat 的源找找看看。都在的，可以的呀。</p>
+<p>然后找到<code>$ getconf LONG_BIT</code>终于得知我的是32位。那就说明yum 的那些源都是x86 ，查看一番：果然。屁颠屁颠去看了有哪些32位mongodb 的我可以用。</p>
+<p>google 找到一个csdn 里面有个2.x 版本的，装上去果然可以启动，把我开心的呀。然后服务器用mongoose 2.x 版本及以下都不可用。一番寻找，找到<br><a href="https://blog.csdn.net/will5451/article/details/78642759" target="_blank" rel="noopener">CSDN centos用yum安装mongodb及 32位linux（centos）下mongoDB的安装</a>  的文章。采用wget 下载相应的版本。前往<a href="https://www.mongodb.com/download-center/community" target="_blank" rel="noopener">官网工具下载区</a> ，一开始也不明白哪个我真的可以用，最后终于找到排到最后一个的3.0x 版本的真的真的是32bit。</p>
+<p>快速放到服务器启动起来的时候，真的开心啊。</p>
+<p>然而一心以为后面React 网页yarn build 应该很简单，没想到又是一番挫折。</p>
+<p>既然数据好了，赶紧打包我的第一个React 应用。<code>yarn build</code> 很快！</p>
+<p>然后配置一下Nginx，把build 出来的文件拖到<code>/root/Work/web/girl</code> 目录下,Nginx 如下配置</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span> default_server;</span><br><span class="line">    <span class="attribute">server_name</span> www.lsgood.top lsgood.top;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /girl/ &#123;</span><br><span class="line">        <span class="attribute">root</span> /root/Work/web/;</span><br><span class="line">        <span class="attribute">index</span> index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先出来一个问题：由于不是放在Nginx 根目录，是<code>http://lsgood.top/girl</code> 这样的目录，导致内部css 资源、static 资源 找不到根路由，找的是<code>http://lsgood.top/xxxstaticxxx</code> 的目录资源，那就在package.json 加上一个field <code>homepage: &quot;.&quot;</code> 。</p>
+<p>这个解决之后出现一个花费我1.5 天寻找是React 内部问题，还是Nginx 没有配置好的问题：Nginx 配置路由(不同根目录)要么出现<code>Uncaught SyntaxError: Unexpected token &lt;</code> ；要么整个页面就是空白，同时查看<strong>右键 - 检查 - Sources</strong> 将我的React 程序目录源代码全部展示出来了。</p>
+<p>说明并没有启动我对应的index.html。我不明白为什么会出现这样，期间问了我以前同事，但还是没有答案（毕竟突然给他看，不明白里面所写，也忙，然后没有解出来）。</p>
+<p>然后1天过去后，我让现在后台帮忙，放到可以运行的网页那边看看。一开始怕他们麻烦，推荐他说，直接放文件名后面，就不用建立子域名。然后还是失败！</p>
+<p>这样我还是不知道是哪边的问题，我又又又google 找了下，有说不要放在<a href="http://host/girl/" target="_blank" rel="noopener">http://host/girl/</a> 子目录，放到Nginx根目录。我赶紧让后台帮忙再试一波！</p>
+<p>果然！成功，不过index 首页是OK，但是路由却进不去了。首页OK，路由有问题，说明React 应用没问题，Nginx 配置错误了，同时React 里面的路由也出错了。</p>
+<p>我又双叒叕google，找到这篇<a href="https://blog.csdn.net/Sophie_U/article/details/80006723" target="_blank" rel="noopener">关于react 在打包后：“找不到资源路径”的问题、部署到服务器二级目录 “打开为空白” 的问题</a> 这里说到一个很重点的信息：<strong>browserRouter/PUBLIC_URL/NGINX</strong> 这么几个重点词语。我还真用到了browserRouter， 问题也确实是<strong>访问时页面空白，没有报错</strong> 这种情况。</p>
+<p>那我就采用他的办法（花了一个下午加加班到晚上8点多）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">1. React 在build 时:</span><br><span class="line">$ PUBLIC_URL=http://lsgood.top/ yarn build</span><br><span class="line">2. 将build 的子文件全部放到 /var/www/ 下面</span><br><span class="line">3. Nginx conf 配置：（参考 https://gkedge.gitbooks.io/react-router-in-the-real/content/nginx.html）</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    server_name www.lsgood.top lsgood.top;</span><br><span class="line"></span><br><span class="line">    root /var/www;</span><br><span class="line">    index index.html index.htm;      </span><br><span class="line">    # Any route that doesn&apos;t have a file extension (e.g. /devices)</span><br><span class="line">    location ~ ^/favicon\.ico$ &#123;</span><br><span class="line">        root /var/www;</span><br><span class="line">    &#125;</span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ /index.html;</span><br><span class="line">        index index.html;</span><br><span class="line">        proxy_set_header   Host             $host;</span><br><span class="line">        proxy_set_header   X-Real-IP        $remote_addr;</span><br><span class="line">        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header   X-Forwarded-Proto  $scheme;</span><br><span class="line">    &#125;</span><br><span class="line">    location @fallback &#123;</span><br><span class="line">        rewrite ^.*$ /index.html break;</span><br><span class="line">    &#125;</span><br><span class="line">    location /girlS/ &#123;</span><br><span class="line">        proxy_pass http://127.0.0.1:8000/girl.v1/;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /popcircle/ &#123;</span><br><span class="line">        root /root/Work/game/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完美！</p>
+<p>服务器也能运行、游戏也能运行、网页也成功运行了。</p>
+<p>这三天的努力，愁的我都长了个痘痘，至少解决问题都是自己解决的，又get 到一个技能。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/11/10/2018-11-10lesson/" class="link f-fl">⟵2018-11-10lesson</a>
+    
+    
+      <a href="/2018/10/31/2018-10-31lesson/" class="link f-fr">2018-10-31lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

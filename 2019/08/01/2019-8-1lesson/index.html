@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2019-8-1lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="k3s最近花了点时间做服务器集群工作尝试。原因是，单就docker，如果服务器不尝试集群，那么对于高可用、高并发，都将是梦，永远都有瓶颈。 我认识的运维和他人认知的运维不一样。 我觉得真正的开发、运维，是让你在最有限的工具、环境里面，做出最大可用的效益。 我用rancher k8s 一上来就吃掉了所有cpu、内存，那我们就啥也搞不了了。当时卡的受不了，直接换成k3s。 我的两只小鸡配置： 1236">
+<meta name="keywords" content="k3s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019-8-1lesson">
+<meta property="og:url" content="https://akerdi.github.io/2019/08/01/2019-8-1lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="k3s最近花了点时间做服务器集群工作尝试。原因是，单就docker，如果服务器不尝试集群，那么对于高可用、高并发，都将是梦，永远都有瓶颈。 我认识的运维和他人认知的运维不一样。 我觉得真正的开发、运维，是让你在最有限的工具、环境里面，做出最大可用的效益。 我用rancher k8s 一上来就吃掉了所有cpu、内存，那我们就啥也搞不了了。当时卡的受不了，直接换成k3s。 我的两只小鸡配置： 1236">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019-8-1lesson">
+<meta name="twitter:description" content="k3s最近花了点时间做服务器集群工作尝试。原因是，单就docker，如果服务器不尝试集群，那么对于高可用、高并发，都将是梦，永远都有瓶颈。 我认识的运维和他人认知的运维不一样。 我觉得真正的开发、运维，是让你在最有限的工具、环境里面，做出最大可用的效益。 我用rancher k8s 一上来就吃掉了所有cpu、内存，那我们就啥也搞不了了。当时卡的受不了，直接换成k3s。 我的两只小鸡配置： 1236">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2019-8-1lesson</h2>
+  <p class="sub">Aug 1, 2019</p>
+  <article class="content">
+    <h1 id="k3s"><a href="#k3s" class="headerlink" title="k3s"></a>k3s</h1><p>最近花了点时间做服务器集群工作尝试。原因是，单就docker，如果服务器不尝试集群，那么对于高可用、高并发，都将是梦，永远都有瓶颈。</p>
+<p>我认识的运维和他人认知的运维不一样。</p>
+<p>我觉得真正的开发、运维，是让你在最有限的工具、环境里面，做出最大可用的效益。</p>
+<p>我用rancher k8s 一上来就吃掉了所有cpu、内存，那我们就啥也搞不了了。当时卡的受不了，直接换成k3s。</p>
+<p>我的两只小鸡配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">67.x.x.x</span><br><span class="line">CPU: 1</span><br><span class="line">RAM: 256M (你没看错, 于是我加点交换区2G, 但是他是CN2 直连， 搬瓦工)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">104.x.x.x</span><br><span class="line">CPU: 1</span><br><span class="line">RAM: 1G (加交换区2G，网络稍慢些， hostwind)</span><br></pre></td></tr></table></figure>
+<p>以上就是我的两只炮灰小鸡啦。</p>
+<p>之后会对k3s 部署进行说明。</p>
+<p>当前k3s 部署会将nginx 端口替换。暂时对这个了解不清。解决了之后回来完成这个主题。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2019/08/05/2019-8-5lesson/" class="link f-fl">⟵2019-8-5lesson</a>
+    
+    
+      <a href="/2019/07/23/2019-7-23lesson/" class="link f-fr">2019-7-23lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>根据一张gif图返回每张图片 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于GPUImage的UIElement在processFrame的block中回调需要用到过渡图片调用，这里处理是将gif图全部取出来，然后在里面进行更新根据一篇博客http://blog.csdn.net/zafir_zzf/article/details/52993853有以下操作：  获取到GIF图的源数据 CGImageSourceRefCGImageSourceRef gifSourc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="根据一张gif图返回每张图片">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/10/根据一张gif图返回每张图片/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="由于GPUImage的UIElement在processFrame的block中回调需要用到过渡图片调用，这里处理是将gif图全部取出来，然后在里面进行更新根据一篇博客http://blog.csdn.net/zafir_zzf/article/details/52993853有以下操作：  获取到GIF图的源数据 CGImageSourceRefCGImageSourceRef gifSourc">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.404Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="根据一张gif图返回每张图片">
+<meta name="twitter:description" content="由于GPUImage的UIElement在processFrame的block中回调需要用到过渡图片调用，这里处理是将gif图全部取出来，然后在里面进行更新根据一篇博客http://blog.csdn.net/zafir_zzf/article/details/52993853有以下操作：  获取到GIF图的源数据 CGImageSourceRefCGImageSourceRef gifSourc">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">根据一张gif图返回每张图片</h2>
+  <p class="sub">Jan 10, 2017</p>
+  <article class="content">
+    <p>由于GPUImage的UIElement在processFrame的block中回调需要用到过渡图片调用，这里处理是将gif图全部取出来，然后在里面进行更新<br>根据一篇博客<a href="http://blog.csdn.net/zafir_zzf/article/details/52993853" target="_blank" rel="noopener">http://blog.csdn.net/zafir_zzf/article/details/52993853</a><br>有以下操作：</p>
+<ol>
+<li>获取到GIF图的源数据 CGImageSourceRef<br><code>CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)fileUrl, NULL);</code></li>
+<li>由源数据 SourceRef生成一张CGImageRef类型图片<br><code>CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL);</code></li>
+<li>拿到里面的图片数<br><code>size_t gifCount = CGImageSourceGetCount(gifSource);</code></li>
+<li>有CGImageRef生成UIImage ,我们想要的.<br><code>UIImage *image = [UIImage imageWithCGImage:imageRef];</code></li>
+<li>最后别忘了给他释放掉<br><code>CGImageRelease(imageRef);</code><br>他这里提供了一段代码,记得，需要添加Binary：ImageIO<br>`#import &lt;ImageIO/ImageIO.h&gt;<br>@implementation NSArray (CDIExtention)</li>
+</ol>
+<ul>
+<li>(NSArray <em>)cdi_imagesWithGif:(NSString </em>)gifNameInBoundle {<br>NSURL <em>fileUrl = [[NSBundle mainBundle] URLForResource:gifNameInBoundle withExtension:@”gif”];<br>CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)fileUrl, NULL);<br>size_t gifCount = CGImageSourceGetCount(gifSource);<br>NSMutableArray </em>frames = [[NSMutableArray alloc]init];<br>for (size_t i = 0; i&lt; gifCount; i++) {<br>CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL);<br>UIImage *image = [UIImage imageWithCGImage:imageRef];<br>[frames addObject:image];<br>CGImageRelease(imageRef);<br>}<br>return frames;<br>}<br>@end`</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/12/20170112meetbug/" class="link f-fl">⟵20170112meetbug</a>
+    
+    
+      <a href="/2017/01/10/忙碌的2016/" class="link f-fr">忙碌的2016⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

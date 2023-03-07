@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2018-5-9lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2018/04/23 Clang Attributes 黑魔法小记http://blog.sunnyxx.com/2016/05/14/clang-attributes/#objc_requires_super objc_subclassing_restricted objc_requires_super objc_boxable constructor/desctructor objc_runt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-5-9lesson">
+<meta property="og:url" content="https://akerdi.github.io/2018/05/20/2018-5-9lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="2018/04/23 Clang Attributes 黑魔法小记http://blog.sunnyxx.com/2016/05/14/clang-attributes/#objc_requires_super objc_subclassing_restricted objc_requires_super objc_boxable constructor/desctructor objc_runt">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018-5-9lesson">
+<meta name="twitter:description" content="2018/04/23 Clang Attributes 黑魔法小记http://blog.sunnyxx.com/2016/05/14/clang-attributes/#objc_requires_super objc_subclassing_restricted objc_requires_super objc_boxable constructor/desctructor objc_runt">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2018-5-9lesson</h2>
+  <p class="sub">May 20, 2018</p>
+  <article class="content">
+    <p>2018/04/23</p>
+<h3 id="Clang-Attributes-黑魔法小记"><a href="#Clang-Attributes-黑魔法小记" class="headerlink" title="Clang Attributes 黑魔法小记"></a>Clang Attributes 黑魔法小记</h3><p><a href="http://blog.sunnyxx.com/2016/05/14/clang-attributes/#objc_requires_super" target="_blank" rel="noopener">http://blog.sunnyxx.com/2016/05/14/clang-attributes/#objc_requires_super</a></p>
+<p>objc_subclassing_restricted</p>
+<p>objc_requires_super</p>
+<p>objc_boxable</p>
+<p>constructor/desctructor</p>
+<p>objc_runtime_name</p>
+<h3 id="Mac-启动服务配置"><a href="#Mac-启动服务配置" class="headerlink" title="Mac 启动服务配置"></a>Mac 启动服务配置</h3><p>redis<br>start: redis-server /usr/local/etc/redis.conf<br>stop:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps axu|grep redis  ## 查找redis-server的PID</span><br><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure>
+<p>mysql<br>start<br>mysql-server start</p>
+<h3 id="2018-05-07交涉"><a href="#2018-05-07交涉" class="headerlink" title="2018/05/07交涉"></a>2018/05/07交涉</h3><p>2017年2月来到粉粉，一开始一直学习进阶姿态。当时c哥来了不久，要成立一个海外团队。当时的人选是LPD(我猜的，毕竟我刚来不太久5月，而LPD 刚好在那个时候选择了回家发展)，后来大师、我、c哥去小会议室说明了计划，任务。<br>我在6、7月份的时候开始和c哥合作，为了合作更愉快，c哥甚至于搬到我位置边。那个时候我只想着更好的处理，学习，进阶，发展。是的，那个时候和他合作的一款绘图，简直让我开心不已，我和他不断交谈，不断完善。后来正要开始一款记账软件的时候，老板也已经没有耐心：没有产品思维，没有变现途径，当断则断的砍掉了该业务。当时我iOS、一个安卓、一个实习编辑(他的口头禅：原来是你小子，把皇君给我的好吃都给吃了回扣了)、c哥就此分开。实习编辑直接辞职；c哥也还想挽回一些结果，但还是回天乏力，于是也选择了离开；我和安卓又回到了之前的岗位了(好奇，我们居然不开掉了？虽然工资一年来没有变化，但是实力绝对学够了，幸好当时没离开，学到就是值);<br>c哥离开前给了我份设计稿，一种MetaBall 的设计记账软件。当时我花了九牛二虎之力，万分努力打磨出来。核心物件出来了，我们又继续打磨产品，打磨整个工程。一开始上线是在c哥账号，叫”Drop”， 后改名叫”小池记账”，再后来改名叫”小泉记账”；<br>真正的问题开始在2018年1月左右。<br>c哥打算喊我去他们公司开发。我心里思考是，如果我去了，按照c哥性格，我估计工资高不到哪去，肯定说什么创业啦，不要在意这么多啦，好好完成功能等等等；学的东西肯定也是不够的。<br>于是c哥说，能把源码给到他们。他的承诺是3个月10w 量，给我3w(我和他一人一半，算是6w)；我不看重这个，这个不是买断，也不是完全合作，我源码一给，相当于我没有任何有利地位了。最终做法：我同意3个月给他尝试，源码给他(核心效果代码做静态库处理，就这他还想要源码，说他们员工很轴，估计当时他就像独吞全部成果吧)，2500给我(相当于5000两人，我做事公平)；<br>我们当时有一款矢量图软件，我有“商店”，但是素材商品快速制作在于c哥手，直到2018年5月终于得到该技术，也就是2018年5月5日周六我前往他们公司，然后c哥终于回忆起来制作历程交付与我(其实教程我之前有一份不完整的，要提交给公司的，但是谁也看不懂，做不出来)。同时作为回馈，我给他们公司员工做一下技术指导，指导过程发现，他们公司的其他好几款其他APP，比如“Uki”，还有其他APP的核心代码都从我那份拷贝得来。这是技术流失。<br>然后如标题，2018年5月7号周一，我与c哥交涉“drop”下一步合作事宜，这天离当时已经有4月多之久(当时的考虑就是还没得到制作画画素材技术，不谈论该话题)；<br>当时我问这个话题的时候，他以为我要3w 的承诺；我说我知道没有10w 的量，但是3个月已过，接下来怎么继续合作；他还说接下来10w 日货，还是承诺2w；兄得，如果把所以权，都给你，就跟我没什么事一样了，拿到我所有源码就这么为所欲为么？那要这么说，我来替你运营，日活10个人，我给你1千万；那些没有意义的承诺。<br>我的字典里一直有句话：</p>
+<blockquote>
+<p>不要跟比自己境况差的人，讨价还价<br>更不要跟比自己有钱的人，抢着买单</p>
+</blockquote>
+<p>能让则让，小弟这么拼命给你干活，你就拿到我源码就“你要介意的话，我们下一版代码会重新写”；我的意思很简单，商业利益失败，朋友还要交的，c哥接下来一句“包括涂色的布局ui也不要用我的设计，既然在意就说清楚，大家都有知识产权对吧”，直接挑明了朋友都没得做。那算了，说明我的意义就这么大，就是那个有静态库的源码的价值。<br>行行行，你是项目负责人，全是你的成就。我啥都没有起到作用，毕竟代码书写被你改了嘛。<br>后来的几天，我全力工作，优化那个涂色项目。接下来其实我完全可以就这么卖了“drop”源码，或者开源了，反正对我意义不大，我的能力不是只有drop。得了芝麻“有静态库的源码”丢了西瓜。<br>之前这么崇拜你的我，也算清醒。我觉得我不太吃亏。对我来说，重要的是涂色项目，一个完整生态，商品和商店，而且可以量产。<br>其实回顾来说，我觉得做人真不必如此，你的钱是我10倍多，我连午饭都要去很远很远的食堂，晚饭省钱饿着回家吃的我，都不舍得花钱，有孩子要养，最近又有买房需求，再说，涂色素材技术本应回交公司，我当时还特意解决了c哥公司很多重大崩溃技术，我觉得您真不必如此。<br>最后一次尊重。您高升就好。“drop”我会留下自己开发，不然对你们公司肯定是致命的，毕竟全公司都花时间搞那个了，我公开出去，或者自己搞个差不多的，我的功能肯定比你多，开发比你快、稳定，然后就跟着你的ISO，蹭你们热量，你们会白做的！<br>接下来我继续加油，避开他以前的设计范畴，一些以前我也参与的设计我就不必客气，这不全是你的功劳，不全是你的成就。都是一起探讨出来的，当时我的努力，我身后要保护的人，都提醒我，该客气时客气，该凶时就该认真对待了！<br>之前去他们公司，看他们的代码，确实，一个成功的产品，开发的人还是很重要的。代码规范，模块划分。我猜想，c哥现在公司应该开不久，或者说开不大。<br>前几天开了些文章，他国对中国封锁核弹、氢弹技术，中国克服困难做出来了；他国对中国封锁航天技术，中国又突出重围。我想我也正需要这股拼劲。这几天硬着头皮，老婆小小的学了把一个方便设计的软件，我自己搞了搞ps，把开源的声音、字体、图片等都找全；<br>给自己软件做东西，你会发现，你总是这个做简单点，那个可以省略就省略吧。于是做的总是自己都不满意。回头想想，你给公司做的时候你会这样么？你肯定是硬着头皮也要搞出来，能搞出来的就搞得更好那种。<br>你要的是，把做公司的那种态度用到写自己的上面，同时，规划好时间，集中精力攻破难关。<br>这次学到的东西也很多很多，同时也警醒自己，有些事情一定要思考思考在思考，一定不能出大错。这次错误，算是损失，但是很能忍。<br>毕竟也学了那么多，同时还长进了这么多。<br>应该应该的，小弟就该吃糠，小弟家人就是垃圾，不应该有这么多思想，不应该要求这么多。<br>timestamp: 2018/5/9 田小新</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2018/07/21/2018-6-28lesson/" class="link f-fl">⟵2018/6/28lesson</a>
+    
+    
+      <a href="/2018/04/22/2018-04-22lesson/" class="link f-fr">2018-04-22lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

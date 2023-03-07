@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2017/3/13lesson | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930//创建标准的变换矩阵CGAffineTransform CGAffineTransformIdentity;//手动创建变换矩阵CGAffineTransform CGAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017&#x2F;3&#x2F;13lesson">
+<meta property="og:url" content="https://akerdi.github.io/2017/03/13/2017-3-13lesson/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930//创建标准的变换矩阵CGAffineTransform CGAffineTransformIdentity;//手动创建变换矩阵CGAffineTransform CGAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d,">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017&#x2F;3&#x2F;13lesson">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930//创建标准的变换矩阵CGAffineTransform CGAffineTransformIdentity;//手动创建变换矩阵CGAffineTransform CGAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d,">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">2017/3/13lesson</h2>
+  <p class="sub">Mar 13, 2017</p>
+  <article class="content">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">//创建标准的变换矩阵</span><br><span class="line">CGAffineTransform CGAffineTransformIdentity;</span><br><span class="line">//手动创建变换矩阵</span><br><span class="line">CGAffineTransform CGAffineTransformMake(CGFloat a, CGFloat b, CGFloat c, CGFloat d, CGFloat tx, CGFloat ty);</span><br><span class="line">//创建平移变换</span><br><span class="line">CGAffineTransform CGAffineTransformMakeTranslation(CGFloat tx, CGFloat ty);</span><br><span class="line">//创建缩放变换</span><br><span class="line">CGAffineTransform CGAffineTransformMakeScale(CGFloat sx, CGFloat sy);</span><br><span class="line">//创建旋转变换</span><br><span class="line">CGAffineTransform CGAffineTransformMakeRotation(CGFloat angle);</span><br><span class="line">//判断某个变化是否是来自标准矩阵的变换</span><br><span class="line">bool CGAffineTransformIsIdentity(CGAffineTransform t);</span><br><span class="line">//对某个变换矩阵进行平移变换</span><br><span class="line">CGAffineTransform CGAffineTransformTranslate(CGAffineTransform t, CGFloat tx, CGFloat ty);</span><br><span class="line">//对某个变换矩阵进行缩放变换</span><br><span class="line">CGAffineTransform CGAffineTransformScale(CGAffineTransform t, CGFloat sx, CGFloat sy);</span><br><span class="line">//对某个变换矩阵进行旋转变换</span><br><span class="line">CGAffineTransform CGAffineTransformRotate(CGAffineTransform t, CGFloat angle);</span><br><span class="line">//对某个变换矩阵进行翻转变换</span><br><span class="line">CGAffineTransform CGAffineTransformInvert(CGAffineTransform t);</span><br><span class="line">//对两个变换矩阵进行计算</span><br><span class="line">CGAffineTransform CGAffineTransformConcat(CGAffineTransform t1, CGAffineTransform t2);</span><br><span class="line">//比较两个变换矩阵是否相同</span><br><span class="line">bool CGAffineTransformEqualToTransform(CGAffineTransform t1, CGAffineTransform t2);</span><br><span class="line">//获取应用变换后某点的坐标</span><br><span class="line">CGPoint CGPointApplyAffineTransform(CGPoint point, CGAffineTransform t);</span><br><span class="line">//获取应用变换后某个区域的尺寸</span><br><span class="line">CGSize CGSizeApplyAffineTransform(CGSize size, CGAffineTransform t);</span><br><span class="line">//获取应用变换后某个区域的位置和尺寸</span><br><span class="line">CGRect CGRectApplyAffineTransform(CGRect rect, CGAffineTransform t);</span><br></pre></td></tr></table></figure>
+<p>记录一下矩阵变换含义</p>
+<p>昨天做了下图片PhotoKit取图片，使用PHImageManager 同步获取200*200某张图片直接在cellForItem里面，性能还是不错的。估计得判断GIF，只能在用户点击之后，才能使用方法验证其属性。继续往下做吧。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">2xx  成功  </span><br><span class="line">200  正常；请求已完成。  </span><br><span class="line">201  正常；紧接 POST 命令。  </span><br><span class="line">202  正常；已接受用于处理，但处理尚未完成。  </span><br><span class="line">203  正常；部分信息 — 返回的信息只是一部分。  </span><br><span class="line">204  正常；无响应 — 已接收请求，但不存在要回送的信息。  </span><br><span class="line">3xx  重定向  </span><br><span class="line">301  已移动 — 请求的数据具有新的位置且更改是永久的。  </span><br><span class="line">302  已找到 — 请求的数据临时具有不同 URI。  </span><br><span class="line">303  请参阅其它 — 可在另一 URI 下找到对请求的响应，且应使用 GET 方法检索此响应。  </span><br><span class="line">304  未修改 — 未按预期修改文档。  </span><br><span class="line">305  使用代理 — 必须通过位置字段中提供的代理来访问请求的资源。  </span><br><span class="line">306  未使用 — 不再使用；保留此代码以便将来使用。  </span><br><span class="line">4xx  客户机中出现的错误  </span><br><span class="line">400  错误请求 — 请求中有语法问题，或不能满足请求。  </span><br><span class="line">401  未授权 — 未授权客户机访问数据。  </span><br><span class="line">402  需要付款 — 表示计费系统已有效。  </span><br><span class="line">403  禁止 — 即使有授权也不需要访问。  </span><br><span class="line">404  找不到 — 服务器找不到给定的资源；文档不存在。  </span><br><span class="line">407  代理认证请求 — 客户机首先必须使用代理认证自身。  </span><br><span class="line">415  介质类型不受支持 — 服务器拒绝服务请求，因为不支持请求实体的格式。  </span><br><span class="line">5xx  服务器中出现的错误  </span><br><span class="line">500  内部错误 — 因为意外情况，服务器不能完成请求。  </span><br><span class="line">501  未执行 — 服务器不支持请求的工具。  </span><br><span class="line">502  错误网关 — 服务器接收到来自上游服务器的无效响应。  </span><br><span class="line">503  无法获得服务 — 由于临时过载或维护，服务器无法处理请求。</span><br></pre></td></tr></table></figure>
+<p>遇到一个问题，就是字符里面出现\r\n、\r、\n、\t等特殊字符，做法是将其replace成\r\n、\r、\n、\t、，没有其他做法了，，特殊的是，\r\n需要最先被替换</p>
+<p>//    一列数：-1,2,3,10,15,26…n，写一个方法计算第n个数的值</p>
+<blockquote>
+</blockquote>
+<p>答案：<br>3-&gt;1<br>7-&gt;5<br>11-&gt;?<br>?应该是9<br>然后接下去是<br>隔下去数是加15</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">BOOL needDescount = NO;</span><br><span class="line">int increaseCount = 4;</span><br><span class="line">int totalNum = -1;</span><br><span class="line">while (true) &#123;</span><br><span class="line">if (needDescount) &#123;</span><br><span class="line">increaseCount -=2;</span><br><span class="line">needDescount = YES;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">increaseCount +=4;</span><br><span class="line">needDescount = NO;</span><br><span class="line">&#125;</span><br><span class="line">totalNum +=increaseCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>IOS－－ UIView中的坐标转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 将像素point由point所在视图转换到目标视图view中，返回在目标视图view中的像素值</span><br><span class="line">- (CGPoint)convertPoint:(CGPoint)point toView:(UIView *)view;</span><br><span class="line">// 将像素point从view中转换到当前视图中，返回在当前视图中的像素值</span><br><span class="line">- (CGPoint)convertPoint:(CGPoint)point fromView:(UIView *)view;</span><br><span class="line"></span><br><span class="line">// 将rect由rect所在视图转换到目标视图view中，返回在目标视图view中的rect</span><br><span class="line">- (CGRect)convertRect:(CGRect)rect toView:(UIView *)view;</span><br><span class="line">// 将rect从view中转换到当前视图中，返回在当前视图中的rect</span><br><span class="line">- (CGRect)convertRect:(CGRect)rect fromView:(UIView *)view;</span><br><span class="line"></span><br><span class="line">例把UITableViewCell中的subview(btn)的frame转换到 controllerA中</span><br><span class="line"></span><br><span class="line">// controllerA 中有一个UITableView, UITableView里有多行UITableVieCell，cell上放有一个button</span><br><span class="line">// 在controllerA中实现:</span><br><span class="line">CGRect rc = [cell convertRect:cell.btn.frame toView:self.view];</span><br><span class="line">或</span><br><span class="line">CGRect rc = [self.view convertRect:cell.btn.frame fromView:cell];</span><br><span class="line">// 此rc为btn在controllerA中的rect</span><br><span class="line"></span><br><span class="line">或当已知btn时：</span><br><span class="line">CGRect rc = [btn.superview convertRect:btn.frame toView:self.view];</span><br><span class="line">或</span><br><span class="line">CGRect rc = [self.view convertRect:btn.frame fromView:btn.superview];</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/03/19/2017-3-18lesson/" class="link f-fl">⟵2017/3/18lesson</a>
+    
+    
+      <a href="/2017/03/03/2017-3-3lesson/" class="link f-fr">2017/3/3lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

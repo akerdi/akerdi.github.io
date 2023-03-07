@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210610网迹【权限优化】 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="网迹【权限优化】各服务目前都有基于用户权限来限制接口的使用的功能。比如系统管理员处理系统的事务；厨师进厨房拿刀切菜烧菜；律师进事务所处理案件等。 当前网迹权限长这样… 普及下权限比如user(普通用户)、superman(超人)等角色，我们用以下模型来表示: 123456789101112131415&amp;#123;  code: &quot;user&quot;,  name: &quot;普通用户&quot;,  permissions">
+<meta name="keywords" content="分享, 学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210610网迹【权限优化】">
+<meta property="og:url" content="https://akerdi.github.io/2021/06/16/20210610网迹【权限优化】/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="网迹【权限优化】各服务目前都有基于用户权限来限制接口的使用的功能。比如系统管理员处理系统的事务；厨师进厨房拿刀切菜烧菜；律师进事务所处理案件等。 当前网迹权限长这样… 普及下权限比如user(普通用户)、superman(超人)等角色，我们用以下模型来表示: 123456789101112131415&amp;#123;  code: &quot;user&quot;,  name: &quot;普通用户&quot;,  permissions">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210610网迹【权限优化】">
+<meta name="twitter:description" content="网迹【权限优化】各服务目前都有基于用户权限来限制接口的使用的功能。比如系统管理员处理系统的事务；厨师进厨房拿刀切菜烧菜；律师进事务所处理案件等。 当前网迹权限长这样… 普及下权限比如user(普通用户)、superman(超人)等角色，我们用以下模型来表示: 123456789101112131415&amp;#123;  code: &quot;user&quot;,  name: &quot;普通用户&quot;,  permissions">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210610网迹【权限优化】</h2>
+  <p class="sub">Jun 16, 2021</p>
+  <article class="content">
+    <h1 id="网迹【权限优化】"><a href="#网迹【权限优化】" class="headerlink" title="网迹【权限优化】"></a>网迹【权限优化】</h1><p>各服务目前都有基于用户权限来限制接口的使用的功能。比如系统管理员处理系统的事务；厨师进厨房拿刀切菜烧菜；律师进事务所处理案件等。</p>
+<h1 id="当前网迹权限长这样"><a href="#当前网迹权限长这样" class="headerlink" title="当前网迹权限长这样"></a>当前网迹权限长这样</h1><p>…</p>
+<h1 id="普及下权限"><a href="#普及下权限" class="headerlink" title="普及下权限"></a>普及下权限</h1><p>比如user(普通用户)、superman(超人)等角色，我们用以下模型来表示:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  code: "user",</span><br><span class="line">  name: "普通用户",</span><br><span class="line">  permissions: ["mod_collect"]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  code: "onlyEditor",</span><br><span class="line">  name: "上传者",</span><br><span class="line">  permissions: ["mod_collect", "mod_sysUser_edit", "mod_sysUser_del"]</span><br><span class="line">&#125;,</span><br><span class="line">&#123;</span><br><span class="line">  code: "superman",</span><br><span class="line">  name: "超人",</span><br><span class="line">  permissions: ["mod_collect", "mod_sysUser", "mod_sysUser_edit", "mod_sysUser_del", "mod_sysRole"] // 没有采集修改权限</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应接口如:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: "/collect",</span><br><span class="line">  method: "GET",</span><br><span class="line">  permission: "mod_collect"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时很简单的方案就是直接判别数组内是否有该权限，有当然就能使用该接口啦。</p>
+<p>但是此时会发现一个问题，数组查找字符串，其实是一个很耗时的操作。数组<code>[&quot;mod_collect&quot;, &quot;mod_collect_edit&quot;].include(&quot;mod_collect&quot;)</code> 会先for 循环查找第一个字符串(mod_collect)，第一个字符串对比从第一个字符开始一个个比对。</p>
+<p>你会说，那也很快啊，CPU买买买，快快快。</p>
+<p>有这想法的人得自己深思了，这里的判别是作用在所有中间件，当然是尽可能快，能提高用户使用、设备使用。大多在中间件出现的数据，一定要尽可能的缓存或者优化。</p>
+<p>OK，那怎么解？我们都知道字符串判别是一个一个字符比较O(n)，如果是数字判别，则是类似于O(1)的时间复杂度。我们将现有的所有permission都转化为一个数字: Bitmap. 比如: <code>mod_collect: 1 &lt;&lt; 2 = 4; mod_collect_edit: 1 &lt;&lt; 3 = 8; mod_sysUser: 1 &lt;&lt; 4 = 16; mod_sysUser_edit: 1 &lt;&lt; 5 = 32; mod_sysUser_del: 1 &lt;&lt; 6 = 64; mod_sysRole: 1 &lt;&lt; 7 = 128; ...</code></p>
+<p>以上得到关联: user 有一个权限: [4]; onlyEditor有三个权限, 我们使用 <code>|</code>运算符给他串起来: <code>8 | 32 | 64 = 104</code>, 我们这时可以说 user用户的权限是4, onlyEditor用户的权限是104, superman超人的权限是244.</p>
+<p>我们将上述的数据量不大，基本不怎么变动的数据都内存缓存下来:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">roles: &#123;</span><br><span class="line">  "mod_collect": 4,</span><br><span class="line">  "mod_colelct_edit": 8,</span><br><span class="line">  "mod_sysUser": 16,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">permissions: &#123;</span><br><span class="line">  "user": 4,</span><br><span class="line">  "onlyEditor": 104,</span><br><span class="line">  "superman": 244</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时如果接口进入中间件:</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假装我是中间件内部判别权限</span></span><br><span class="line"><span class="keyword">const</span> curRoutePermission = <span class="string">"mod_collect_edit"</span> <span class="comment">// 当前接口必须的权限</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasPermission</span>(<span class="params">role:<span class="built_in">string</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> tPerm = permissions[role]</span><br><span class="line">  <span class="keyword">const</span> curRole = roles[curRoutePermission]</span><br><span class="line">  <span class="keyword">return</span> tPerm &amp; curRole <span class="comment">// `与`符能得到交集 -&gt; 这个用户是否有该接口的权限</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果是user判别需要<code>&quot;mod_collect_edit&quot;</code>接口 =&gt; 4 &amp; 8 = 0; onlyEditor =&gt; 104 &amp; 8 = 8, 说明是有权限的!</p>
+<blockquote>
+<p>使用位运算<code>&amp;</code>比较，如果 &gt; 0 则表明这是有权限的。</p>
+</blockquote>
+<p>以上是权限基础普及，下面开始进入权限升级部分: ↓↓↓</p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><h3 id="设定数据范围、权限及访问路由"><a href="#设定数据范围、权限及访问路由" class="headerlink" title="设定数据范围、权限及访问路由"></a>设定数据范围、权限及访问路由</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">enum DataScope &#123;</span><br><span class="line">  All = <span class="number">1</span>, <span class="comment">// 全局</span></span><br><span class="line">  ThisWithSubordinate = <span class="number">2</span>, <span class="comment">// 本单位及下属单位</span></span><br><span class="line">  This, <span class="comment">// 仅本单位</span></span><br><span class="line">  self <span class="comment">// 本人</span></span><br><span class="line">&#125;</span><br><span class="line">enum UrlMap &#123;</span><br><span class="line">  browseCollection = <span class="string">"/browse/collection"</span>, <span class="comment">// 采集管理</span></span><br><span class="line">  sysUser = <span class="string">"/sys/user"</span>,</span><br><span class="line">  sysRole = <span class="string">"/sys/role"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> Urls = [</span><br><span class="line">  UrlMap.browseCollection,</span><br><span class="line">  UrlMap.sysUser,</span><br><span class="line">  UrlMap.sysRole</span><br><span class="line">]</span><br><span class="line"><span class="keyword">const</span> roleSchema = &#123;</span><br><span class="line">  name: <span class="built_in">String</span>, <span class="comment">// 用于记录角色名称，比如 `超人`</span></span><br><span class="line">  code: &#123;<span class="attr">type</span>: <span class="built_in">String</span>, <span class="attr">unique</span>: <span class="literal">true</span>&#125;, <span class="comment">// 用于声明角色编码，如superman/user/u001等代号</span></span><br><span class="line">  permissions: [&#123;<span class="attr">type</span>: <span class="built_in">String</span>&#125;], <span class="comment">// 该角色拥有的权限数组</span></span><br><span class="line">  urls: [&#123;<span class="attr">type</span>: <span class="built_in">String</span>&#125;], <span class="comment">// 该角色展示的页面数组</span></span><br><span class="line">  dataScope: &#123;<span class="attr">type</span>: <span class="built_in">Number</span>, <span class="attr">enum</span>: DataScope&#125;, <span class="comment">// 数据范围声明</span></span><br><span class="line">  remark: <span class="built_in">String</span> <span class="comment">// 加个简介好记忆?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>角色表包含有数据权限dataScope，页面列表urls，权限列表permissions。</p>
+<p>数据范围定义数据获取等级。侧重点是支持中间件将该用户的数据权限，写到用户数据中:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将已构建的角色对应结构保存在内存中</span></span><br><span class="line">staticbuildInRoleMaps:IBuildInRoleMap</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">async</span> dataScopeMiddleware(req:Request, <span class="attr">res</span>:Response, <span class="attr">next</span>:NextFunction) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!req.hasPermission(<span class="string">"admin"</span>)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!req.user.departmentNo) <span class="keyword">return</span> res.status(<span class="number">403</span>).send(<span class="string">"您没有设置组织机构"</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    req.user.dataScope = DataScope.All</span><br><span class="line">    <span class="keyword">return</span> next()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> requserRole = Utils.getUserFirstRole(req.user)</span><br><span class="line">  <span class="keyword">if</span> (!_.includes([<span class="string">"anon"</span>], requserRole)) &#123;</span><br><span class="line">    <span class="keyword">const</span> theRole = Role.buildInRoleMaps[requserRole]</span><br><span class="line">    <span class="keyword">if</span> (!theRole) <span class="keyword">return</span> next(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"权限获取出错，请联系管理员"</span>))</span><br><span class="line">    req.user.dataScope = theRole.dataScope</span><br><span class="line">  &#125;</span><br><span class="line">  next()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将改变不大的数据存在内存中，可以很快速的进行获取数据。</p>
+</blockquote>
+<h3 id="数据范围设定-根据业务划分不同的接口"><a href="#数据范围设定-根据业务划分不同的接口" class="headerlink" title="数据范围设定(根据业务划分不同的接口)"></a>数据范围设定(根据业务划分不同的接口)</h3><p>下面是我所使用的获取数据过滤方式之一:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> dataScopeForCollect(user:&#123;<span class="attr">dataScope</span>:DataScope, <span class="attr">departmentNo</span>:string, <span class="attr">policeNo</span>:string&#125;) &#123;</span><br><span class="line">  <span class="keyword">let</span> cond:&#123;departmentNo?:string, code?:<span class="built_in">RegExp</span>, policeNo?:string&#125; = &#123;&#125;</span><br><span class="line">  <span class="keyword">if</span> (!_.isNumber(user.dataScope)) <span class="keyword">return</span> cond</span><br><span class="line">  <span class="keyword">if</span> (user.dataScope === DataScope.All) <span class="keyword">return</span> cond</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (user.dataScope === DataScope.ThisWithSubordinate) &#123;</span><br><span class="line">    cond.code = Utils.orgReg(user.departmentNo)</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (user.dataScope === DataScope.This) &#123;</span><br><span class="line">    cond.departmentNo = user.departmentNo</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (user.dataScope === DataScope.self) &#123;</span><br><span class="line">    cond.policeNo = user.policeNo</span><br><span class="line">    <span class="keyword">if</span> (user.departmentNo) cond.departmentNo = user.departmentNo</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cond</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是我很快就能知道对应的获取数据方案。</p>
+<h3 id="限制页面路由"><a href="#限制页面路由" class="headerlink" title="限制页面路由"></a>限制页面路由</h3><p>这方面由李豪同学来交流下。当初也是李豪同学提出来，我保存好，由他来约束这块的逻辑。点赞。</p>
+<h3 id="接口权限的组合"><a href="#接口权限的组合" class="headerlink" title="接口权限的组合"></a>接口权限的组合</h3><p>这块复用第一章节的逻辑。第一章节将静态的数据，在这里转化为可调节配置的权限组合。</p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>Number 类型是32位的。使用Number 进行位运算，当角色超过32位时， <code>1 &lt;&lt; 32 = 0</code>.</p>
+<p>使用BigInt 可能突破这个限制: <code>BigInt(1) &lt;&lt; BigInt(x)</code>.当使用BigInt 作为json 传输时需要<code>将其转为字符串</code>，在Chrome67之后版本支持BigInt 类型。前段收到对应角色编码，将其转化为BigInt:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ BigInt(<span class="string">"17179869185"</span>)</span><br><span class="line">$ <span class="number">17179869185</span>n</span><br></pre></td></tr></table></figure>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/06/16/20210611房子买后感/" class="link f-fl">⟵20210611房子买后感</a>
+    
+    
+      <a href="/2021/06/04/20210604这是第二篇入住自己房子回顾/" class="link f-fr">20210604这是第二篇入住自己房子回顾⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20220328es | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="eses 使用curl$ alias curles=&amp;apos;curl  -u elastic:elasticpassword&amp;apos; $ curles -XPUT &amp;quot;http://localhost:9200/movies/movie/1&amp;quot; -d&amp;apos;&amp;apos; $ curles -X POST &amp;quot;http://172.16.60.162:9200/_">
+<meta name="keywords" content="es">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20220328es">
+<meta property="og:url" content="https://akerdi.github.io/2022/03/28/20220328es/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="eses 使用curl$ alias curles=&amp;apos;curl  -u elastic:elasticpassword&amp;apos; $ curles -XPUT &amp;quot;http://localhost:9200/movies/movie/1&amp;quot; -d&amp;apos;&amp;apos; $ curles -X POST &amp;quot;http://172.16.60.162:9200/_">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20220328es">
+<meta name="twitter:description" content="eses 使用curl$ alias curles=&amp;apos;curl  -u elastic:elasticpassword&amp;apos; $ curles -XPUT &amp;quot;http://localhost:9200/movies/movie/1&amp;quot; -d&amp;apos;&amp;apos; $ curles -X POST &amp;quot;http://172.16.60.162:9200/_">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20220328es</h2>
+  <p class="sub">Mar 28, 2022</p>
+  <article class="content">
+    <h1 id="es"><a href="#es" class="headerlink" title="es"></a>es</h1><h2 id="es-使用curl"><a href="#es-使用curl" class="headerlink" title="es 使用curl"></a>es 使用curl</h2><pre><code>$ alias curles=&apos;curl  -u elastic:elasticpassword&apos;
+$ curles -XPUT &quot;http://localhost:9200/movies/movie/1&quot; -d&apos;&apos;
+$ curles -X POST &quot;http://172.16.60.162:9200/_analyze&quot; -d &apos;{&quot;analyzer&quot;:&quot;standard&quot;, &quot;text&quot;:&quot;Like X 国庆放假的&quot;}&apos; -H &quot;Content-Type: application/json&quot;
+</code></pre><h2 id="为es-增加stopword-和词汇"><a href="#为es-增加stopword-和词汇" class="headerlink" title="为es 增加stopword 和词汇"></a>为es 增加stopword 和词汇</h2><h3 id="增加stopword-和词汇的操作"><a href="#增加stopword-和词汇的操作" class="headerlink" title="增加stopword 和词汇的操作"></a>增加stopword 和词汇的操作</h3><pre><code>$ docker cp ${dockerId}:/usr/share/elasticsearch/plugins/ik/config config
+// 支持往custom/mydic.dic 写入对应合并关键词、custom/ext_stopword.dic
+$ mkdir config/custom &amp;&amp; touch config/custom/mydict.dic &amp;&amp; touch config/custom/ext_stopword.dic
+$ docker cp config ${dockerId}:/usr/share/elasticsearch/plugins/ik // 拷贝配置文件回elastic
+$ docker restart ${dockerId} // 重启elastic
+</code></pre><h3 id="↑支持的plugins语法"><a href="#↑支持的plugins语法" class="headerlink" title="↑支持的plugins语法"></a>↑支持的plugins语法</h3><p>语法如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">新案件</span><br><span class="line">不要</span><br><span class="line">不可</span><br></pre></td></tr></table></figure></p>
+<h2 id="search-max-open-scroll-context"><a href="#search-max-open-scroll-context" class="headerlink" title="[search.max_open_scroll_context]"></a><code>[search.max_open_scroll_context]</code></h2><p>PUT 更新下配置即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT --user elastic:123456 &quot;http://localhost:9200/_cluster/settings&quot; -H &apos;Content-Type: application/json&apos; -d &apos;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;persistent&quot;: &#123;</span><br><span class="line">    &quot;search.max_open_scroll_context&quot;: 1024</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;transient&quot;: &#123;</span><br><span class="line">    &quot;search.max_open_scroll_context&quot;: 1024</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="FORBIDDEN-12"><a href="#FORBIDDEN-12" class="headerlink" title="FORBIDDEN/12"></a><code>FORBIDDEN/12</code></h2><p>该表示为磁盘空间已不足90%，可以配置使用磁盘空间比例，但是推荐扩容磁盘大小，90%已经是比较危险的使用大小了。</p>
+<p>扩容磁盘大小后，将所有索引再重置下，否则只能读，不能创建或者更新等操作:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -XPUT --user elastic:123456 &quot;http://localhost:9200/_all/_settings&quot; -H &apos;Content-Type: application/json&apos; -d &apos;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;index.block.read_only_allow_delete&quot;: null</span><br><span class="line">&#125;&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="Data-too-large"><a href="#Data-too-large" class="headerlink" title="Data too large"></a><code>Data too large</code></h2><p><code>Data too large</code> 表明了ES内存已达到当前数据存储上线。</p>
+<p>解决方案目前是两个:</p>
+<ol>
+<li>扩容机器数据内存；</li>
+<li>设置熔断驱逐数据；</li>
+</ol>
+<p>这里记录2中设置熔断驱逐数据:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">docker-compose.yml</span><br><span class="line">services:</span><br><span class="line">  elasticsearch:</span><br><span class="line">    volumes:</span><br><span class="line">      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml</span><br><span class="line"></span><br><span class="line">elasticsearch.yml</span><br><span class="line">cluster.name: &quot;docker-cluster&quot;</span><br><span class="line">network.host: 0.0.0.0</span><br><span class="line">indices.breaker.total.use_real_memory: false</span><br><span class="line">indices.breaker.total.limit: 60%</span><br><span class="line">indices.fielddata.cache.size: 45%</span><br><span class="line">indices.requests.cache.size: 20%</span><br><span class="line">indices.breaker.fielddata.limit: 35%</span><br><span class="line">indices.breaker.request.limit: 50%</span><br><span class="line">network.breaker.inflight_requests.limit: 50%</span><br><span class="line">indices.breaker.accounting.limit: 50%</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/weixin_42715225/article/details/113258998" target="_blank" rel="noopener">参考文档1</a></p>
+<p><a href="https://segmentfault.com/a/1190000022568882" target="_blank" rel="noopener">参考文档2</a></p>
+<h3 id="Data-too-large解决记录"><a href="#Data-too-large解决记录" class="headerlink" title="Data too large解决记录"></a><code>Data too large</code>解决记录</h3><p><code>Data too large</code> / <code>429 Too Many Requests</code> 这个问题由来已久。之前考虑是关闭某些年份数据，但是仍然会报那个问题。</p>
+<p>思考就是数据加载到内存后，如果继续增加，而没有把旧数据驱逐，则肯定会超过内存数据大小，于是对应上述方案: 增加内存，让他不到达最大内存(好处是都加载到内存，快)；驱逐旧数据，加载新数据。</p>
+<p>查看数据: <code>GET /_stats/fielddata?fields=*</code></p>
+<blockquote>
+<p>fielddata中的memory_size_in_bytes表示已使用的内存总数，而evictions(驱逐数据)为0.且经过一段时间观察，字段所占内存大小都没有变化。由此推断，当下缓存处于无法有效驱逐的状态。</p>
+</blockquote>
+<p>最重要的是设置好fielddata cache大小和熔断点大小<code>indices.fielddata.cache.size</code> 和<code>indices.breaker.fielddata.limit</code></p>
+<p>参考文档总结中挺有帮助的:</p>
+<ul>
+<li>系统默认的indices.fielddata.cache.size 是不限制大小的，本意是想通过报错告知维护者需要做配置，是否搜素的数据有误。</li>
+<li>fielddata.limit 的配置需要比fielddata.cache.size稍大。而fielddata缓存到达fielddata.cache.size的时候就会启动自动清理机制。expire配置不建议使用。</li>
+<li>indices.breaker.request.limit限制查询的其他部分需要用的内存大小。indices.breaker.total.limit限制总(fieldData+其他部分)大小。</li>
+<li>创建mapping时，可以设置fielddata format控制缓存数据格式。</li>
+</ul>
+<p>ES需要高速内存读取，首要达到硬件内存通过集群扩容大于数据大小。此时体现在数据快速读取，大量人员内存操作的场景。<em>如果是人员人数不多，非必要大量数据高速存取场景，则可通过ES熔断机制驱逐旧数据，达到存取平衡。</em></p>
+<p>故，非超大型查询场景是可以不采用集群方案(超大型集群调节熔断配置)，单节点可以满足配置中熔断数据(根据<code>ES_JAVA_OPTS</code> 比例值)。</p>
+<p>此处描述配置作用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cluster.name                            集群名称</span><br><span class="line">network.host                            网络配置</span><br><span class="line">network.breaker.inflight_requests.limit 请求中熔断器</span><br><span class="line">indices.fielddata.cache.size            类型为text进行sort/aggs时加载fielddata到内存</span><br><span class="line">indices.requests.cache.size             shard request cache热点请求cache</span><br><span class="line">indices.memory.index_buffer_size        索引操作大小(default:10%)</span><br><span class="line">indices.breaker.total.use_real_memory   可以更加精准的分析内存状况，避免 OOM</span><br><span class="line">indices.breaker.total.limit             配置总内存大小</span><br><span class="line">indices.breaker.fielddata.limit         field 内存数据加载大小</span><br><span class="line">indices.breaker.request.limit           防止单个请求内存溢出</span><br><span class="line">indices.breaker.accounting.limit        已请求完的请求所占用内存占比</span><br></pre></td></tr></table></figure>
+<p>查看是否配置成功及查询现有配置:</p>
+<pre><code>alias escurl=&apos;curl --user ${esuser}:${espass}&apos;
+escurl -XGET &quot;http://${eshost}:9200/_nodes/_all/settings?pretty&quot;
+</code></pre><blockquote>
+<p>参考说明 <a href="https://blog.csdn.net/u013200380/article/details/109285118" target="_blank" rel="noopener">https://blog.csdn.net/u013200380/article/details/109285118</a></p>
+</blockquote>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2022/04/20/20220420lesson/" class="link f-fl">⟵20220420生活琐碎</a>
+    
+    
+      <a href="/2022/03/11/20220311manager-review/" class="link f-fr">20220311管理回顾⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

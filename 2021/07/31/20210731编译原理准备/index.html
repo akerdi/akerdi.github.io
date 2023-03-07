@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210731编译原理准备 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="编译原理准备BNF范式 - 巴恩斯范式 BNF范式是一种用递归的思想来表述计算机语言符号集的定义规范 法则:   ::= 表示定义； “”双引号里的内容表示字符； &amp;lt;&amp;gt;尖括号里的内容表示必选内容； |竖线两边的是可选内容，相当于or；  BNF规定是推导规则(产生式)的集合，写为: &amp;lt;符号&amp;gt; ::= &amp;lt;使用符号的表达式&amp;gt; 这里的&amp;lt;符号&amp;gt;是非终结符，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210731编译原理准备">
+<meta property="og:url" content="https://akerdi.github.io/2021/07/31/20210731编译原理准备/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="编译原理准备BNF范式 - 巴恩斯范式 BNF范式是一种用递归的思想来表述计算机语言符号集的定义规范 法则:   ::= 表示定义； “”双引号里的内容表示字符； &amp;lt;&amp;gt;尖括号里的内容表示必选内容； |竖线两边的是可选内容，相当于or；  BNF规定是推导规则(产生式)的集合，写为: &amp;lt;符号&amp;gt; ::= &amp;lt;使用符号的表达式&amp;gt; 这里的&amp;lt;符号&amp;gt;是非终结符，而">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210731/bnf.png">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210731/ast1.jpg">
+<meta property="og:image" content="https://akerdi.github.io/css/images/210731/ast2.jpg">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.384Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210731编译原理准备">
+<meta name="twitter:description" content="编译原理准备BNF范式 - 巴恩斯范式 BNF范式是一种用递归的思想来表述计算机语言符号集的定义规范 法则:   ::= 表示定义； “”双引号里的内容表示字符； &amp;lt;&amp;gt;尖括号里的内容表示必选内容； |竖线两边的是可选内容，相当于or；  BNF规定是推导规则(产生式)的集合，写为: &amp;lt;符号&amp;gt; ::= &amp;lt;使用符号的表达式&amp;gt; 这里的&amp;lt;符号&amp;gt;是非终结符，而">
+<meta name="twitter:image" content="https://akerdi.github.io/css/images/210731/bnf.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210731编译原理准备</h2>
+  <p class="sub">Jul 31, 2021</p>
+  <article class="content">
+    <h1 id="编译原理准备"><a href="#编译原理准备" class="headerlink" title="编译原理准备"></a>编译原理准备</h1><h2 id="BNF范式-巴恩斯范式"><a href="#BNF范式-巴恩斯范式" class="headerlink" title="BNF范式 - 巴恩斯范式"></a>BNF范式 - 巴恩斯范式</h2><ol>
+<li>BNF范式是一种用<strong>递归</strong>的思想来表述计算机语言符号集的定义规范</li>
+<li>法则:</li>
+</ol>
+<ul>
+<li>::= 表示定义；</li>
+<li>“”双引号里的内容表示字符；</li>
+<li>&lt;&gt;尖括号里的内容表示必选内容；</li>
+<li>|竖线两边的是可选内容，相当于or；</li>
+</ul>
+<p>BNF规定是推导规则(产生式)的集合，写为:</p>
+<p><code>&lt;符号&gt; ::= &lt;使用符号的表达式&gt;</code></p>
+<p>这里的<code>&lt;符号&gt;</code>是非终结符，而<code>表达式</code>由一个符号序列，或用指示选择的竖杠’|’ 分割的多个符号序列构成，每个符号序列整体都是左端的符号的一种可能的<code>替代</code>。从未在左端出现的符号叫做<code>终结符</code>。</p>
+<p><img src="/css/images/210731/bnf.png" alt="举例"></p>
+<p><a href="https://gaixin.blog.csdn.net/article/details/113929322" target="_blank" rel="noopener">参考</a></p>
+<h2 id="AST"><a href="#AST" class="headerlink" title="AST"></a>AST</h2><p>这里直接学习AST概念，不进行深入探讨。后边做编译原理的时候，会有涉及。内容的例子直接挪用参考文章的示例，参考文章使用其他工具部分不是本文涉及。后边会跟进学习cpp 编译原理的前端部分。</p>
+<h3 id="AST是什么"><a href="#AST是什么" class="headerlink" title="AST是什么"></a>AST是什么</h3><blockquote>
+<p>Abstract Syntax Tree，它是源代码结构的一种抽象表示。他一树状的形式表现编程语言的语法结构，树上的每个节点都表示源代码中的一种结构</p>
+</blockquote>
+<p>这里贴出参考中好用的转换工具: <a href="https://astexplorer.net/" target="_blank" rel="noopener">https://astexplorer.net/</a></p>
+<h3 id="入门AST"><a href="#入门AST" class="headerlink" title="入门AST"></a>入门AST</h3><p><img src="/css/images/210731/ast1.jpg" alt="1"></p>
+<p>可以看到对应的关系:</p>
+<ul>
+<li>var 是关键字(<code>keyword</code>)</li>
+<li>AST 是最小单元(<code>Identifier</code>)</li>
+<li>= 是Equal等号</li>
+<li>is tree 是一个字符串</li>
+<li>; 是Semicolon</li>
+</ul>
+<h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>词法分析 也称之为scanner，对每一行每个char 过滤一遍，分解每个词块。</p>
+<p>这块不多介绍，和下面语法分析一起进行。</p>
+<h3 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h3><p>语法分析会将词法分析出来的token转化成有语法含义的抽象语法树结构，并加上类型描述。这步骤验证语法，词法分析仅是读取每个char，根据段落转化一个个token。</p>
+<h3 id="开搞例子"><a href="#开搞例子" class="headerlink" title="开搞例子"></a>开搞例子</h3><p>以下是直接抄原作者例子, 请直接看<a href="https://juejin.cn/post/6844904035271573511" target="_blank" rel="noopener">原作者链接</a></p>
+<h4 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h4><pre><code>const fn = a =&gt; a;
+</code></pre><p><img src="/css/images/210731/ast2.jpg" alt="2"></p>
+<h4 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h4><pre><code>const fn = a =&gt; {
+    const i = 1
+    return a + 1
+}
+</code></pre><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"Program"</span>,</span><br><span class="line">  <span class="attr">"start"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"end"</span>: <span class="number">52</span>,</span><br><span class="line">  <span class="attr">"body"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"VariableDeclaration"</span>,</span><br><span class="line">      <span class="attr">"start"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"end"</span>: <span class="number">52</span>,</span><br><span class="line">      <span class="attr">"declarations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"VariableDeclarator"</span>,</span><br><span class="line">          <span class="attr">"start"</span>: <span class="number">6</span>,</span><br><span class="line">          <span class="attr">"end"</span>: <span class="number">52</span>,</span><br><span class="line">          <span class="attr">"id"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">            <span class="attr">"start"</span>: <span class="number">6</span>,</span><br><span class="line">            <span class="attr">"end"</span>: <span class="number">8</span>,</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"fn"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">"init"</span>: &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"ArrowFunctionExpression"</span>,</span><br><span class="line">            <span class="attr">"start"</span>: <span class="number">11</span>,</span><br><span class="line">            <span class="attr">"end"</span>: <span class="number">52</span>,</span><br><span class="line">            <span class="attr">"id"</span>: <span class="literal">null</span>,</span><br><span class="line">            <span class="attr">"expression"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"generator"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"async"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"params"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                <span class="attr">"start"</span>: <span class="number">11</span>,</span><br><span class="line">                <span class="attr">"end"</span>: <span class="number">12</span>,</span><br><span class="line">                <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">              &#125;</span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"body"</span>: &#123;</span><br><span class="line">              <span class="attr">"type"</span>: <span class="string">"BlockStatement"</span>,</span><br><span class="line">              <span class="attr">"start"</span>: <span class="number">16</span>,</span><br><span class="line">              <span class="attr">"end"</span>: <span class="number">52</span>,</span><br><span class="line">              <span class="attr">"body"</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"VariableDeclaration"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">21</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">32</span>,</span><br><span class="line">                  <span class="attr">"declarations"</span>: [</span><br><span class="line">                    &#123;</span><br><span class="line">                      <span class="attr">"type"</span>: <span class="string">"VariableDeclarator"</span>,</span><br><span class="line">                      <span class="attr">"start"</span>: <span class="number">27</span>,</span><br><span class="line">                      <span class="attr">"end"</span>: <span class="number">32</span>,</span><br><span class="line">                      <span class="attr">"id"</span>: &#123;</span><br><span class="line">                        <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                        <span class="attr">"start"</span>: <span class="number">27</span>,</span><br><span class="line">                        <span class="attr">"end"</span>: <span class="number">28</span>,</span><br><span class="line">                        <span class="attr">"name"</span>: <span class="string">"i"</span></span><br><span class="line">                      &#125;,</span><br><span class="line">                      <span class="attr">"init"</span>: &#123;</span><br><span class="line">                        <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">                        <span class="attr">"start"</span>: <span class="number">31</span>,</span><br><span class="line">                        <span class="attr">"end"</span>: <span class="number">32</span>,</span><br><span class="line">                        <span class="attr">"value"</span>: <span class="number">1</span>,</span><br><span class="line">                        <span class="attr">"raw"</span>: <span class="string">"1"</span></span><br><span class="line">                      &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                  ],</span><br><span class="line">                  <span class="attr">"kind"</span>: <span class="string">"const"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"ReturnStatement"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">36</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">48</span>,</span><br><span class="line">                  <span class="attr">"argument"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>: <span class="string">"BinaryExpression"</span>,</span><br><span class="line">                    <span class="attr">"start"</span>: <span class="number">43</span>,</span><br><span class="line">                    <span class="attr">"end"</span>: <span class="number">48</span>,</span><br><span class="line">                    <span class="attr">"left"</span>: &#123;</span><br><span class="line">                      <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                      <span class="attr">"start"</span>: <span class="number">43</span>,</span><br><span class="line">                      <span class="attr">"end"</span>: <span class="number">44</span>,</span><br><span class="line">                      <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">                    &#125;,</span><br><span class="line">                    <span class="attr">"operator"</span>: <span class="string">"+"</span>,</span><br><span class="line">                    <span class="attr">"right"</span>: &#123;</span><br><span class="line">                      <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">                      <span class="attr">"start"</span>: <span class="number">47</span>,</span><br><span class="line">                      <span class="attr">"end"</span>: <span class="number">48</span>,</span><br><span class="line">                      <span class="attr">"value"</span>: <span class="number">1</span>,</span><br><span class="line">                      <span class="attr">"raw"</span>: <span class="string">"1"</span></span><br><span class="line">                    &#125;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              ]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"kind"</span>: <span class="string">"const"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"sourceType"</span>: <span class="string">"module"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例子3"><a href="#例子3" class="headerlink" title="例子3"></a>例子3</h4><pre><code>    function test() {
+  let a = 1
+  console.log(a)
+}
+</code></pre><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"Program"</span>,</span><br><span class="line">  <span class="attr">"start"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"end"</span>: <span class="number">60</span>,</span><br><span class="line">  <span class="attr">"body"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"FunctionDeclaration"</span>,</span><br><span class="line">      <span class="attr">"start"</span>: <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"end"</span>: <span class="number">60</span>,</span><br><span class="line">      <span class="attr">"id"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">        <span class="attr">"start"</span>: <span class="number">9</span>,</span><br><span class="line">        <span class="attr">"end"</span>: <span class="number">13</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"test"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"expression"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"generator"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"async"</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">"params"</span>: [],</span><br><span class="line">      <span class="attr">"body"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"BlockStatement"</span>,</span><br><span class="line">        <span class="attr">"start"</span>: <span class="number">16</span>,</span><br><span class="line">        <span class="attr">"end"</span>: <span class="number">60</span>,</span><br><span class="line">        <span class="attr">"body"</span>: [</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"VariableDeclaration"</span>,</span><br><span class="line">            <span class="attr">"start"</span>: <span class="number">24</span>,</span><br><span class="line">            <span class="attr">"end"</span>: <span class="number">33</span>,</span><br><span class="line">            <span class="attr">"declarations"</span>: [</span><br><span class="line">              &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"VariableDeclarator"</span>,</span><br><span class="line">                <span class="attr">"start"</span>: <span class="number">28</span>,</span><br><span class="line">                <span class="attr">"end"</span>: <span class="number">33</span>,</span><br><span class="line">                <span class="attr">"id"</span>: &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">28</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">29</span>,</span><br><span class="line">                  <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"init"</span>: &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"Literal"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">32</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">33</span>,</span><br><span class="line">                  <span class="attr">"value"</span>: <span class="number">1</span>,</span><br><span class="line">                  <span class="attr">"raw"</span>: <span class="string">"1"</span></span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"kind"</span>: <span class="string">"let"</span></span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"ExpressionStatement"</span>,</span><br><span class="line">            <span class="attr">"start"</span>: <span class="number">40</span>,</span><br><span class="line">            <span class="attr">"end"</span>: <span class="number">54</span>,</span><br><span class="line">            <span class="attr">"expression"</span>: &#123;</span><br><span class="line">              <span class="attr">"type"</span>: <span class="string">"CallExpression"</span>,</span><br><span class="line">              <span class="attr">"start"</span>: <span class="number">40</span>,</span><br><span class="line">              <span class="attr">"end"</span>: <span class="number">54</span>,</span><br><span class="line">              <span class="attr">"callee"</span>: &#123;</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"MemberExpression"</span>,</span><br><span class="line">                <span class="attr">"start"</span>: <span class="number">40</span>,</span><br><span class="line">                <span class="attr">"end"</span>: <span class="number">51</span>,</span><br><span class="line">                <span class="attr">"object"</span>: &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">40</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">47</span>,</span><br><span class="line">                  <span class="attr">"name"</span>: <span class="string">"console"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"property"</span>: &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">48</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">51</span>,</span><br><span class="line">                  <span class="attr">"name"</span>: <span class="string">"log"</span></span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="attr">"computed"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"optional"</span>: <span class="literal">false</span></span><br><span class="line">              &#125;,</span><br><span class="line">              <span class="attr">"arguments"</span>: [</span><br><span class="line">                &#123;</span><br><span class="line">                  <span class="attr">"type"</span>: <span class="string">"Identifier"</span>,</span><br><span class="line">                  <span class="attr">"start"</span>: <span class="number">52</span>,</span><br><span class="line">                  <span class="attr">"end"</span>: <span class="number">53</span>,</span><br><span class="line">                  <span class="attr">"name"</span>: <span class="string">"a"</span></span><br><span class="line">                &#125;</span><br><span class="line">              ],</span><br><span class="line">              <span class="attr">"optional"</span>: <span class="literal">false</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"sourceType"</span>: <span class="string">"module"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://segmentfault.com/a/1190000023389980" target="_blank" rel="noopener">参考</a><br><a href="https://juejin.cn/post/6844904035271573511" target="_blank" rel="noopener">掘金文章参考</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/08/05/20210805Mac安装Opengl库/" class="link f-fl">⟵20210805Mac安装Opengl库</a>
+    
+    
+      <a href="/2021/07/06/20210705cpp学习/" class="link f-fr">20210705cpp学习⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20210531生活琐碎 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这段时间超级超级忙碌。 首先是网迹市局需求和之前要改的徐汇权限优化，一开始设计是单接口权限优化，在后面完善功能下，我们为其设计了三个维度的权限设计: 数据作用域、页面权限、接口权限。 市局需求比较急忙，在周一上午开会；下午有时需要开取综会；有时有其他服务的开会；自己组织开会等；其他地方找我；各种各样找我的等情况下，急急忙忙上线这款功能。大约耗时1个月。 由于其中还有需要将iced代码翻译为type">
+<meta name="keywords" content="琐碎">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20210531生活琐碎">
+<meta property="og:url" content="https://akerdi.github.io/2021/05/31/20210531琐碎/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="这段时间超级超级忙碌。 首先是网迹市局需求和之前要改的徐汇权限优化，一开始设计是单接口权限优化，在后面完善功能下，我们为其设计了三个维度的权限设计: 数据作用域、页面权限、接口权限。 市局需求比较急忙，在周一上午开会；下午有时需要开取综会；有时有其他服务的开会；自己组织开会等；其他地方找我；各种各样找我的等情况下，急急忙忙上线这款功能。大约耗时1个月。 由于其中还有需要将iced代码翻译为type">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20210531生活琐碎">
+<meta name="twitter:description" content="这段时间超级超级忙碌。 首先是网迹市局需求和之前要改的徐汇权限优化，一开始设计是单接口权限优化，在后面完善功能下，我们为其设计了三个维度的权限设计: 数据作用域、页面权限、接口权限。 市局需求比较急忙，在周一上午开会；下午有时需要开取综会；有时有其他服务的开会；自己组织开会等；其他地方找我；各种各样找我的等情况下，急急忙忙上线这款功能。大约耗时1个月。 由于其中还有需要将iced代码翻译为type">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20210531生活琐碎</h2>
+  <p class="sub">May 31, 2021</p>
+  <article class="content">
+    <p>这段时间超级超级忙碌。</p>
+<p>首先是网迹市局需求和之前要改的徐汇权限优化，一开始设计是单接口权限优化，在后面完善功能下，我们为其设计了三个维度的权限设计: 数据作用域、页面权限、接口权限。</p>
+<p>市局需求比较急忙，在周一上午开会；下午有时需要开取综会；有时有其他服务的开会；自己组织开会等；其他地方找我；各种各样找我的等情况下，急急忙忙上线这款功能。大约耗时1个月。</p>
+<p>由于其中还有需要将iced代码翻译为typescript代码，着实是每天加班熬夜换来的成就。其中业务不熟悉，里面有几个模块走不通权限判别，多人、单人、多案件、单案件、上传数据包等有时走的判别还不一样。之前是iced的不理解其内涵情况下，最终自己重写了判别逻辑。不然感觉都要吐血：改一些不对，再改一些还是不对，继续改继续不对!真要吐血。</p>
+<p>另一个是房子过户、缴税、贷款申请等。由于这块业务比较大，内心也是放到超级第一的位置。</p>
+<p>再一个是想要能落户而去考试，软考中级。前一段时间在翻译代码过程，还不那么急忙，晚上可以抽空看看；后来太忙，晚上只有偶尔的时间赶紧学习。当时在想的就是，要是现在不用加班到11点，能赶紧看书多好。偶尔10点能到家，赶紧打开电脑学习。</p>
+<p>车牌也在拍当中，所以也是急急忙忙。</p>
+<p>5月也是超级超级忙碌啊。周末能用来加班的都用上，有时带上老婆去公司学习，路过公园还能转一圈，有时顺便就去打羽毛球，啊，累却又充实却又有所得。</p>
+<p>这篇就是胡言乱语文章，原因是好久好久没写博客了，今天也是抽空写下。</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2021/06/04/20210604这是第二篇入住自己房子回顾/" class="link f-fl">⟵20210604这是第二篇入住自己房子回顾</a>
+    
+    
+      <a href="/2021/05/17/20210517产证到手/" class="link f-fr">20210517产证到手⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

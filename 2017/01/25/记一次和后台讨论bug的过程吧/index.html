@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>记一次和后台讨论bug的过程吧 | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="和公司后台大哥打交道也有几次了，都不是很给力的解决bug过程。 先说一下上一次的情形吧。我们的后台是用php写的，我以前都是和java后台打交道，所以有些怪，而且后台用的他们以前公司的架构，我们之前的所有api，重要不重要都需要post请求，而且调试bug需要我们前段调节，我记得以前的java那边可以使用terminal调试。这些都不是事，接下来的才是比较蛋疼的。我们那次调试发布，类似发布帖子情形">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次和后台讨论bug的过程吧">
+<meta property="og:url" content="https://akerdi.github.io/2017/01/25/记一次和后台讨论bug的过程吧/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="和公司后台大哥打交道也有几次了，都不是很给力的解决bug过程。 先说一下上一次的情形吧。我们的后台是用php写的，我以前都是和java后台打交道，所以有些怪，而且后台用的他们以前公司的架构，我们之前的所有api，重要不重要都需要post请求，而且调试bug需要我们前段调节，我记得以前的java那边可以使用terminal调试。这些都不是事，接下来的才是比较蛋疼的。我们那次调试发布，类似发布帖子情形">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-07T09:24:38.405Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次和后台讨论bug的过程吧">
+<meta name="twitter:description" content="和公司后台大哥打交道也有几次了，都不是很给力的解决bug过程。 先说一下上一次的情形吧。我们的后台是用php写的，我以前都是和java后台打交道，所以有些怪，而且后台用的他们以前公司的架构，我们之前的所有api，重要不重要都需要post请求，而且调试bug需要我们前段调节，我记得以前的java那边可以使用terminal调试。这些都不是事，接下来的才是比较蛋疼的。我们那次调试发布，类似发布帖子情形">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">记一次和后台讨论bug的过程吧</h2>
+  <p class="sub">Jan 25, 2017</p>
+  <article class="content">
+    <p>和公司后台大哥打交道也有几次了，都不是很给力的解决bug过程。</p>
+<h4 id="先说一下上一次的情形吧。"><a href="#先说一下上一次的情形吧。" class="headerlink" title="先说一下上一次的情形吧。"></a>先说一下上一次的情形吧。</h4><p>我们的后台是用php写的，我以前都是和java后台打交道，所以有些怪，而且后台用的他们以前公司的架构，我们之前的所有api，重要不重要都需要post请求，而且调试bug需要我们前段调节，我记得以前的java那边可以使用terminal调试。<br>这些都不是事，接下来的才是比较蛋疼的。<br>我们那次调试发布，类似发布帖子情形，怎么都发布不出去。我跟后台调了好久，最后我先下去吃饭了，一上来，说解决了。这件事离得比较久，有些忘记了，不过跟后台沟通真麻烦，真蛋疼的那种，我说说这次的吧，基本差不多，感受一下。</p>
+<h4 id="“我这代码绝对没有问题，想想你们代码怎么写的吧；不是你们的错，也绝对不是我代码有问题，好吧，那就不用做了，不要做了”"><a href="#“我这代码绝对没有问题，想想你们代码怎么写的吧；不是你们的错，也绝对不是我代码有问题，好吧，那就不用做了，不要做了”" class="headerlink" title="“我这代码绝对没有问题，想想你们代码怎么写的吧；不是你们的错，也绝对不是我代码有问题，好吧，那就不用做了，不要做了”"></a>“我这代码绝对没有问题，想想你们代码怎么写的吧；不是你们的错，也绝对不是我代码有问题，好吧，那就不用做了，不要做了”</h4><p>是的，这个真是他这样说的。<br>这次是2017年1月23号，也就是鸡年快过年最后一天班。心比较急是真的。<br>后台把代码放到线上，我们都发现登陆、发布这两块不能用。<br>我们可以用排除法：</p>
+<ul>
+<li>登陆我使用测试登陆：手机号登陆、第三方登陆都没有问题；</li>
+<li>我使用线上登陆：手机号登陆失败，第三方登陆没有问题；</li>
+<li>我们前段iOS，线上线下唯一区别就是域名不一样，没有其他。</li>
+<li>发布这个接口也有问题</li>
+<li>我很久没有修改登陆位置的代码了<br>呐，上面可以看出，真的，要么线上线下都不能登录，要么所有接口全都不能用，那肯定是我们哪里错了，他就一句话一开始：肯定是你们前段的错，你们代码没有写好。<br>我当时一直的态度都是确定的知道是后台的错，我愿意陪你来改，帮后台查查那边的错误。<br>他一直说我们这都问题，好吧，毕竟是我当时写的，那我看看代码有没有变动吧：没有，只字未变，，，<br>我说，大哥，我们这里真的没有问题，要不你再查一查。<br>他就说，绝对不可能，怎么可能我这里有问题，你再查查再查查。说的很激动，，肯定是你们的错的。<br>我还是好言好语，毕竟做不好，大家年都不好过，心里想着。<br>接着他说，不然我们调bug。<br>好吧，于是调bug过程也很蛋疼，我用AFNetworking，简单使用网络连接的，他说88888，有没有，我说收到383838 38，中间有个空格。<br>他说我给你88888，你给我383838中间还有空格，肯定是你们那里错了，不然那里来的3，还出来空格，你赶紧改你们代码。<br>我说，大哥啊，我们收到什么就是什么，你给383838空格38，我当然收到相应的了，真不是我们这有错啊。<br>然后他就很凶的，我给你88888，你到时给出来38383838，你还说我这里有问题，那你说这3还有空格哪里来的。<br>我当时回说不知道啊，我们前段收到什么就是什么了。<br>他就一扭头，你先解决3和空格哪里来的在跟我说下一步，再说调试。<br>我无奈的说，你发过来什么我怎么可能找出来哪里来的3，真是服务器的情况啊，你看看测试可以用，线上第三方都能用<br>他插话，语气很凶的说，你不要跟我说什么测试能用，第三方能用，你先把383838那个3和空格找出来（这纯粹转移话题了，解决登陆、发布问题变成了解决3和空格问题）<br>我说，大哥，这没法测了，我们解决登陆问题，你让我查3和空格，我们这，你要什么参数我们提供给你们，你返回什么数据我们就收，我真查不出来啊。<br>然后他就更凶了，你说不是你们问题，那还不是我们问题类，那这样不要测了，不能做不要做了，<br>我蛋疼啊，我还是苦口婆心（毕竟这大过年的，登陆都没法，大家过年都不用过了，老板肯定会很气愤的啊，做了大半年），大哥，我们再查一查吧，毕竟不能登陆，老板肯定发飙啊。<br>他的凶依旧，查什么查，我这里根本不用查，你那边多出来3和空格还让我这边查，那要这样，我把代码还原，要是你还不能登陆，发布有问题，我跟你说好，接下来也不用找我，你自己解决，也不用找我帮忙。<br>（呐，听到这，真的很心寒，我确定是他那边有问题，我都是打着帮他调试bug的态度，心里也嘀咕，要真登陆不了，我没有后台帮忙调试，没法搞啊），我就说先下去吃饭了，登陆上来就换回之前代码试试，没办法了呀，只有这样才能确定是他那边还是我这边，要真我这边，那我也没话说啊<br>，，，我下去吃饭中，，，<br>心情也没被搞坏，毕竟出来给人工作，没必要受同事的气的，吃个饭，慢走慢走的上来了，大冬天，有点太阳，心情还是有点蛋疼。<br>上来看见我们iOS另一个同事和大哥调试着代码，慢慢调着，始终能把矛头指向他们那服务器有问题。<br>因为我一开始就能预见—&gt;才没几行代码啊，出去回来一个过程。<br>后来好吧，后台把代码退回去，（服务器还没运行）还是登不上，我做对面，觉得不对啊，然后他们退到首页看其他数据也没有，然后大哥说还没启动。（服务器运行着）：登陆、发布全部正常，这回后台没话说了，真的没话说了。<br>我也没说什么，搞我自己的东西，这明显的啊。<br>后来说是当时他们搞一些别的东西给代码加上别的东西。<br>可以这么说，这回我是真的蛋疼，特别蛋疼，我一直好声好气，给别人打工啊，没办法啊，后台那边就可以一句话：那就不用做了，不要做了，，，<br>我只是发泄一下，，，毕竟有苦闷着绝对不好，哈哈<br>如果界面有问题，那不用说了，前段的错。<br>逻辑有问题，可能双方哪里合作没有调试好。<br>如果比较矛盾问题，那估计是服务器有问题了。基本都是，前段的东西基本很少的，就这么几个代码啊！！！<br>我真是老好人，人家都凶成这样，我都还是笑脸相迎，我都恨不得给自己一巴掌得了：做你麻痹程序员，写你麻痹代码，，，<br>我其实也可以甩手，不用做就不用做呗，不做就不做呗，我本职做好，谁都没话说，你凶就你凶呗。<br>额弥陀福，，，也记住这一次，下一次还有类似蛋疼的，我就发这给大哥看看好了，我真的以大局为重，要都不解决，登陆不了，明年我们都散伙得了，我怎么对得起其他同事，，，真不想管那么多啊，真想随便拿个工资做做自己手上的事多好，，，，</li>
+</ul>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2017/01/29/大年初二研究成果/" class="link f-fl">⟵大年初二研究成果</a>
+    
+    
+      <a href="/2017/01/23/微博API分析/" class="link f-fr">微博API分析⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
