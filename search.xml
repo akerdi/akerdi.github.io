@@ -4,13 +4,19 @@
   
     
     <entry>
-      <title>20230307findjob</title>
-      <link href="/2023/03/07/20230307findjob/"/>
-      <url>/2023/03/07/20230307findjob/</url>
+      <title>20230308cpp_knowledge</title>
+      <link href="/2023/03/08/20230308cpp-knowledge/"/>
+      <url>/2023/03/08/20230308cpp-knowledge/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="CPP-Knowledge"><a href="#CPP-Knowledge" class="headerlink" title="CPP Knowledge"></a>CPP Knowledge</h1><h2 id="1-const-int-a-10-修改值"><a href="#1-const-int-a-10-修改值" class="headerlink" title="1. const int a = 10; 修改值"></a>1. <code>const int a = 10;</code> 修改值</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span>* c = (<span class="keyword">int</span>*)&amp;b;</span><br><span class="line">    *c = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"b ptr: "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" b value: "</span> &lt;&lt; b &lt;&lt; <span class="string">" c ptr: "</span> &lt;&lt; c &lt;&lt; <span class="string">" c value: "</span>&lt;&lt; *c;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">30</span>;</span><br><span class="line">    n = *c;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" n value: "</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>答案是: <code>b ptr: 0x7ffeefbff704 b value: 10 c ptr: 0x7ffeefbff704 c value: 20 n value: 20</code></p><ol><li>b确实没被修改</li><li>b、c地址相同，但是打印出来尽然不同</li><li>被修改过的值有效，可被赋值</li></ol>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> cpp </tag>
+            
+        </tags>
       
     </entry>
     

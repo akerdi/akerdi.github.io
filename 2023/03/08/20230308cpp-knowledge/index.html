@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20230308cpp_knowledge | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CPP Knowledge1. const int a = 10; 修改值123456789int main() &amp;#123;    const int b = 10;    int* c = (int*)&amp;amp;b;    *c = 20;    cout &amp;lt;&amp;lt; &quot;b ptr: &quot; &amp;lt;&amp;lt; &amp;amp;b &amp;lt;&amp;lt; &quot; b value: &quot; &amp;lt;&amp;lt; b &amp;">
+<meta name="keywords" content="cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230308cpp_knowledge">
+<meta property="og:url" content="https://akerdi.github.io/2023/03/08/20230308cpp-knowledge/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="CPP Knowledge1. const int a = 10; 修改值123456789int main() &amp;#123;    const int b = 10;    int* c = (int*)&amp;amp;b;    *c = 20;    cout &amp;lt;&amp;lt; &quot;b ptr: &quot; &amp;lt;&amp;lt; &amp;amp;b &amp;lt;&amp;lt; &quot; b value: &quot; &amp;lt;&amp;lt; b &amp;">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-03-08T08:00:03.062Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20230308cpp_knowledge">
+<meta name="twitter:description" content="CPP Knowledge1. const int a = 10; 修改值123456789int main() &amp;#123;    const int b = 10;    int* c = (int*)&amp;amp;b;    *c = 20;    cout &amp;lt;&amp;lt; &quot;b ptr: &quot; &amp;lt;&amp;lt; &amp;amp;b &amp;lt;&amp;lt; &quot; b value: &quot; &amp;lt;&amp;lt; b &amp;">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20230308cpp_knowledge</h2>
+  <p class="sub">Mar 8, 2023</p>
+  <article class="content">
+    <h1 id="CPP-Knowledge"><a href="#CPP-Knowledge" class="headerlink" title="CPP Knowledge"></a>CPP Knowledge</h1><h2 id="1-const-int-a-10-修改值"><a href="#1-const-int-a-10-修改值" class="headerlink" title="1. const int a = 10; 修改值"></a>1. <code>const int a = 10;</code> 修改值</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span>* c = (<span class="keyword">int</span>*)&amp;b;</span><br><span class="line">    *c = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"b ptr: "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" b value: "</span> &lt;&lt; b &lt;&lt; <span class="string">" c ptr: "</span> &lt;&lt; c &lt;&lt; <span class="string">" c value: "</span>&lt;&lt; *c;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">30</span>;</span><br><span class="line">    n = *c;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">" n value: "</span> &lt;&lt; n &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答案是: <code>b ptr: 0x7ffeefbff704 b value: 10 c ptr: 0x7ffeefbff704 c value: 20 n value: 20</code></p>
+<ol>
+<li>b确实没被修改</li>
+<li>b、c地址相同，但是打印出来尽然不同</li>
+<li>被修改过的值有效，可被赋值</li>
+</ol>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2023/03/07/Overview/" class="link f-fr">⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
