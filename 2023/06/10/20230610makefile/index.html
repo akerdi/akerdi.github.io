@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>How to use Makefile | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MakefileSimple Makefile rule: 12target ...: prerequisites ...  command  target is the target file, it can either be an Object File, or Executable File, even can be a Label.  prerequisites is files or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to use Makefile">
+<meta property="og:url" content="https://akerdi.github.io/2023/06/10/20230610makefile/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="MakefileSimple Makefile rule: 12target ...: prerequisites ...  command  target is the target file, it can either be an Object File, or Executable File, even can be a Label.  prerequisites is files or">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-06-10T00:52:38.298Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to use Makefile">
+<meta name="twitter:description" content="MakefileSimple Makefile rule: 12target ...: prerequisites ...  command  target is the target file, it can either be an Object File, or Executable File, even can be a Label.  prerequisites is files or">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">How to use Makefile</h2>
+  <p class="sub">Jun 10, 2023</p>
+  <article class="content">
+    <h1 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h1><p>Simple Makefile rule:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target ...: prerequisites ...</span><br><span class="line">  command</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>target</code> is the target file, it can either be an <code>Object File</code>, or <code>Executable File</code>, even can be a <code>Label</code>.</p>
+</li>
+<li><p><code>prerequisites</code> is files or objs to generate the <code>target</code>.</p>
+</li>
+<li><p><code>command</code> is the command to eval.</p>
+</li>
+</ul>
+<p>It is the relationship about files execution. That is to say, <code>target</code> depends on <code>prerequisites</code>, and the generation rule is at <code>command</code>. More conciselly to say, <code>prerequisites</code> has more than one file changed, command is about to executes. This is the signification of the <code>Makefile</code>.</p>
+<h2 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hellofunc.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;hellomake.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myPrintHelloMake</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Hello, make files!\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hellomake.h</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myPrintHelloMake</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hellomake.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;hellomake.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  myPrintHelloMake();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Let’s write <code>Makefile</code>:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc</span><br><span class="line">edit : hellofunc.o hellomake.o</span><br><span class="line">  <span class="variable">$(CC)</span> -o edit hellofunc.o hellomake.o</span><br><span class="line">hellofunc.o : hellofunc.c</span><br><span class="line">  <span class="variable">$(CC)</span> -c hellofunc.c -I.</span><br><span class="line">hellomake.o : hellomake.c</span><br><span class="line">  <span class="variable">$(CC)</span> -c hellomake.c -I.</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">  rm hellofunc.o /</span><br><span class="line">  hellomake.o</span><br></pre></td></tr></table></figure>
+<p>Symbol <code>$(CC)</code> replace with <code>gcc</code>, symbol <code>/</code> the same as <code>\r\n</code>. After input <code>make</code> at terminal, middle and final files generated. If you want to delete *.o and edit, just eval <code>make clean</code> at terminal.</p>
+<p>After defining the dependencies between files, the <code>command</code> defined how to generate target file by system command call, the <code>command</code> must start with a <code>Tab</code> key. <code>make</code> will compare time between <code>target</code> file and <code>prerequisites</code> files, calling the command when date of <code>prerequisites</code> is new to <code>target</code>‘s.</p>
+<p>Pluz, <code>clean</code> in command <code>make clean</code> is not a command from <code>make</code>, it is a label in <code>Makefile</code>.</p>
+<h2 id="Use-Parametric"><a href="#Use-Parametric" class="headerlink" title="Use Parametric"></a>Use Parametric</h2><p>We have use param in above sample, a more usefull sample:</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">CC=gcc</span><br><span class="line">objects=hellofunc.o hellomake.o</span><br><span class="line">edit : <span class="variable">$(objects)</span></span><br><span class="line">  <span class="variable">$(CC)</span> -o edit <span class="variable">$(objects)</span></span><br><span class="line">hellofunc.o : hellofunc.c</span><br><span class="line">	<span class="variable">$(CC)</span> -c hellofunc.c -I.</span><br><span class="line">hellomake.o : hellomake.c</span><br><span class="line">	$&#123;CC&#125; -c hellomake.c -I.</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">  rm edit <span class="variable">$(objects)</span></span><br></pre></td></tr></table></figure>
+<p>This will save more time by only change the <code>objects</code> field.</p>
+<h2 id="Makefile-filename"><a href="#Makefile-filename" class="headerlink" title="Makefile filename"></a>Makefile filename</h2><p>Typically, <code>make</code> command will search unrecursively by sort: <code>GNUmakefile</code> / <code>makefile</code> / <code>Makefile</code>. <code>GNUmakefile</code> is for GNU only, so <code>Makefile</code> is recommanded for eye-catching by first letter uppercase.</p>
+<p>You can use other filenames, such as <code>Makefile.linux</code> / <code>Makefile.win</code> etc. If filename is specificlly created, you can use <code>-f</code> or <code>--file</code> to specify the target file: <code>make -f Makefile.win</code>.</p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2023/06/10/20230610gbd/" class="link f-fl">⟵How to use GDB</a>
+    
+    
+      <a href="/2023/05/26/20230526lesson/" class="link f-fr">20230526lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>

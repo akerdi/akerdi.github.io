@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>How to use GDB | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="GDBThis is a course teaches how to use gdb. Debug is very important, not only in development pirior, but also reproduce throw when in particular environment, such as at customer’s hardware. A shortcut">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to use GDB">
+<meta property="og:url" content="https://akerdi.github.io/2023/06/10/20230610gbd/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="GDBThis is a course teaches how to use gdb. Debug is very important, not only in development pirior, but also reproduce throw when in particular environment, such as at customer’s hardware. A shortcut">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-06-10T00:53:05.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to use GDB">
+<meta name="twitter:description" content="GDBThis is a course teaches how to use gdb. Debug is very important, not only in development pirior, but also reproduce throw when in particular environment, such as at customer’s hardware. A shortcut">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">How to use GDB</h2>
+  <p class="sub">Jun 10, 2023</p>
+  <article class="content">
+    <h1 id="GDB"><a href="#GDB" class="headerlink" title="GDB"></a>GDB</h1><p>This is a course teaches how to use <code>gdb</code>.</p>
+<p>Debug is very important, not only in development pirior, but also reproduce throw when in particular environment, such as at customer’s hardware.</p>
+<p>A shortcut is record herein, if you want to learn basic action, just follow <a href="#ref">Ref - gdb-demo git</a>.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">g++ buggyLinkedList.cpp</span><br><span class="line">./a.out</span><br><span class="line"></span><br><span class="line"><span class="comment"># when use gdb</span></span><br><span class="line">g++ -g buggyLinkedList.cpp</span><br><span class="line">gdb ./a.out</span><br><span class="line">  run</span><br><span class="line">  <span class="built_in">print</span> list-&gt;tail</span><br><span class="line">  quit</span><br><span class="line">  info args</span><br><span class="line">  info locals</span><br><span class="line">  po args</span><br><span class="line">  p <span class="variable">$&#123;commands&#125;</span></span><br><span class="line">  <span class="built_in">break</span> 63 <span class="comment"># break addIntToEndOList</span></span><br><span class="line">  step</span><br><span class="line">  next</span><br><span class="line">  finish</span><br><span class="line">  <span class="built_in">continue</span></span><br><span class="line">  watch list-&gt;head</span><br></pre></td></tr></table></figure>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://github.com/ucsb-cs24-s22/gdb-demo" target="_blank" rel="noopener">gdb-demo git</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2023/06/10/20230610makefile/" class="link f-fr">How to use Makefile⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
