@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20230610thread | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="thread基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。 thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。 创建一个 std::thread对象即可启动一个线程，并使用该std::thread对象来管理该线程。.e.g. std::thread t(af">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230610thread">
+<meta property="og:url" content="https://akerdi.github.io/2023/06/10/20230610thread/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="thread基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。 thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。 创建一个 std::thread对象即可启动一个线程，并使用该std::thread对象来管理该线程。.e.g. std::thread t(af">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-06-10T07:28:27.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20230610thread">
+<meta name="twitter:description" content="thread基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。 thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。 创建一个 std::thread对象即可启动一个线程，并使用该std::thread对象来管理该线程。.e.g. std::thread t(af">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20230610thread</h2>
+  <p class="sub">Jun 10, 2023</p>
+  <article class="content">
+    <h1 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h1><p>基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。</p>
+<p>thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。</p>
+<p>创建一个 <code>std::thread</code>对象即可启动一个线程，并使用该<code>std::thread</code>对象来管理该线程。.e.g. <code>std::thread t(afunc, param1, param2...)</code></p>
+<h2 id="一个简单的多线程实现"><a href="#一个简单的多线程实现" class="headerlink" title="一个简单的多线程实现"></a>一个简单的多线程实现</h2><p>在4个线程中分别输出索引:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint8_t</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">        <span class="function">thread <span class="title">t</span><span class="params">(output, i)</span></span>;</span><br><span class="line">        t.detach();</span><br><span class="line">    &#125;</span><br><span class="line">    getchar(); <span class="comment">// 为了防止主线程提前结束，而子线程还未运行完的情况。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>t</code> 为线程分配的对象，<code>output</code> 为线程启动的方法块，启动后该方法获得输入索引<code>i</code>。</p>
+<p>单线程能简单预测得到输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>但是在单线程中多次运行可能得到以下结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01</span><br><span class="line"></span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<p>这就涉及到多线程编程最核心的问题: <code>资源竞争</code>.</p>
+<p>假设CPU有4核，可以同时执行4个线程，但是<code>控制台却只有一个，同时只能有一个线程拥有这个唯一的控制台</code>，将数字输出. 将上面代码创建的四个线程进行编号: t0,t1,t2,t3, 分别输出的数字: 0,1,2,3. 参照上图的执行结果，控制台的拥有权的转移如下:</p>
+<ul>
+<li>t0拥有控制权，输出了数字0，但是其没来的及输出换行符，控制的拥有权却转移到了t1; (0)</li>
+<li>t1完成自己的输出，t1线程完成; (1\n)</li>
+<li>控制台拥有权转移给t0，输出换行符; (\n)</li>
+<li>t2拥有控制台，完成输出; (2\n)</li>
+<li>t3拥有控制台，完成输出; (3\n)</li>
+</ul>
+<p>由于控制台是系统资源，这里控制台拥有权的管理是操作系统完成的。但是，假如是多个线程共享进程空间的数据，这就需要自己写代码控制，每个线程合适能够拥有共享数据进行操作。</p>
+<h2 id="启动一个线程"><a href="#启动一个线程" class="headerlink" title="启动一个线程"></a>启动一个线程</h2><ul>
+<li>可以使用lambda表达式:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">    <span class="function">thread <span class="title">t</span><span class="params">([i]&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line">    t.detach();</span><br><span class="line">    <span class="comment">// t.join();</span></span><br><span class="line">&#125;</span><br><span class="line">getchar();</span><br></pre></td></tr></table></figure>
+<p><code>t.detach();</code> 使分线程进入后台执行；<code>t.join();</code> 使分线程加入到当前线程，当分线程结束后回到当前线程，继续往下走。</p>
+<ul>
+<li>重载了()运算符的类的实例</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Task</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint8_t</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">        Task task;</span><br><span class="line">        <span class="function">thread <span class="title">t</span><span class="params">(task, i)</span></span>;</span><br><span class="line">        t.detach();</span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="异常情况下等待线程完成"><a href="#异常情况下等待线程完成" class="headerlink" title="异常情况下等待线程完成"></a>异常情况下等待线程完成</h2><p>当决定以detach方式让线程在后台运行时，可以在创建<code>thread</code> 的实例后立即调用<code>detach</code>， 这样线程就会和<code>thread</code>的实例分离，即使出现了异常<code>thread</code>的实例被销毁，仍然能保证线程在后台运行。</p>
+<p>但线程以join方式运行时，需要在主线程的合适位置调用<code>join</code> 方法，如果调用<code>join</code>前出现了异常，<code>thread</code>被销毁，线程就会被异常所终结，或者由于某些原因，例如线程访问了局部变量，就要保证线程一定要在函数退出前完成，就要保证要在函数退出前调用<code>join</code>.</p>
+<p>一种比较好的方法是自愿获取即初始化(RALL, Resource Acquisition Is Initialization), 该方法提供一个类，在析构函数中调用<code>join</code>:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">thread_guard</span> &#123;</span></span><br><span class="line">    thread *t;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    explicit thread_guard(thread&amp; _t): t(_t) &#123;&#125;</span><br><span class="line">    ~thread_guard() &#123;</span><br><span class="line">        <span class="keyword">if</span> (t.joinable())</span><br><span class="line">            t.join();</span><br><span class="line">    &#125;</span><br><span class="line">    thread_guard(<span class="keyword">const</span> thread_guard&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    thread_guard&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> thread_guard&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="function">thread <span class="title">t</span><span class="params">([] &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello thread"</span> &lt;&lt; <span class="built_in">endl</span>;</span></span></span><br><span class="line"><span class="function"><span class="params">    &#125;)</span></span>;</span><br><span class="line">    <span class="function">thread_guard <span class="title">g</span><span class="params">(t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="向线程传递参数"><a href="#向线程传递参数" class="headerlink" title="向线程传递参数"></a>向线程传递参数</h2><p>线程启动的函数参数，可以为指针或者对象拷贝。如果使用引用拷贝的话，其引用的是拷贝的线程空间的对象，而不是出事希望改变的对象。指针传参如:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TagNode</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">int</span> a;</span><br><span class="line">        <span class="keyword">int</span> b;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(TagNode* node)</span> </span>&#123;</span><br><span class="line">    node-&gt;a = <span class="number">10</span>;</span><br><span class="line">    node-&gt;b = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    TagNode node;</span><br><span class="line">    <span class="function">thread <span class="title">t</span><span class="params">(func, &amp;node)</span></span>;</span><br><span class="line">    t.join();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; node.a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 10</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; node.b &lt;&lt; <span class="built_in">endl</span>; <span class="comment">// 20</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="转移线程的所有权"><a href="#转移线程的所有权" class="headerlink" title="转移线程的所有权"></a>转移线程的所有权</h2><p><code>thread</code> 是可移动的，但不可复制。可以通过<code>move</code> 来改变线程的所有权，灵活的决定线程在什么时候join或者detach.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thread t1(f1);</span><br><span class="line">thread t3(move(t1));</span><br></pre></td></tr></table></figure>
+<p>讲线程从t1转移给t3，这时候t1就不再拥有线程的所有权，调用<code>t1.join</code> 或<code>t1.detach</code> 会出现异常。</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://immortalqx.github.io/2021/12/04/cpp-notes-3/" target="_blank" rel="noopener">thread</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+      <a href="/2023/06/10/20230610pthread/" class="link f-fl">⟵20230610pthread</a>
+    
+    
+      <a href="/2023/06/10/20230610gbd/" class="link f-fr">How to use GDB⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
