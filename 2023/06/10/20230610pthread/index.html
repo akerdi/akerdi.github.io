@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="aKer">
 <meta property="og:description" content="pthread在C++开发中，原生的线程库主要有两个，一个是C++11提供的&amp;lt;thread.h&amp;gt;(Mac/Linux)类，另一个是Linux 下的&amp;lt;pthread.h&amp;gt;(Mac/Windows/Linux)。 std::thread 是C++11中的新特性，将多线程程序的编写提升到了语言层面，是的编写的多线程程序的可移植性大大提供。std::thread更加简便易用，而pt">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2023-06-12T12:48:34.146Z">
+<meta property="og:updated_time" content="2023-06-12T13:41:12.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20230610pthread">
 <meta name="twitter:description" content="pthread在C++开发中，原生的线程库主要有两个，一个是C++11提供的&amp;lt;thread.h&amp;gt;(Mac/Linux)类，另一个是Linux 下的&amp;lt;pthread.h&amp;gt;(Mac/Windows/Linux)。 std::thread 是C++11中的新特性，将多线程程序的编写提升到了语言层面，是的编写的多线程程序的可移植性大大提供。std::thread更加简便易用，而pt">
@@ -90,6 +90,7 @@
     <h1 id="pthread"><a href="#pthread" class="headerlink" title="pthread"></a>pthread</h1><p>在C++开发中，原生的线程库主要有两个，一个是C++11提供的&lt;thread.h&gt;(Mac/Linux)类，另一个是Linux 下的&lt;pthread.h&gt;(Mac/Windows/Linux)。</p>
 <p>std::thread 是C++11中的新特性，将多线程程序的编写提升到了语言层面，是的编写的多线程程序的可移植性大大提供。<code>std::thread更加简便易用，而pthread功能更加强大。</code></p>
 <p>std::thread 使用请参考<a href="./20230610thread.md">这篇内容</a>, 下面我们来介绍pthread 的使用。</p>
+<p>本文所学来自于<a href="#ref">Ref</a></p>
 <h2 id="pthread-的创建和管理"><a href="#pthread-的创建和管理" class="headerlink" title="pthread 的创建和管理"></a>pthread 的创建和管理</h2><p><code>int(*pthread_create)(pthread_t* thread, pthread_attr_t* attr, void*(*start_routine)(void*), void* arg)</code></p>
 <p>若创建成功，返回0。</p>
 <ul>

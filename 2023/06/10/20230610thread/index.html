@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="aKer">
 <meta property="og:description" content="thread基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。 thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。 创建一个 std::thread对象即可启动一个线程，并使用该std::thread对象来管理该线程。.e.g. std::thread t(af">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2023-06-10T07:28:27.064Z">
+<meta property="og:updated_time" content="2023-06-12T13:41:12.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20230610thread">
 <meta name="twitter:description" content="thread基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。 thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。 创建一个 std::thread对象即可启动一个线程，并使用该std::thread对象来管理该线程。.e.g. std::thread t(af">
@@ -90,6 +90,7 @@
     <h1 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h1><p>基于进程开发，有助于隔离物理、逻辑、上下文的好处。基于线程开发，有助于有效利用多核心CPU优势，充分发挥性能上的优势，比如常用来比较、衡量单机处理并发的多少。</p>
 <p>thread.h 是一组跨平台的多线程库，并且提供简单的使用即可实现多线程技术。</p>
 <p>创建一个 <code>std::thread</code>对象即可启动一个线程，并使用该<code>std::thread</code>对象来管理该线程。.e.g. <code>std::thread t(afunc, param1, param2...)</code></p>
+<p>本文所学来自于<a href="#ref">Ref</a></p>
 <h2 id="一个简单的多线程实现"><a href="#一个简单的多线程实现" class="headerlink" title="一个简单的多线程实现"></a>一个简单的多线程实现</h2><p>在4个线程中分别输出索引:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">output</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">uint8_t</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">        <span class="function">thread <span class="title">t</span><span class="params">(output, i)</span></span>;</span><br><span class="line">        t.detach();</span><br><span class="line">    &#125;</span><br><span class="line">    getchar(); <span class="comment">// 为了防止主线程提前结束，而子线程还未运行完的情况。</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>t</code> 为线程分配的对象，<code>output</code> 为线程启动的方法块，启动后该方法获得输入索引<code>i</code>。</p>
