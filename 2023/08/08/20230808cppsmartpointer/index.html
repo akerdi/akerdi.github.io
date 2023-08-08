@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>20230808cppsmartpointer | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++智能指针原理C++ smart pointer schematic学很多其他语言，如Java、C#或者其他托管语言(managed languages)，看C++时总是觉得到处需要delete是件麻烦的事情。 Learning many other languages, such as Java, C# or ther managed languages, C++ always delete">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20230808cppsmartpointer">
+<meta property="og:url" content="https://akerdi.github.io/2023/08/08/20230808cppsmartpointer/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="C++智能指针原理C++ smart pointer schematic学很多其他语言，如Java、C#或者其他托管语言(managed languages)，看C++时总是觉得到处需要delete是件麻烦的事情。 Learning many other languages, such as Java, C# or ther managed languages, C++ always delete">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-08-08T13:47:56.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20230808cppsmartpointer">
+<meta name="twitter:description" content="C++智能指针原理C++ smart pointer schematic学很多其他语言，如Java、C#或者其他托管语言(managed languages)，看C++时总是觉得到处需要delete是件麻烦的事情。 Learning many other languages, such as Java, C# or ther managed languages, C++ always delete">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">20230808cppsmartpointer</h2>
+  <p class="sub">Aug 8, 2023</p>
+  <article class="content">
+    <h1 id="C-智能指针原理"><a href="#C-智能指针原理" class="headerlink" title="C++智能指针原理"></a>C++智能指针原理</h1><h1 id="C-smart-pointer-schematic"><a href="#C-smart-pointer-schematic" class="headerlink" title="C++ smart pointer schematic"></a>C++ smart pointer schematic</h1><p>学很多其他语言，如Java、C#或者其他托管语言(managed languages)，看C++时总是觉得到处需要delete是件麻烦的事情。</p>
+<p>Learning many other languages, such as Java, C# or ther managed languages, C++ always delete object here and there which is a trouble thing.</p>
+<p>而一个方法中如果做了delete某一个对象，不过还未运行到即exception，那么还是产生了leak:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// do something to p</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If process work successfully, that’s ok, but if it meet exception below?</p>
+<ul>
+<li>process returned in the body, it haven’t come to end to delete</li>
+<li>process exception but not be catch out</li>
+</ul>
+<p>Leak will happen in above situation, or you write everywhere the delete function to prevent leaking? Just for recycle the object, to code dirtily?</p>
+<p>Maybe once or twice leaked produced by an object, it could be forgave. But if an loop function constantly produce the leak, it must be a critical.</p>
+<h2 id="What-is-RALL"><a href="#What-is-RALL" class="headerlink" title="What is RALL"></a>What is RALL</h2><p>It’s well known that C++ is Orientate-Object language, when initialize object, system will execute class alloc method. If class object is stored at stack space, such as declare a local variable, then when class object is expire life circle, such as get out of a local variable working field, system will execute class dealloc method; If a class object stored at heap space, such as by using <code>new</code> operation to create a class heap object, then when class object is deleting, such as by executing object’s delete operation, system will also execute class object dealloc method.</p>
+<p>The specific skill of C++ will be used to solve the source leak trouble, but how?</p>
+<p>modern C++ practice recommend to put source stored at stack. If it is a variable, you can simply define it as local variable, then when code block get out, system will automotive collect source on the stack:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> data = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// do something with data</span></span><br><span class="line">    <span class="comment">// when function get out, automotive release data stored stack space</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>When source is stored at heap space, you can use a stack object who use pointer store the object, when the stack object release, the heap object delete manually in the dealloc method:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Helper</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span>* data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Helper() &#123;</span><br><span class="line">        data = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ~Helper() &#123;</span><br><span class="line">        <span class="keyword">delete</span> data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">do_something_with_data</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Helper help;</span><br><span class="line">    help.do_something_with_data();</span><br><span class="line">    <span class="comment">// When function get out, help will be release, then Helper dealloc will be called to delete data;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>This is C++ RALL [Resource acquisition is initialization].</p>
+<h3 id="C-smart-pointer"><a href="#C-smart-pointer" class="headerlink" title="C++ smart pointer"></a>C++ smart pointer</h3><p>Sample above look odd, for easily usage for develop, <code>unique_ptr</code> is add to standard library after C++ 11.</p>
+<p><code>unique_ptr</code> belong to Smart Points. Using Smart points to take place sample above, it look like this:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt; data(<span class="keyword">new</span> <span class="keyword">int</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"data=%d\n"</span>, *data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After using the smart pointer, it doesn’t acquire to define Helper class to manage pointer.</p>
+<p>But smart pointer sample above require a pointer, can it be a better way to manage the code?</p>
+<p>Yes, after C++ 14, standard add <code>make_unique</code>, this is how to use:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">unique_ptr</span>&lt;<span class="keyword">int</span>&gt; data = <span class="built_in">std</span>::make_unique&lt;<span class="keyword">int</span>&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://juejin.cn/post/7234103673344901175" target="_blank" rel="noopener">Juejin - 都说 C++ 没有 GC，RAII: 那么我算个啥？</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2023/08/06/20230806recent/" class="link f-fr">20230806recent⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
