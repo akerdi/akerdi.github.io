@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Clion_connect_docker_and_wsl | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Clion connect docker and wslClion can use remote server, by using target platform environment, Clion can decipher and build delivery. This lesson describer how to consitude such a environment. DockerT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clion_connect_docker_and_wsl">
+<meta property="og:url" content="https://akerdi.github.io/2023/11/04/clion-connect-docker-and-wsl/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="Clion connect docker and wslClion can use remote server, by using target platform environment, Clion can decipher and build delivery. This lesson describer how to consitude such a environment. DockerT">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://akerdi.github.io/2023/11/04/assets/clion_remote_settings.png">
+<meta property="og:image" content="https://akerdi.github.io/2023/11/04/assets/clion_remote_sync_files.png">
+<meta property="og:updated_time" content="2023-11-05T02:27:19.213Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clion_connect_docker_and_wsl">
+<meta name="twitter:description" content="Clion connect docker and wslClion can use remote server, by using target platform environment, Clion can decipher and build delivery. This lesson describer how to consitude such a environment. DockerT">
+<meta name="twitter:image" content="https://akerdi.github.io/2023/11/04/assets/clion_remote_settings.png">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">Clion_connect_docker_and_wsl</h2>
+  <p class="sub">Nov 4, 2023</p>
+  <article class="content">
+    <h1 id="Clion-connect-docker-and-wsl"><a href="#Clion-connect-docker-and-wsl" class="headerlink" title="Clion connect docker and wsl"></a>Clion connect docker and wsl</h1><p><code>Clion</code> can use remote server, by using target platform environment, Clion can decipher and build delivery. This lesson describer how to consitude such a environment.</p>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><p>Take docker as an example to illustrate how to setup Clion use remote service as base platform, do compiling / do building / do running.</p>
+<ul>
+<li>Build Ubuntu image</li>
+<li>Settings on Clion</li>
+<li>Sync files</li>
+</ul>
+<h3 id="Build-Ubuntu-image"><a href="#Build-Ubuntu-image" class="headerlink" title="Build Ubuntu image"></a>Build Ubuntu image</h3><pre><code>docker build -t Clion/ubuntu/cpp-env:1.0 -f Dockerfile_cpp-env-ubuntu .
+</code></pre><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">FROM</span> <span class="attr">ubuntu:20.04</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">DEBIAN_FRONTEND="noninteractive"</span> <span class="string">apt-get</span> <span class="string">update</span> <span class="string">&amp;&amp;</span> <span class="string">apt-get</span> <span class="bullet">-y</span> <span class="string">install</span> <span class="string">tzdata</span> <span class="string">openssh-server</span> <span class="string">sudo</span> <span class="bullet">-y</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">apt-get</span> <span class="string">update</span> <span class="string">\</span></span><br><span class="line">  <span class="string">&amp;&amp;</span> <span class="string">apt-get</span> <span class="string">install</span> <span class="bullet">-y</span> <span class="string">build-essential</span> <span class="string">\</span></span><br><span class="line">      <span class="string">gcc</span> <span class="string">\</span></span><br><span class="line">      <span class="string">g++</span> <span class="string">\</span></span><br><span class="line">      <span class="string">gdb</span> <span class="string">\</span></span><br><span class="line">      <span class="string">make</span> <span class="string">\</span></span><br><span class="line">      <span class="string">cmake</span> <span class="string">\</span></span><br><span class="line">      <span class="string">rsync</span> <span class="string">\</span></span><br><span class="line">      <span class="string">gcc-multilib</span> <span class="string">g++-multilib</span> <span class="string">\</span> <span class="comment"># epoll include error</span></span><br><span class="line">  <span class="string">&amp;&amp;</span> <span class="string">apt-get</span> <span class="string">clean</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">useradd</span> <span class="bullet">-rm</span> <span class="bullet">-d</span> <span class="string">/home/ubuntu</span> <span class="bullet">-s</span> <span class="string">/bin/bash</span> <span class="bullet">-g</span> <span class="string">root</span> <span class="bullet">-G</span> <span class="string">sudo</span> <span class="bullet">-u</span> <span class="number">1000</span> <span class="string">test</span></span><br><span class="line"><span class="string">RUN</span> <span class="string">echo</span> <span class="string">'test:test'</span> <span class="string">| chpasswd</span></span><br><span class="line"><span class="string">RUN service ssh start</span></span><br><span class="line"><span class="string">EXPOSE 22</span></span><br><span class="line"><span class="string">CMD ["/usr/sbin/sshd", "-D"]</span></span><br></pre></td></tr></table></figure>
+<p>After image has built, use this image in docker-compose.yml as below:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  uu:</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">Clion_env</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">Clion/ubuntu/cpp-env:1.0</span></span><br><span class="line"><span class="attr">    cap_add:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">SYS_PTRACE</span></span><br><span class="line"><span class="attr">    tty:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">$&#123;OTHER_PORT&#125;:$&#123;OTHER_PORT&#125;</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">$&#123;SSH_PORT&#125;:22</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OTHER_PORT=9006</span><br><span class="line">SSH_PORT=2222</span><br></pre></td></tr></table></figure>
+<h3 id="Settings-on-Clion"><a href="#Settings-on-Clion" class="headerlink" title="Settings on Clion"></a>Settings on Clion</h3><p>Settings on clion refer to <code>Build, Execution, Deployment</code> - <code>Toolchains</code>.</p>
+<p>Go to <code>Toolchains</code>, press <code>+</code> button to add <code>docker</code> to the list, and fill in Credentials.</p>
+<p><img src="../assets/clion_remote_settings.png" alt="clion_remote_settings"></p>
+<p>Credentials need ports, record on <code>.env</code> file, and user &amp; password is hard code in the docker image.</p>
+<p>Tools as CMake / Make / C Compiler / C++ Compiler / Debugger is also hard code in the docker image, so all this needed tools is already present.</p>
+<p>After Clion connect to docker container, <code>connected</code> prompt will present, like picture as above.</p>
+<p>Here is all about settings on Clion to connect remove server.</p>
+<h3 id="Sync-files"><a href="#Sync-files" class="headerlink" title="Sync files"></a>Sync files</h3><p>When files is not correct, you can do a sync file action:</p>
+<p><img src="../assets/clion_remote_sync_files.png" alt="clion_remote_sync_files"></p>
+<h2 id="wsl-Ubuntu"><a href="#wsl-Ubuntu" class="headerlink" title="wsl - Ubuntu"></a>wsl - Ubuntu</h2><p>wsl - Ubuntu is the same as docker. WSL by setting up SSH, download make / cmake / gdb / gcc / c++ tools. Clion do the same as docker stratege to connect to WSL SSH.</p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2023/10/25/20231019lesson/" class="link f-fr">20231019lesson⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
