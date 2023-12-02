@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>vscode_wsl | aKer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="VSCode WSL CMakeInorder to take place Clion as IDE to run and debug for Cpp, I choose VSCode because it is totally free. After VSCode install C++ extension, it can play well at Windows platform, perfe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vscode_wsl">
+<meta property="og:url" content="https://akerdi.github.io/2023/12/02/vscode-wsl/index.html">
+<meta property="og:site_name" content="aKer">
+<meta property="og:description" content="VSCode WSL CMakeInorder to take place Clion as IDE to run and debug for Cpp, I choose VSCode because it is totally free. After VSCode install C++ extension, it can play well at Windows platform, perfe">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2023-12-02T06:55:07.897Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vscode_wsl">
+<meta name="twitter:description" content="VSCode WSL CMakeInorder to take place Clion as IDE to run and debug for Cpp, I choose VSCode because it is totally free. After VSCode install C++ extension, it can play well at Windows platform, perfe">
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+</html>
+<body style="
+
+
+  background-color: #eff0f6
+
+">
+  <div id="container">
+    <nav id="nav">
+  <header class="header">
+    <a href="/" class="title">Clover Tuan</a>
+  </header>
+  <div class="ctnWrap">
+    <div class="icons">
+      
+        
+          
+            <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn iconfont icon-dribbble"></a>
+          
+        
+          
+            <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn iconfont icon-behance"></a>
+          
+        
+          
+            <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn iconfont icon-lofter"></a>
+          
+        
+          
+            <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn iconfont icon-instagram"></a>
+          
+        
+          
+            <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn iconfont icon-github"></a>
+          
+        
+      
+    </div>
+    <div class="menu">
+      
+        
+            <a href="/" class="nav-menu ">HOME</a>
+          
+        
+            <a href="/archives" class="nav-menu ">ARCHIVE</a>
+          
+        
+            <a href="/about" class="nav-menu ">ABOUT</a>
+          
+        
+      
+    </div>
+  </div>
+</nav>
+    <div id="main"><section class="article">
+  <h2 class="title">vscode_wsl</h2>
+  <p class="sub">Dec 2, 2023</p>
+  <article class="content">
+    <h1 id="VSCode-WSL-CMake"><a href="#VSCode-WSL-CMake" class="headerlink" title="VSCode WSL CMake"></a>VSCode WSL CMake</h1><p>Inorder to take place <code>Clion</code> as IDE to run and debug for Cpp, I choose VSCode because it is totally free.</p>
+<p>After VSCode install C++ extension, it can play well at Windows platform, perfect writing code, snippet highlight immediatly.</p>
+<p><code>Clion</code> also highlight snippet well at Mac, the way by remoting to local docker SSH, but Windows fail to support this wonderful technique. AFter tunning to use VSCode Windows remote to WSL-ubuntu, it can perfect hightlight the snippet, but frankly to say, my computer is more busy, another word - CPU high.</p>
+<p>If you prefer using an edit tool, build in terminal, gdb in terminal, this will be like this:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$&gt;cmake -S . -B cmake-build-debug -DCMAKE_BUILD_TYPE=Debug</span><br><span class="line">$&gt;cmake --build cmake-build-debug</span><br><span class="line">$&gt;gdb demo</span><br><span class="line"></span><br><span class="line"><span class="variable">$gdb</span>&gt;<span class="built_in">set</span> env LD_LIBRARY_PATH ../libs/aarch64_android:libs/aarch64_android</span><br><span class="line"><span class="variable">$gdb</span>&gt;<span class="built_in">break</span> main</span><br><span class="line"><span class="variable">$gdb</span>&gt;r</span><br></pre></td></tr></table></figure>
+<p>But is you can simple type <code>F5</code> keyboard to start the whole process flow, a seamless collaboration between you and computer greatly improve the job efficiancy.</p>
+<p>I think you can choose respective benefit to make your own decision, or fix it’s trouble(Such as can’t highlight, or CPU perform high, or any others)? Next, let me introduce you how to config VSCode WSL CMake:</p>
+<h2 id="VSCode-Remote-WSL"><a href="#VSCode-Remote-WSL" class="headerlink" title="VSCode Remote WSL"></a>VSCode Remote WSL</h2><p>VSCode install extension <code>C++</code>, you can follow <a href="https://code.visualstudio.com/docs/cpp/config-wsl" target="_blank" rel="noopener">vscode wsl</a> docs, including install WSL-ubuntu, a quick start sample, this will not introduce again.</p>
+<p>In addition, if WSL-ubuntu change user, <code>code</code> command may disappear, an export command can help you define the comamdn <code>code</code>: <code>export PATH=$PATH:&quot;/mnt/c/Users/%USERNAME%/AppData/Local/Programs/Microsoft VS Code/bin&quot;</code></p>
+<p>After complete this phase, a small project can easily be started and examine, but how about a more complex task? Let’s go to next phase, let’s use CMake to constitude the project:</p>
+<h2 id="VSCode-CMake"><a href="#VSCode-CMake" class="headerlink" title="VSCode CMake"></a>VSCode CMake</h2><p>AS an example, I will introduce you with three key files: <code>CMakeLists.txt</code> / <code>.vscode/tasks.json</code> / <code>.vscode/launch.json</code>.</p>
+<p><code>CMakeLists.txt</code> just fill use what you want to config for you project, a simple sample:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.6)</span><br><span class="line">project(app)</span><br><span class="line"></span><br><span class="line">aux_source_directory(. SRCS)</span><br><span class="line">add_executable(app $&#123;SRCS&#125; http/http_conn.cpp log/log.cpp timer/lst_timer.cpp CGImysql/sql_connection_pool.cpp)</span><br><span class="line"></span><br><span class="line">target_link_libraries(app -lpthread -lmysqlclient)</span><br></pre></td></tr></table></figure>
+<p><code>./vscode/tasks.json</code> help define three key tasks: <code>cmake</code>, <code>make</code>, <code>CMake Build</code>. Sample:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</span><br><span class="line">  <span class="attr">"options"</span>: &#123;</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">"tasks"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"label"</span>: <span class="string">"cmake"</span>,</span><br><span class="line">          <span class="attr">"type"</span>: <span class="string">"shell"</span>,</span><br><span class="line">          <span class="attr">"command"</span>: <span class="string">"cmake"</span>,</span><br><span class="line">          <span class="attr">"args"</span>: [</span><br><span class="line">              <span class="string">"-S"</span>,</span><br><span class="line">              <span class="string">"."</span>,</span><br><span class="line">              <span class="string">"-B"</span>,</span><br><span class="line">              <span class="string">"cmake-build-debug"</span>,</span><br><span class="line">              <span class="string">"-DCMAKE_BUILD_TYPE=Debug"</span></span><br><span class="line">          ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"label"</span>: <span class="string">"make"</span>,</span><br><span class="line">          <span class="attr">"dependsOn"</span>: [<span class="string">"cmake"</span>],</span><br><span class="line">          <span class="attr">"command"</span>: <span class="string">"cmake"</span>,</span><br><span class="line">          <span class="attr">"args"</span>:[</span><br><span class="line">            <span class="string">"--build"</span>,</span><br><span class="line">            <span class="string">"cmake-build-debug"</span></span><br><span class="line">          ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          <span class="attr">"label"</span>:<span class="string">"CMake Build"</span>,</span><br><span class="line">          <span class="attr">"dependsOn"</span>:[</span><br><span class="line">            <span class="string">"cmake"</span>,</span><br><span class="line">            <span class="string">"make"</span></span><br><span class="line">          ]</span><br><span class="line">      &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>launch.json</code> defines for VSCode how to start the project. In this sample, launch.json contains important fields: <code>type</code> / <code>request</code> / <code>program</code> / <code>cwd</code> / <code>miDebuggerPath</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Launch"</span>,</span><br><span class="line">      "type": "cppdbg", // vscode插件需要下载对应的插件</span><br><span class="line">      "request": "launch",</span><br><span class="line">      "program": "$&#123;workspaceFolder&#125;/cmake-build-debug/app", // program启动声明需要调用的exe文件</span><br><span class="line">      "args": [],</span><br><span class="line">      "stopAtEntry": false,</span><br><span class="line">      "cwd": "$&#123;workspaceFolder&#125;/cmake-build-debug",</span><br><span class="line">      "environment": [],</span><br><span class="line">      "externalConsole": false,</span><br><span class="line">      "miDebuggerPath": "/usr/bin/gdb",</span><br><span class="line">      "setupCommands": [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">"description"</span>: <span class="string">"Enable pretty-printing for gdb"</span>,</span><br><span class="line">          <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">          <span class="attr">"ignoreFailures"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      "preLaunchTask": "CMake Build" // 断点启动前执行的任务，对应tasks的label。</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>After this phase, your program can simply run or debug, just take a try.</p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="https://code.visualstudio.com/docs/cpp/config-wsl" target="_blank" rel="noopener">vscode wsl</a></p>
+<p><a href="https://blog.csdn.net/lazy_x/article/details/118677306" target="_blank" rel="noopener">VSCode的远程连接和CMAKE项目调试</a></p>
+<p><a href="https://akerdi.github.io/2022/11/20/20221121window-cmake/">20221121window_cmake</a></p>
+
+  </article>
+  <footer class="f-cf">
+    
+    
+      <a href="/2023/11/04/clion-connect-docker-and-wsl/" class="link f-fr">Clion_connect_docker_and_wsl⟶</a>
+    
+  </footer>
+</section></div>
+    <footer id="footer" class="f-cf">
+  d.guangying@foxmail.com
+  
+    
+      
+        · <a href="https://dribbble.com/clovertuan" target="_blank" class="nav-icn">Dribbble</a>
+      
+    
+      
+        · <a href="https://www.behance.net/clovertuan" target="_blank" class="nav-icn">Behance</a>
+      
+    
+      
+        · <a href="http://clovertuan.lofter.com/" target="_blank" class="nav-icn">Lofter</a>
+      
+    
+      
+        · <a href="https://www.instagram.com/clovertuan/" target="_blank" class="nav-icn">Instagram</a>
+      
+    
+      
+        · <a href="https://github.com/cloverTuan" target="_blank" class="nav-icn">GitHub</a>
+      
+    
+  
+  <span class="copyright">All rights reserved @Clover Tuan</span>
+</footer>
+  </div>
+</body>
+</html>
