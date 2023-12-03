@@ -256,7 +256,8 @@ body {
       font-size: 13px;
       background: #f8f8f8; }
       .article > .content pre .gutter, .article > .content .highlight .gutter {
-        text-align: right; }
+        text-align: right;
+        width: 50px; }
         .article > .content pre .gutter pre, .article > .content .highlight .gutter pre {
           background-color: #f0f0f0;
           padding: 0 10px; }
@@ -318,7 +319,7 @@ body {
         background-color: #f5f5f5; }
       .article > .content table caption, .article > .content table th, .article > .content table td {
         padding: 5px;
-        text-align: center;
+        text-align: left;
         vertical-align: middle;
         font-weight: normal; }
       .article > .content table th, .article > .content table td {
